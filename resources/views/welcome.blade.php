@@ -48,9 +48,8 @@
                     aria-label="Close"></button>
             </div>
             <div class="offcanvas-body home-offcanvas-body">
-                <div class="btn-group-vertical w-100">
-                    @if (Route::has('login'))
-                    @auth
+                @if (Route::has('login'))
+                @auth<div class="btn-group-vertical w-100">
                     <a href="{{ url('/home') }}" class="btn btn-outline-secondary home-offcanvas-body-link">
                         Home
                     </a>
@@ -63,17 +62,25 @@
                     <a href="?b=settings" type="button" class="btn btn-outline-secondary home-offcanvas-body-link">
                         settings
                     </a>
-                    @else
-                    <a href="{{ route('login') }}" class="btn btn-outline-secondary home-offcanvas-body-link">Log in</a>
+                </div>
+                <div class="mt-3">
+                <a type="button" class="btn btn-outline-danger w-100" href="{{ route('logout') }}"
+                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    {{ __('Logout') }}
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form></div>
+                @else
+                    <a href="{{ route('login') }}" class="btn btn-outline-success w-100 mb-1">Log in</a>
 
                     @if (Route::has('register'))
-                    <a href="{{ route('register') }}" class="btn btn-outline-secondary home-offcanvas-body-link">
+                    <a href="{{ route('register') }}" class="btn btn-outline-secondary w-100">
                         Register
                     </a>
                     @endif
-                    @endauth
-                    @endif
-                </div>
+                @endauth
+                @endif
             </div>
         </div>
         <article class="row g-3 home article-home">
