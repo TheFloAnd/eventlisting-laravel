@@ -59,7 +59,7 @@
                     <a href="?b=groups" type="button" class="btn btn-outline-secondary home-offcanvas-body-link">
                         groups
                     </a>
-                    <a href="?b=settings" type="button" class="btn btn-outline-secondary home-offcanvas-body-link">
+                    <a href="{{ route('settings') }}" type="button" class="btn btn-outline-secondary home-offcanvas-body-link">
                         settings
                     </a>
                 </div>
