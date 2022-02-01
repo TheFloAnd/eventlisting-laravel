@@ -1,3 +1,6 @@
+@extends('layouts.app')
+
+@section('content')
 <article class="row g-3">
     <section class="col">
         <div class="card">
@@ -139,3 +142,4 @@
     modalBodyInput.value = table
   })
 </script>
+@endsection

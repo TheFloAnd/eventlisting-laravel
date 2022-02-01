@@ -73,12 +73,6 @@
                 </form></div>
                 @else
                     <a href="{{ route('login') }}" class="btn btn-outline-success w-100 mb-1">Log in</a>
-
-                    @if (Route::has('register'))
-                    <a href="{{ route('register') }}" class="btn btn-outline-secondary w-100">
-                        Register
-                    </a>
-                    @endif
                 @endauth
                 @endif
             </div>
