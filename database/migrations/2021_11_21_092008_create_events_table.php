@@ -17,8 +17,9 @@ class CreateEventsTable extends Migration
             $table->id();
             $table->smallInteger('not_applicable')->nullable();
             $table->string('event');
-            $table->datetime('start_at');
-            $table->datetime('end_at');
+            $table->string('team');
+            $table->datetime('start');
+            $table->datetime('end');
             $table->integer('repeat')->nullable();
             $table->integer('repeat_parent')->nullable();
             $table->string('room')->nullable();

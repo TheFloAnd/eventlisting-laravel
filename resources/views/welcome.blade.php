@@ -59,20 +59,25 @@
                     <a href="?b=groups" type="button" class="btn btn-outline-secondary home-offcanvas-body-link">
                         groups
                     </a>
-                    <a href="{{ route('settings') }}" type="button" class="btn btn-outline-secondary home-offcanvas-body-link">
+                    <a href="{{ route('settings') }}" type="button"
+                        class="btn btn-outline-secondary home-offcanvas-body-link">
                         settings
                     </a>
                 </div>
                 <div class="mt-3">
-                <a type="button" class="btn btn-outline-danger w-100" href="{{ route('logout') }}"
-                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    {{ __('Logout') }}
-                </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                    @csrf
-                </form></div>
+                    <a type="button" class="btn btn-outline-danger w-100" href="{{ route('logout') }}"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        {{ __('Logout') }}
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                </div>
                 @else
-                    <a href="{{ route('login') }}" class="btn btn-outline-success w-100 mb-1">Log in</a>
+                <button type="button" class="btn btn-outline-success w-100" data-bs-dismiss="offcanvas" data-bs-toggle="modal"
+                    data-bs-target="#modal_login">
+                    {{ __('Login') }}
+                </button>
                 @endauth
                 @endif
             </div>
@@ -110,23 +115,98 @@
                                 <thead class="home-card-today-table-head">
                                     <tr>
                                         <th scope="col" class="home-card-today-table-head-item">
-                                            project
+                                            {{ __('Termin') }}
                                         </th>
                                         <th scope="col" class="home-card-today-table-head-item">
-                                            group
+                                            {{ __('Gruppe') }}
                                         </th>
                                         <th scope="col" class="home-card-today-table-head-item">
-                                            room
+                                            {{ __('Raum') }}
                                         </th>
                                         <th scope="col" class="home-card-today-table-head-item">
-                                            from
+                                            {{ __('Von') }}
                                         </th>
                                         <th scope="col" class="home-card-today-table-head-item">
-                                            till
+                                            {{ __('Bis') }}
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody class="home-card-today-table-body">
+
+                                    @forEach($today as $row)
+                                    @if($row->not_applicable == 1)
+                                    <tr class="table-danger strikethrough">
+                                        @else
+                                    <tr>
+                                        @endif
+                                        <td>
+                                            {{ $row->event }}
+                                        </td>
+                                        <td>
+                                            @foreach(explode(';', $row->team) as $group)
+                                            {{-- <span class="badge text-dark"
+                                                style="background-color:{{ Groups::find($group)->color }};"> --}}
+                                                <span class="badge">
+                                                    {{ $group }}
+                                                </span>
+                                                @endforeach
+                                        </td>
+                                        <td>
+                                            {{ $row->room }}
+                                        </td>
+                                        @if(strftime('%d.%m.%Y', strtotime($row->start)) != strftime('%d.%m.%Y',
+                                        strtotime($row->end)))
+
+                                        @if(strftime('%H:%M', strtotime($row->start)) == '00:00')
+                                        <td> {{ strftime('%a - %d.%m.%Y', strtotime($row->start)) }} </td>
+                                        @else
+                                        <td> {{ strftime('%a - %d.%m.%Y - %H:%M', strtotime($row->start)) }} </td>
+                                        @endif
+
+                                        @if(strftime('%H:%M', strtotime($row->end)) == '00:00')
+                                        <td> {{ strftime('%a - %d.%m.%Y ', strtotime($row->end)) }} </td>
+                                        @else
+                                        <td> {{ strftime('%a - %d.%m.%Y - %H:%M', strtotime($row->end))}} </td>
+                                        @endif
+
+                                        @endif
+                                        @if(strftime('%d.%m.%Y', strtotime($row->start)) == strftime('%d.%m.%Y',
+                                        strtotime($row->end)))
+
+                                        @if(strftime('%H:%M', strtotime($row->start)) == strftime('%H:%M',
+                                        strtotime($row->end)))
+
+                                        @if(strftime('%H:%M', strtotime($row->start)) == '00:00')
+                                        <td colspan="2"> {{ strftime('%a - %d.%m.%Y ', strtotime($row->start)) }}
+                                        </td>
+                                        <td style="display:none;">
+                                            @else
+                                        <td colspan="2"> {{ strftime('%a - %d.%m.%Y - %H:%M', strtotime($row->start))
+                                            }} </td>
+                                        <td style="display:none;">
+                                            @endif
+
+                                            @endif
+                                            @if(strftime('%H:%M', strtotime($row->start)) != strftime('%H:%M',
+                                            strtotime($row->end)))
+
+                                            @if(strftime('%H:%M', strtotime($row->start)) == '00:00')
+                                        <td> {{ strftime('%a - %d.%m.%Y', strtotime($row->start)) }} </td>
+                                        @else
+                                        <td> {{ strftime('%a - %d.%m.%Y - %H:%M', strtotime($row->start)) }} </td>
+                                        @endif
+
+                                        @if(strftime('%H:%M', strtotime($row->end)) == '00:00')
+                                        <td> {{ strftime('%a - %d.%m.%Y', strtotime($row->end)) }} </td>
+                                        @else
+                                        <td> {{ strftime('%a - %H:%M', strtotime($row->end)) }} </td>
+                                        @endif
+                                        @endif
+                                        @endif
+
+
+                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -184,6 +264,82 @@
                                     </tr>
                                 </thead>
                                 <tbody class="home-card-preview-table-body">
+
+                                    @forEach($future as $row)
+                                    @if($row->not_applicable == 1)
+                                    <tr class="table-danger strikethrough">
+                                        @else
+                                    <tr>
+                                        @endif
+                                        <td>
+                                            {{ $row->event }}
+                                        </td>
+                                        <td>
+                                            @foreach(explode(';', $row->team) as $group)
+                                            {{-- <span class="badge text-dark"
+                                                style="background-color:{{ Groups::find($group)->color }};"> --}}
+                                                <span class="badge">
+                                                    {{ $group }}
+                                                </span>
+                                                @endforeach
+                                        </td>
+                                        <td>
+                                            {{ $row->room }}
+                                        </td>
+                                        @if(strftime('%d.%m.%Y', strtotime($row->start)) != strftime('%d.%m.%Y',
+                                        strtotime($row->end)))
+
+                                        @if(strftime('%H:%M', strtotime($row->start)) == '00:00')
+                                        <td> {{ strftime('%a - %d.%m.%Y', strtotime($row->start)) }} </td>
+                                        @else
+                                        <td> {{ strftime('%a - %d.%m.%Y - %H:%M', strtotime($row->start)) }} </td>
+                                        @endif
+
+                                        @if(strftime('%H:%M', strtotime($row->end)) == '00:00')
+                                        <td> {{ strftime('%a - %d.%m.%Y ', strtotime($row->end)) }} </td>
+                                        @else
+                                        <td> {{ strftime('%a - %d.%m.%Y - %H:%M', strtotime($row->end))}} </td>
+                                        @endif
+
+                                        @endif
+                                        @if(strftime('%d.%m.%Y', strtotime($row->start)) == strftime('%d.%m.%Y',
+                                        strtotime($row->end)))
+
+                                        @if(strftime('%H:%M', strtotime($row->start)) == strftime('%H:%M',
+                                        strtotime($row->end)))
+
+                                        @if(strftime('%H:%M', strtotime($row->start)) == '00:00')
+                                        <td colspan="2"> {{ strftime('%a - %d.%m.%Y ', strtotime($row->start)) }}
+                                        </td>
+                                        <td style="display:none;">
+                                            @else
+                                        <td colspan="2"> {{ strftime('%a - %d.%m.%Y - %H:%M', strtotime($row->start))
+                                            }} </td>
+                                        <td style="display:none;">
+                                            @endif
+
+                                            @endif
+                                            @if(strftime('%H:%M', strtotime($row->start)) != strftime('%H:%M',
+                                            strtotime($row->end)))
+
+                                            @if(strftime('%H:%M', strtotime($row->start)) == '00:00')
+                                        <td> {{ strftime('%a - %d.%m.%Y', strtotime($row->start)) }} </td>
+                                        @else
+                                        <td> {{ strftime('%a - %d.%m.%Y - %H:%M', strtotime($row->start)) }} </td>
+                                        @endif
+
+                                        @if(strftime('%H:%M', strtotime($row->end)) == '00:00')
+                                        <td> {{ strftime('%a - %d.%m.%Y', strtotime($row->end)) }} </td>
+                                        @else
+                                        <td> {{ strftime('%a - %H:%M', strtotime($row->end)) }} </td>
+                                        @endif
+                                        @endif
+                                        @endif
+
+                                        <td> {{ abs(strtotime(strftime('%Y-%m-%d', strtotime($row->start))) -
+                                            strtotime(strftime('%Y-%m-%d'))) / 60 / 60 / 24 }}</td>
+                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -191,6 +347,74 @@
                 </div>
             </section>
         </article>
+        <!-- Login Modal -->
+        <div class="modal fade" id="modal_login" tabindex="-1" aria-labelledby="modal_login_Label" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modal_login_Label"> {{ __('Login') }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form method="POST" action="{{ route('login') }}">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="row g-3 justify-content-center">
+                                <div class="col-md-10">
+                                    <div class="form-floating">
+                                        <input id="email" type="email"
+                                            class="form-control @error('email') is-invalid @enderror" name="email"
+                                            value="{{ old('email') }}" placeholder="{{ __('Email') }}" required
+                                            autocomplete="email" autofocus>
+                                        @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                        <label for="email">
+                                            {{ __('Email Address') }}
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="form-floating">
+                                        <input id="password" type="password"
+                                            class="form-control @error('password') is-invalid @enderror" name="password"
+                                            required autocomplete="current-password" placeholder="{{ __('Passwort') }}">
+
+                                        @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                        <label for="password">
+                                            {{ __('Passwort') }}
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="remember" id="remember" {{
+                                            old('remember') ? 'checked' : '' }}>
+
+                                        <label class="form-check-label" for="remember">
+                                            {{ __('Remember Me') }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                {{ __('Schließen') }}
+                            </button>
+                            <button type="submit" class="btn btn-outline-success" name="login">
+                                {{ __('Login') }}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
         <script src="{{ asset('js/bootstrap/bootstrap.bundle.js') }}"></script>
         <!-- Jquery -->
         <script src="{{ asset('js/jquery/jquery.min.js') }}"></script>
