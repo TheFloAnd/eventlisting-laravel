@@ -22,3 +22,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('settings', App\Http\Controllers\SettingsController::class);
 Route::get('/einstellungen', [App\Http\Controllers\SettingsController::class, 'index'])->name('settings');
 
+
+Route::resource('events', App\Http\Controllers\EventsController::class);
+Route::get('/termine', [App\Http\Controllers\EventsController::class, 'index'])->name('events.index');

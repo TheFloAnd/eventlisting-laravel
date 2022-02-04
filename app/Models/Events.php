@@ -4,17 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class settings extends Model
+class Events extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'settings';
+    protected $table = 'events';
 
     /**
      * The primary key associated with the table.
@@ -29,7 +31,16 @@ class settings extends Model
      * @var array
      */
     protected $fillable = [
-        'value',
-        'value_unit',
+        'not_applicable',
+        'event',
+        'team',
+        'start',
+        'end',
+        'repeat',
+        'repeat_parent',
+        'room',
+        'created_at',
+        'updated_at',
+        'deleted_at',
     ];
 }

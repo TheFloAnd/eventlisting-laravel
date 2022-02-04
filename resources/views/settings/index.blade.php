@@ -19,7 +19,7 @@
     <section class="col-12">
         <div class="card">
             <div class="card-header">
-                database:
+                {{ __('Datenbank') }}
             </div>
             <div class="card-body">
                 <div class="row g-5">

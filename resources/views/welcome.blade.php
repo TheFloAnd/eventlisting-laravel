@@ -49,12 +49,19 @@
             </div>
             <div class="offcanvas-body home-offcanvas-body">
                 @if (Route::has('login'))
-                @auth<div class="btn-group-vertical w-100">
-                    <a href="{{ url('/home') }}" class="btn btn-outline-secondary home-offcanvas-body-link">
-                        Home
+                @auth
+                <div class="mb-3">
+                    <a href="{{ url('/home') }}" class="btn btn-outline-secondary home-offcanvas-body-link w-100">
+                    {{ __('Home') }}
+                </a>
+                </div>
+                <div class="btn-group-vertical w-100">
+                    <a href="{{ url('/events') }}" type="button" class="btn btn-outline-secondary home-offcanvas-body-link">
+                        {{ __('Termine') }}
                     </a>
-                    <a href="?b=events" type="button" class="btn btn-outline-secondary home-offcanvas-body-link">
-                        events
+
+                    <a href="{{ url('/events') }}" type="button" class="btn btn-outline-secondary home-offcanvas-body-link sec-nav w-75">
+                        {{ __('Hinzufügen') }}
                     </a>
                     <a href="?b=groups" type="button" class="btn btn-outline-secondary home-offcanvas-body-link">
                         groups
