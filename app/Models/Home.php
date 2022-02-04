@@ -72,12 +72,12 @@ class home extends Model
     // }
 
 
-    public function scopeProposals($query)
-    {
-        return $query->select('eaten', DB::raw('COUNT(`eaten`) as count'))
-            ->whereNull('deleted_at')
-            ->groupBy('eaten')
-            ->orderBy('count', 'DESC')
-            ->inRandomOrder();
-    }
+    // public function scopeProposals($query)
+    // {
+    //     return $query->select('eaten', DB::raw('COUNT(`eaten`) as count'))
+    //         ->whereNull('deleted_at')
+    //         ->groupBy('eaten')
+    //         ->orderBy('count', 'DESC')
+    //         ->inRandomOrder();
+    // }
 }

@@ -110,10 +110,6 @@ tr.strikeout td:after {
     border-color: $border-color;
 }
 
-input:-internal-autofill {
-    background: $palette-background-paper !important;
-}
-
 .select2-results__options,
 .select2-container--default .select2-selection--multiple,
 .select2-container--default .select2-selection--multiple .select2-selection__choice,
@@ -195,3 +191,13 @@ input:-internal-autofill {
     background: none !important;
     display: hidden !important;
 }
+
+// input,
+// input:-webkit-autofill,
+// input:-webkit-autofill:focus,
+// input:-webkit-autofill:hover,
+// input:-webkit-autofill:active,
+// input:-webkit-autofill-previewed,
+// input:-webkit-autofill-selected {
+//     background-color: $palette-background-paper !important;
+// }
