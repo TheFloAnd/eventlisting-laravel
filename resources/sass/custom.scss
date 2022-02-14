@@ -155,6 +155,20 @@ div.table-responsive>div.dataTables_wrapper>div.row>div[class^=col-]:last-child 
     background: none;
 }
 
-.sec-nav {
-    margin-left: 25%;
+.home-offcanvas-body-second-link {
+    list-style-type: none;
+}
+
+.home-offcanvas-body-second-link {
+    margin: 0 0 0 5%;
+    width: 95%;
+    border-radius: 0;
+}
+
+.btn-label {
+    // position: relative;
+    float: left;
+    // display: inline;
+    // background: rgba(0, 0, 0, 0.15);
+    border-radius: 3px 0 0 3px;
 }

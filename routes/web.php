@@ -19,9 +19,15 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-Route::resource('settings', App\Http\Controllers\SettingsController::class);
-Route::get('/einstellungen', [App\Http\Controllers\SettingsController::class, 'index'])->name('settings');
+Auth::routes();
+Route::group(['middleware' => ['auth']], function () {
+    Route::resource('settings', App\Http\Controllers\SettingsController::class);
+    Route::get('/einstellungen', [App\Http\Controllers\SettingsController::class, 'index'])->name('settings');
 
 
-Route::resource('events', App\Http\Controllers\EventsController::class);
-Route::get('/termine', [App\Http\Controllers\EventsController::class, 'index'])->name('events.index');
+    Route::resource('events', App\Http\Controllers\EventsController::class);
+    Route::get('/termine', [App\Http\Controllers\EventsController::class, 'index'])->name('events.index');
+
+    Route::resource('groups', App\Http\Controllers\GroupsController::class);
+    Route::get('/gruppen', [App\Http\Controllers\GroupsController::class, 'index'])->name('groups.index');
+});

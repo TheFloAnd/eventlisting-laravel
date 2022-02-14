@@ -11,6 +11,7 @@
     {{--
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet"> --}}
     <link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dark.css') }}">
     <!-- Styles -->
@@ -42,7 +43,7 @@
             aria-labelledby="home-offcanvasTopLabel">
             <div class="offcanvas-header">
                 <h4 id="home-offcanvasTopLabel">
-                    nav
+                    {{ __('Navigation') }}
                 </h4>
                 <button type="button" class="btn-close text-reset home-offcanvas-close" data-bs-dismiss="offcanvas"
                     aria-label="Close"></button>
@@ -52,23 +53,57 @@
                 @auth
                 <div class="mb-3">
                     <a href="{{ url('/home') }}" class="btn btn-outline-secondary home-offcanvas-body-link w-100">
-                    {{ __('Home') }}
-                </a>
+                        <span class="btn-label"><i class="bi bi-house-door"></i></span>
+                        {{ __('Home') }}
+                    </a>
                 </div>
-                <div class="btn-group-vertical w-100">
-                    <a href="{{ url('/events') }}" type="button" class="btn btn-outline-secondary home-offcanvas-body-link">
-                        {{ __('Termine') }}
-                    </a>
-
-                    <a href="{{ url('/events') }}" type="button" class="btn btn-outline-secondary home-offcanvas-body-link sec-nav w-75">
-                        {{ __('Hinzufügen') }}
-                    </a>
-                    <a href="?b=groups" type="button" class="btn btn-outline-secondary home-offcanvas-body-link">
-                        groups
-                    </a>
+                <div class="btn-group-vertical w-100" role="group">
+                    <div class="btn-group-vertical w-100" role="group">
+                        <a href="{{ url('/events') }}" type="button"
+                            class="btn btn-outline-secondary home-offcanvas-body-link">
+                            <span class="btn-label"><i class="bi bi-calendar"></i></span>
+                            {{ __('Termine') }}
+                        </a>
+                        <li class="home-offcanvas-body-second-link">
+                            <a href="{{ url('/events') }}" type="button"
+                                class="btn btn-outline-secondary home-offcanvas-body-link home-offcanvas-body-second-link">
+                                <span class="btn-label"><i class="bi bi-plus-lg"></i></span>
+                                {{ __('Hinzufügen') }}
+                            </a>
+                        </li>
+                        <li class="home-offcanvas-body-second-link">
+                            <a href="{{ url('/events') }}" type="button"
+                                class="btn btn-outline-secondary home-offcanvas-body-link home-offcanvas-body-second-link">
+                                <span class="btn-label"><i class="bi bi-list"></i></span>
+                                {{ __('Auflistung') }}
+                            </a>
+                        </li>
+                    </div>
+                    <div class="btn-group-vertical w-100" role="group">
+                        <a href="?b=groups" type="button"
+                            class="btn btn-outline-secondary home-offcanvas-body-link"><span class="btn-label"><i
+                                    class="bi bi-people"></i></span>
+                            {{ __('Gruppen') }}
+                        </a>
+                        <li class="home-offcanvas-body-second-link">
+                            <a href="{{ url('/events') }}" type="button"
+                                class="btn btn-outline-secondary home-offcanvas-body-link home-offcanvas-body-second-link">
+                                <span class="btn-label"><i class="bi bi-plus-lg"></i></span>
+                                {{ __('Hinzufügen') }}
+                            </a>
+                        </li>
+                        <li class="home-offcanvas-body-second-link">
+                            <a href="{{ url('/events') }}" type="button"
+                                class="btn btn-outline-secondary home-offcanvas-body-link home-offcanvas-body-second-link">
+                                <span class="btn-label"><i class="bi bi-person-lines-fill"></i></span>
+                                {{ __('Auflistung') }}
+                            </a>
+                        </li>
+                    </div>
                     <a href="{{ route('settings') }}" type="button"
                         class="btn btn-outline-secondary home-offcanvas-body-link">
-                        settings
+                        <span class="btn-label"><i class="bi bi-gear"></i></span>
+                        {{ __('Einstellungen') }}
                     </a>
                 </div>
                 <div class="mt-3">
@@ -81,8 +116,8 @@
                     </form>
                 </div>
                 @else
-                <button type="button" class="btn btn-outline-success w-100" data-bs-dismiss="offcanvas" data-bs-toggle="modal"
-                    data-bs-target="#modal_login">
+                <button type="button" class="btn btn-outline-success w-100" data-bs-dismiss="offcanvas"
+                    data-bs-toggle="modal" data-bs-target="#modal_login">
                     {{ __('Login') }}
                 </button>
                 @endauth
@@ -103,9 +138,9 @@
                                     </div>
                                 </div>
                                 <div class="col-auto home-card-today-header-col">
-                                    <div class="refresh-icon invisible">
+                                    <div class="invisible" data-refresh-icon>
                                         <div class="spinner-grow" role="status">
-                                            <span class="visually-hidden">Loading...</span>
+                                            <span class="visually-hidden">{{ __('Laden...') }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -228,13 +263,13 @@
                             <div class="row home-card-preview-header-row">
                                 <div class="col-auto home-card-preview-header-col">
                                     <h2 class="header-secondary home-card-preview-header-title">
-                                        event preview
+                                        {{ __('Termin Vorschau') }}
                                     </h2>
                                 </div>
                                 <div class="col-auto home-card-preview-header-col">
-                                    <div class="refresh-icon invisible">
+                                    <div class="invisible" data-refresh-icon>
                                         <div class="spinner-grow" role="status">
-                                            <span class="visually-hidden">Loading...</span>
+                                            <span class="visually-hidden">{{ __('Laden...') }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -251,22 +286,22 @@
                                 <thead class="home-card-preview-table-head">
                                     <tr>
                                         <th scope="col" class="home-card-preview-table-head-item">
-                                            project
+                                            {{ __('Termin') }}
                                         </th>
                                         <th scope="col" class="home-card-preview-table-head-item">
-                                            group
+                                            {{ __('Gruppe(n)') }}
                                         </th>
                                         <th scope="col" class="home-card-preview-table-head-item">
-                                            room
+                                            {{ __('Raum') }}
                                         </th>
                                         <th scope="col" class="home-card-preview-table-head-item">
-                                            from
+                                            {{ __('Von') }}
                                         </th>
                                         <th scope="col" class="home-card-preview-table-head-item">
-                                            till
+                                            {{ __('Bis') }}
                                         </th>
                                         <th scope="col" class="home-card-preview-table-head-item">
-                                            remaining_days
+                                            {{ __('In') }}
                                         </th>
                                     </tr>
                                 </thead>
@@ -343,8 +378,11 @@
                                         @endif
                                         @endif
 
-                                        <td> {{ abs(strtotime(strftime('%Y-%m-%d', strtotime($row->start))) -
-                                            strtotime(strftime('%Y-%m-%d'))) / 60 / 60 / 24 }}</td>
+                                        <td>
+                                            {{ abs(strtotime(strftime('%Y-%m-%d', strtotime($row->start))) -
+                                            strtotime(strftime('%Y-%m-%d'))) / 60 / 60 / 24 }}
+                                            {{ __('Tagen') }}
+                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -368,7 +406,7 @@
                             <div class="row g-3 justify-content-center">
                                 <div class="col-md-10">
                                     <div class="form-floating">
-                                        <input id="email" type="email"
+                                        <input id="email" type="text"
                                             class="form-control @error('email') is-invalid @enderror" name="email"
                                             value="{{ old('email') }}" placeholder="{{ __('Email') }}" required
                                             autocomplete="email" autofocus>
@@ -378,7 +416,7 @@
                                         </span>
                                         @enderror
                                         <label for="email">
-                                            {{ __('Email Address') }}
+                                            {{ __('Email Address/Name') }}
                                         </label>
                                     </div>
                                 </div>
@@ -431,15 +469,17 @@
             refresh_loop();
           }, 15 * 1000);
           function refresh_loop() {
-            $('.refresh-icon').each(function(index, element) {
+            $('[data-refresh-icon]').each(function(index, element) {
               $(element).removeClass("invisible");
               $(element).addClass("visible");
+            //   $(element).classList.toggle("invisible");
+            //   $(element).classList.toggle("visible");
             });
             $('.refresh').each(function(index, element) {
               $(element).load(window.location.href + " #" + this.id + " > *");
             });
             setTimeout(function() {
-              $('.refresh-icon').each(function(index, element) {
+              $('.[data-refresh-icon]').each(function(index, element) {
                 $(element).removeClass("visible");
                 $(element).addClass("invisible");
               });
