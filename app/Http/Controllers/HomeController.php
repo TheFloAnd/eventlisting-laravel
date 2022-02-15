@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Home;
 use App\Models\Groups;
+use App\Models\Settings;
 
 class HomeController extends Controller
 {
@@ -13,6 +14,9 @@ class HomeController extends Controller
         $today = Home::today()->get();
 
         $future = Home::future()->get();
-        return view('welcome', compact('today', 'future'),['title' => 'Dashboard']);
+
+        $title = Settings::setting('name');
+        $preview = Settings::setting('future_day');
+        return view('welcome', compact('today', 'future', 'preview'),['title' => $title]);
     }
 }

@@ -29,7 +29,14 @@ class Settings extends Model
      * @var array
      */
     protected $fillable = [
+        'setting',
         'value',
         'value_unit',
     ];
+
+
+    public function scopeSetting($query, $setting)
+    {
+        return $query->where('setting', $setting)->first();
+    }
 }

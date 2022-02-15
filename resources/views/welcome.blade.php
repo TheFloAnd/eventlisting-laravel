@@ -35,95 +35,7 @@
         </div>
         @endif --}}
 
-        <button class="btn btn-lg btn_hidden btn_menu" type="button" href="?b=events" data-bs-toggle="offcanvas"
-            data-bs-target="#home-offcanvasTop" aria-controls="home-offcanvasTop">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="offcanvas offcanvas-start home-offcanvas" tabindex="-1" id="home-offcanvasTop"
-            aria-labelledby="home-offcanvasTopLabel">
-            <div class="offcanvas-header">
-                <h4 id="home-offcanvasTopLabel">
-                    {{ __('Navigation') }}
-                </h4>
-                <button type="button" class="btn-close text-reset home-offcanvas-close" data-bs-dismiss="offcanvas"
-                    aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body home-offcanvas-body">
-                @if (Route::has('login'))
-                @auth
-                <div class="mb-3">
-                    <a href="{{ url('/home') }}" class="btn btn-outline-secondary home-offcanvas-body-link w-100">
-                        <span class="btn-label"><i class="bi bi-house-door"></i></span>
-                        {{ __('Home') }}
-                    </a>
-                </div>
-                <div class="btn-group-vertical w-100" role="group">
-                    <div class="btn-group-vertical w-100" role="group">
-                        <a href="{{ url('/events') }}" type="button"
-                            class="btn btn-outline-secondary home-offcanvas-body-link">
-                            <span class="btn-label"><i class="bi bi-calendar"></i></span>
-                            {{ __('Termine') }}
-                        </a>
-                        <li class="home-offcanvas-body-second-link">
-                            <a href="{{ url('/events') }}" type="button"
-                                class="btn btn-outline-secondary home-offcanvas-body-link home-offcanvas-body-second-link">
-                                <span class="btn-label"><i class="bi bi-plus-lg"></i></span>
-                                {{ __('Hinzufügen') }}
-                            </a>
-                        </li>
-                        <li class="home-offcanvas-body-second-link">
-                            <a href="{{ url('/events') }}" type="button"
-                                class="btn btn-outline-secondary home-offcanvas-body-link home-offcanvas-body-second-link">
-                                <span class="btn-label"><i class="bi bi-list"></i></span>
-                                {{ __('Auflistung') }}
-                            </a>
-                        </li>
-                    </div>
-                    <div class="btn-group-vertical w-100" role="group">
-                        <a href="?b=groups" type="button"
-                            class="btn btn-outline-secondary home-offcanvas-body-link"><span class="btn-label"><i
-                                    class="bi bi-people"></i></span>
-                            {{ __('Gruppen') }}
-                        </a>
-                        <li class="home-offcanvas-body-second-link">
-                            <a href="{{ url('/events') }}" type="button"
-                                class="btn btn-outline-secondary home-offcanvas-body-link home-offcanvas-body-second-link">
-                                <span class="btn-label"><i class="bi bi-plus-lg"></i></span>
-                                {{ __('Hinzufügen') }}
-                            </a>
-                        </li>
-                        <li class="home-offcanvas-body-second-link">
-                            <a href="{{ url('/events') }}" type="button"
-                                class="btn btn-outline-secondary home-offcanvas-body-link home-offcanvas-body-second-link">
-                                <span class="btn-label"><i class="bi bi-person-lines-fill"></i></span>
-                                {{ __('Auflistung') }}
-                            </a>
-                        </li>
-                    </div>
-                    <a href="{{ route('settings') }}" type="button"
-                        class="btn btn-outline-secondary home-offcanvas-body-link">
-                        <span class="btn-label"><i class="bi bi-gear"></i></span>
-                        {{ __('Einstellungen') }}
-                    </a>
-                </div>
-                <div class="mt-3">
-                    <a type="button" class="btn btn-outline-danger w-100" href="{{ route('logout') }}"
-                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        {{ __('Logout') }}
-                    </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                        @csrf
-                    </form>
-                </div>
-                @else
-                <button type="button" class="btn btn-outline-success w-100" data-bs-dismiss="offcanvas"
-                    data-bs-toggle="modal" data-bs-target="#modal_login">
-                    {{ __('Login') }}
-                </button>
-                @endauth
-                @endif
-            </div>
-        </div>
+        <x-home_nav />
         <article class="row g-3 home article-home">
             <section class="col-12 home-section-today">
                 <div class="card home-card-today">
@@ -131,9 +43,9 @@
                         <nav class="navbar home-card-today-header-nav">
                             <div class="row home-card-today-header-row">
                                 <div class="col-auto home-card-today-header-col">
-                                    <div class="refresh" id="refresh-title">
-                                        <h1 class="header-primary home-card-today-header-title">
-                                            <title>{{ config('app.name', 'Laravel') }}</title>
+                                    <div id="refresh-title" data-refresh>
+                                        <h1 class="header-primary">
+                                            {{ $title->value ?? 'NONE' }}
                                         </h1>
                                     </div>
                                 </div>
@@ -151,7 +63,7 @@
                             </h1>
                         </nav>
                     </div>
-                    <div class="card-body home-card-body home-card-today-body refresh" id="refresh-home-card">
+                    <div class="card-body home-card-body home-card-today-body" id="refresh-home-card" data-refresh>
                         <div class="table-responsive">
                             <table class="table table-striped home-card-today-body-table">
                                 <thead class="home-card-today-table-head">
@@ -274,13 +186,20 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="refresh" id="refresh-title-preview">
+                            <div id="refresh-title-preview" data-refresh>
                                 <h2 class="header-secondary home-card-preview-header-title">
+                                    {{ $preview->value }}
+                                    @if($preview->value_unit == 'week')
+                                        {{ __('Woche(n)') }}
+                                    @endif
+                                    @if($preview->value_unit == 'days')
+                                        {{ __('Tage') }}
+                                    @endif
                                 </h2>
                             </div>
                         </nav>
                     </div>
-                    <div class="card-body refresh home-card-preview-body" id="refresh-card-preview">
+                    <div class="card-body home-card-preview-body" id="refresh-card-preview" data-refresh>
                         <div class="table-responsive">
                             <table class="table table-striped home-card-preview-table">
                                 <thead class="home-card-preview-table-head">
@@ -475,7 +394,7 @@
             //   $(element).classList.toggle("invisible");
             //   $(element).classList.toggle("visible");
             });
-            $('.refresh').each(function(index, element) {
+            $('[data-refresh]').each(function(index, element) {
               $(element).load(window.location.href + " #" + this.id + " > *");
             });
             setTimeout(function() {
