@@ -15,10 +15,12 @@
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    {{-- <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"> --}}
+    {{--
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"> --}}
     <link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
-    {{-- <link rel="stylesheet" href="{{ asset('css/dark.css') }}"> --}}
+    {{--
+    <link rel="stylesheet" href="{{ asset('css/dark.css') }}"> --}}
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -40,6 +42,24 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a href="{{ url('/events') }}" class="nav-link">
+                                <span class="btn-label pe-1"><i class="bi bi-calendar"></i></span>
+                                {{ __('Termine') }}
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('/groups') }}" class="nav-link">
+                                <span class="btn-label pe-1"><i class="bi bi-people"></i></span>
+                                {{ __('Gruppen') }}
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('/settings') }}" class="nav-link">
+                                <span class="btn-label pe-1"><i class="bi bi-gear"></i></span>
+                                {{ __('Einstellungen') }}
+                            </a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

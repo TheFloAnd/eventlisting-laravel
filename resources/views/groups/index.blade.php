@@ -1,33 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
-
 <article class="row g-3">
     <section class="col-12">
-        <div class="card">
-            <div class="card-header">
-                <nav class="navbar navbar-dark">
-                    <h1 class="header-primary">
-
-                    </h1>
-                </nav>
-            </div>
-            <div class="card-body">
-
-            </div>
+        <div class="d-flex justify-content-end mx-2">
+            <a href="#" type="button" class="btn btn-outline-success w-100">
+                {{ __('Hinzufügen') }}
+            </a>
         </div>
     </section>
 
     <!-- Auflistung -->
     <section class="col-12">
         <div class="card">
-            <div class="card-header">
-                <nav class="navbar navbar-dark">
-                    <h1 class="header-primary">
-
-                    </h1>
-                </nav>
-            </div>
             <div class="card-body">
 
                 <nav>
@@ -75,18 +60,20 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-@foreach($active as $row)
-<tr>
-    <td class="table_search">{{ $row->alias }}</td>
-    <td class="table_search">{{ $row->name }}</td>
-    <td style="background-color:{{ $row->color }};">{{ $row->color }}</td>
-    <td data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('Bearbeiten') }}">
-        <a href="?b=group_edit&g={{ $row->alias }}" type="button" class="btn btn-sm btn-secondary position-relative">
-            <i class="bi bi-gear-wide"></i>
-        </a>
-    </td>
-</tr>
-@endforeach
+                                    @foreach($active as $row)
+                                    <tr>
+                                        <td class="table_search">{{ $row->alias }}</td>
+                                        <td class="table_search">{{ $row->name }}</td>
+                                        <td style="background-color:{{ $row->color }};">{{ $row->color }}</td>
+                                        <td data-bs-toggle="tooltip" data-bs-placement="top"
+                                            title="{{ __('Bearbeiten') }}">
+                                            <a href="?b=group_edit&g={{ $row->alias }}" type="button"
+                                                class="btn btn-sm btn-secondary position-relative">
+                                                <i class="bi bi-gear-wide"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -120,19 +107,20 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-@foreach($inactive as $row)
-<tr>
-    <td class="table_search">{{ $row->alias }}</td>
-    <td class="table_search">{{ $row->name }}</td>
-    <td style="background-color:{{ $row->color }};">{{ $row->color }}</td>
-    <td data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('Bearbeiten') }}">
-        <a href="?b=group_edit&g={{ $row->alias }}" type="button"
-            class="btn btn-sm btn-secondary position-relative">
-            <i class="bi bi-gear-wide"></i>
-        </a>
-    </td>
-</tr>
-@endforeach
+                                    @foreach($inactive as $row)
+                                    <tr>
+                                        <td class="table_search">{{ $row->alias }}</td>
+                                        <td class="table_search">{{ $row->name }}</td>
+                                        <td style="background-color:{{ $row->color }};">{{ $row->color }}</td>
+                                        <td data-bs-toggle="tooltip" data-bs-placement="top"
+                                            title="{{ __('Bearbeiten') }}">
+                                            <a href="?b=group_edit&g={{ $row->alias }}" type="button"
+                                                class="btn btn-sm btn-secondary position-relative">
+                                                <i class="bi bi-gear-wide"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
