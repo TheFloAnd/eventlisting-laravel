@@ -18,8 +18,6 @@ Route::resource('home', App\Http\Controllers\HomeController::class);
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
-Auth::routes();
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('settings', App\Http\Controllers\SettingsController::class);
     Route::get('/einstellungen', [App\Http\Controllers\SettingsController::class, 'index'])->name('settings');

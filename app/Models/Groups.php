@@ -39,4 +39,15 @@ class Groups extends Model
         'deleted_at',
     ];
 
+
+    public function scopeUsed($query)
+    {
+        return $query->whereNull('deleted_at')->orderBy('id');
+    }
+
+    public function scopeUnused($query)
+    {
+        return $query->whereNotNull('deleted_at')->orderBy('id');
+    }
+
 }

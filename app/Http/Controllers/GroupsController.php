@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Groups;
 
 class GroupsController extends Controller
 {
@@ -13,6 +14,11 @@ class GroupsController extends Controller
     }
     public function index()
     {
-        return view('groups.index', ['title' => 'Gruppen']);
+
+        $active = Groups::used()->get();
+
+        $inactive = Groups::unused()->get();
+
+        return view('groups.index', compact('active', 'inactive'), ['title' => 'Gruppen']);
     }
 }
