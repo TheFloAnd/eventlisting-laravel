@@ -36,6 +36,8 @@
         @endif --}}
 
         <x-home_nav />
+
+
         <article class="row g-3 home article-home">
             <section class="col-12 home-section-today">
                 <div class="card home-card-today">

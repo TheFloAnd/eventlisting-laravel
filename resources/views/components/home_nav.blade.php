@@ -33,31 +33,17 @@
                         {{ __('Hinzufügen') }}
                     </a>
                 </li>
-                <li class="home-offcanvas-body-second-link">
-                    <a href="{{ url('/events') }}" type="button"
-                        class="btn btn-outline-secondary home-offcanvas-body-link home-offcanvas-body-second-link">
-                        <span class="btn-label"><i class="bi bi-list"></i></span>
-                        {{ __('Auflistung') }}
-                    </a>
-                </li>
             </div>
             <div class="btn-group-vertical w-100" role="group">
-                <a href="?b=groups" type="button" class="btn btn-outline-secondary home-offcanvas-body-link"><span
+                <a href="{{ url('/groups') }}" type="button" class="btn btn-outline-secondary home-offcanvas-body-link"><span
                         class="btn-label"><i class="bi bi-people"></i></span>
                     {{ __('Gruppen') }}
                 </a>
                 <li class="home-offcanvas-body-second-link">
-                    <a href="{{ url('/events') }}" type="button"
+                    <a href="{{ url('/groups') }}" type="button"
                         class="btn btn-outline-secondary home-offcanvas-body-link home-offcanvas-body-second-link">
                         <span class="btn-label"><i class="bi bi-plus-lg"></i></span>
                         {{ __('Hinzufügen') }}
-                    </a>
-                </li>
-                <li class="home-offcanvas-body-second-link">
-                    <a href="{{ url('/events') }}" type="button"
-                        class="btn btn-outline-secondary home-offcanvas-body-link home-offcanvas-body-second-link">
-                        <span class="btn-label"><i class="bi bi-person-lines-fill"></i></span>
-                        {{ __('Auflistung') }}
                     </a>
                 </li>
             </div>

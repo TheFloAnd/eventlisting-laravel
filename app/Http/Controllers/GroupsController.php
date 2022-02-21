@@ -13,6 +13,6 @@ class GroupsController extends Controller
     }
     public function index()
     {
-        return view('events.index', ['title' => 'Gruppen']);
+        return view('groups.index', ['title' => 'Gruppen']);
     }
 }
