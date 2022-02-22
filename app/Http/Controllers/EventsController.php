@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Events;
 
 class EventsController extends Controller
 {
@@ -11,8 +12,11 @@ class EventsController extends Controller
     {
         $this->middleware('auth');
     }
+
     public function index()
     {
-        return view('events.index', ['title' => 'Dashboard']);
+        $data = Events::get();
+
+        return view('events.index', compact('data'),['title' => 'Termine']);
     }
 }

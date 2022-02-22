@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Groups extends Model
 {
     use HasFactory;
-    use SoftDeletes;
+    // use SoftDeletes;
 
     /**
      * The table associated with the model.
@@ -48,6 +48,11 @@ class Groups extends Model
     public function scopeUnused($query)
     {
         return $query->whereNotNull('deleted_at')->orderBy('id');
+    }
+
+    public function scopeAlias($query, $alias)
+    {
+        return $query->where('alias', $alias);
     }
 
 }

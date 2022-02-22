@@ -100,9 +100,8 @@
                                         </td>
                                         <td>
                                             @foreach(explode(';', $row->team) as $group)
-                                            {{-- <span class="badge text-dark"
-                                                style="background-color:{{ Groups::find($group)->color }};"> --}}
-                                                <span class="badge">
+                                            <span class="badge text-dark" style="background-color:{{ App\Models\Groups::alias($group)->pluck('color')->first() }};">
+                                                {{-- <span class="badge"> --}}
                                                     {{ $group }}
                                                 </span>
                                                 @endforeach
@@ -239,9 +238,8 @@
                                         </td>
                                         <td>
                                             @foreach(explode(';', $row->team) as $group)
-                                            {{-- <span class="badge text-dark"
-                                                style="background-color:{{ Groups::find($group)->color }};"> --}}
-                                                <span class="badge">
+                                            <span class="badge text-dark" style="background-color:{{ App\Models\Groups::alias($group)->pluck('color')->first() }};">
+                                                {{-- <span class="badge"> --}}
                                                     {{ $group }}
                                                 </span>
                                                 @endforeach

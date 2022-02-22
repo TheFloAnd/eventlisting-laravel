@@ -18,6 +18,7 @@ class CreateGroupsTable extends Migration
             $table->string('name');
             $table->string('alias');
             $table->string('color', 7);
+            $table->boolean(1)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
