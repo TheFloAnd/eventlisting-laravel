@@ -22,6 +22,11 @@
     {{--
     <link rel="stylesheet" href="{{ asset('css/dark.css') }}"> --}}
 
+    <link rel="stylesheet" href="{{ asset('css/select2/select2.min.css') }}">
+    {{--
+    <link rel="stylesheet" href="{{ asset('css/jquery.dataTables.min.css') }}"> --}}
+    <link rel="stylesheet" href="{{ asset('css/dataTables/dataTables.bootstrap5.min.css') }}">
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
@@ -102,9 +107,31 @@
         </main>
     </div>
     <script src="{{ asset('js/bootstrap/bootstrap.bundle.js') }}"></script>
+    <script src="{{ asset('js/init/bootstrap/bootstrap.validation.init.js') }}"></script>
     <!-- Jquery -->
     <script src="{{ asset('js/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('js/jquery/jquery-ui.min.js') }}"></script>
+
+    <!-- Jquery Datatable -->
+    <script src="{{ asset('js/dataTables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('js/dataTables/dataTables.bootstrap5.min.js') }}"></script>
+
+    <!-- Select 2 -->
+    <script src="{{ asset('js/select2/select2.full.min.js') }}"></script>
+    <script src="{{ asset('js/init/select2/select2.init.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+                $('.multiple-select').select2();
+            });
+    </script>
+
+    <script src="{{ asset('js/input_disable.js') }}"></script>
+    <script src="{{ asset('js/input_length.js') }}"></script>
+
+
+    <script src="{{ asset('js/init/dataTables/default.init.js') }}" defer></script>
+    <script src="{{ asset('js/init/dataTables/groups_active.init.js') }}" defer></script>
+    <script src="{{ asset('js/init/dataTables/groups_inactive.init.js') }}" defer></script>
 </body>
 
 </html>
