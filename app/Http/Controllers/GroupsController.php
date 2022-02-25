@@ -38,7 +38,10 @@ class GroupsController extends Controller
     public function store(Request $request)
     {
         // $validated = $request->validated();
-
+        if(Groups::alias($request->input('group_alias'))->exists()){
+            return redirect()->route('groups.create')
+                ->with('error', $request->input('group_alias') . ' Existiert bereits!');
+        }
         Groups::create([
             'name' => $request->input('group_name'),
             'alias' => $request->input('group_alias'),

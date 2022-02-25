@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+
+@if (count($errors) > 0)
+<x-alert.error :errors="$errors" />
+@endif
+
 <article class="row g-3">
     <section>
         <h1>
