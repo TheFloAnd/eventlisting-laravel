@@ -11,7 +11,7 @@
     <section class="col">
         <div class="card">
             <div class="card-body">
-                <form method="PATCH" action="{{ route('groups.update', $result->alias) }}">
+                <form method="patch" action="{{ route('groups.update', $result->alias) }}">
                     @csrf
                     <div class="row mt-3 g-3 justify-content-center">
                         <fieldset class="" hidden>

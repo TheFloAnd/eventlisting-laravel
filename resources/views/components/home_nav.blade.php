@@ -40,7 +40,7 @@
                     {{ __('Gruppen') }}
                 </a>
                 <li class="home-offcanvas-body-second-link">
-                    <a href="{{ url('/groups') }}" type="button"
+                    <a href="{{ route('groups.create') }}" type="button"
                         class="btn btn-outline-secondary home-offcanvas-body-link home-offcanvas-body-second-link">
                         <span class="btn-label"><i class="bi bi-plus-lg"></i></span>
                         {{ __('Hinzufügen') }}
