@@ -21,4 +21,38 @@ class GroupsController extends Controller
 
         return view('groups.index', compact('active', 'inactive'), ['title' => 'Gruppen']);
     }
+    public function create()
+    {
+
+        $color = '#' . substr(str_shuffle("0123456789abcdef"), 6, 6);
+
+        return view('groups.create', compact('color'), ['title' => 'Gruppe Hinzufügen']);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function store(Request $request)
+    {
+        // $validated = $request->validated();
+
+        Groups::create([
+            'name' => $request->input('group_name'),
+            'alias' => $request->input('group_alias'),
+            'color' => $request->input('group_color'),
+        ]);
+
+
+        return redirect()->route('groups.index');
+            // ->with('success', $request->input('group_alias') . ' Erfolgreich hinzugefügt!');
+    }
+
+    public function edit($alias)
+    {
+        $result = Groups::alias($alias)->first();
+        return view('groups.edit', compact('result'), ['title' => 'Gruppe Hinzufügen']);
+    }
 }

@@ -4,7 +4,7 @@
 <article class="row g-3">
     <section class="col-12">
         <div class="d-flex justify-content-end mx-2">
-            <a href="#" type="button" class="btn btn-outline-success w-100">
+            <a href="{{ route('groups.create') }}" type="button" class="btn btn-outline-success w-100">
                 {{ __('Hinzufügen') }}
             </a>
         </div>
@@ -67,7 +67,7 @@
                                         <td style="background-color:{{ $row->color }};">{{ $row->color }}</td>
                                         <td data-bs-toggle="tooltip" data-bs-placement="top"
                                             title="{{ __('Bearbeiten') }}">
-                                            <a href="?b=group_edit&g={{ $row->alias }}" type="button"
+                                            <a href="{{ route('groups.edit', $row->alias) }}" type="button"
                                                 class="btn btn-sm btn-secondary position-relative">
                                                 <i class="bi bi-gear-wide"></i>
                                             </a>
@@ -114,7 +114,7 @@
                                         <td style="background-color:{{ $row->color }};">{{ $row->color }}</td>
                                         <td data-bs-toggle="tooltip" data-bs-placement="top"
                                             title="{{ __('Bearbeiten') }}">
-                                            <a href="?b=group_edit&g={{ $row->alias }}" type="button"
+                                            <a href="{{ route('groups.edit', $row->alias) }}" type="button"
                                                 class="btn btn-sm btn-secondary position-relative">
                                                 <i class="bi bi-gear-wide"></i>
                                             </a>
