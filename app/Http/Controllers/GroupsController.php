@@ -67,11 +67,7 @@ class GroupsController extends Controller
             return redirect()->route('groups.create')
                 ->with('error', $request->input('group_alias') . ' Existiert bereits!');
         }
-        Groups::create([
-            'name' => $request->input('group_name'),
-            'alias' => $request->input('group_alias'),
-            'color' => $request->input('group_color'),
-        ]);
+
 
 
         return redirect()->route('groups.index');
