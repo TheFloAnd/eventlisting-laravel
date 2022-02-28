@@ -25,7 +25,7 @@
                                         name="group_name" id="group_name"
                                         placeholder="{{ old('group_name') ?? __('Gruppen Name') }}" maxlength="100"
                                         required data-bs-toggle="tooltip" data-bs-placement="top"
-                                        title="{{ __('Die volle Bezeichnung für die Gruppe') }}" data-show-length>
+                                        title="{{ __('Die volle Bezeichnung für die Gruppe') }}" data-show-input-length>
                                     <label for="group_name">
                                         {{ __('Gruppen Name') }}
                                         <span style="color: red;">
@@ -48,7 +48,7 @@
                                         name="group_alias" id="group_alias"
                                         placeholder="{{ old('group_alias') ?? __('Gruppen Alias') }}" maxlength="10"
                                         required data-bs-toggle="tooltip" data-bs-placement="top"
-                                        title="{{ __('Ein Kürzel für die Gruppe') }}" data-show-length>
+                                        title="{{ __('Ein Kürzel für die Gruppe') }}" data-show-input-length>
                                     <label for="group_alias">
                                         {{ __('Gruppen Alias') }}
                                         <span style="color: red;">

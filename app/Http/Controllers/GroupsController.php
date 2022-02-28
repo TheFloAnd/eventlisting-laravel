@@ -17,7 +17,7 @@ class GroupsController extends Controller
 
         $active = Groups::used()->get();
 
-        $inactive = Groups::unused()->get();
+        $inactive = Groups::unused()->withTrashed()->get();
 
         return view('groups.index', compact('active', 'inactive'), ['title' => 'Gruppen']);
     }
@@ -55,13 +55,13 @@ class GroupsController extends Controller
 
     public function show($alias)
     {
-        $result = Groups::alias($alias)->first();
-        return view('groups.edit', compact('result'), ['title' => 'Gruppe Anzeigen']);
+        $result = Groups::alias($alias)->withTrashed()->first();
+        return view('groups.show', compact('result'), ['title' => 'Gruppe Anzeigen']);
     }
 
     public function edit($alias)
     {
-        $result = Groups::alias($alias)->first();
+        $result = Groups::alias($alias)->withTrashed()->first();
         return view('groups.edit', compact('result'), ['title' => 'Gruppe Bearbeiten']);
     }
 
@@ -70,14 +70,11 @@ class GroupsController extends Controller
     {
         // $request->validated();
 
-        $id = Groups::alias($alias)->first();
-        $update = Groups::find($id)->alias($alias)->update([
+        Groups::alias($alias)->update([
             'name' => $request->input('group_name'),
-            'color' => $request->input('group_color'),
-            'updated_at' =>  strftime('%c')
+            'color' => $request->input('group_color')
         ]);
-        var_dump($update);
-        // return redirect()->route('groups.index', $alias);
+        return redirect()->route('groups.index');
             // ->with('success', $request->input('group_alias') . ' Erfolgreich hinzugefügt!');
     }
 
@@ -85,27 +82,23 @@ class GroupsController extends Controller
     public function destroy(Request $request, $alias)
     {
         // $request->validated();
-
-        $id = Groups::alias($alias)->first();
-        if($id->deleted_at == NULL){
-            Groups::find($id->id)
-                ->alias($alias)
-                ->update([
-                    'updated_at' =>  strftime('%c'),
-                    'deleted_at' =>  strftime('%c')
-                ]);
+        $item = Groups::alias($alias)->first();
+        if($item->deleted_at == null){
+            Groups::alias($alias)->delete();
+            // Groups::find($id)->update([
+            //         'deleted_at' =>  strftime('%c')
+            //     ]);
+            $msg = 'deaktiviert';
         }
 
-        if($id->deleted_at != NULL){
-            Groups::find($id->id)
-                ->alias($alias)
-                ->update([
-                    'updated_at' =>  strftime('%c'),
-                    'deleted_at' =>  NULL
+        if($item->deleted_at != null){
+            Groups::alias($alias)->update([
+                    'deleted_at' =>  null
                 ]);
+            $msg = 'aktiviert';
         }
-        // var_dump($update);
-        // return redirect()->route('groups.index', $alias);
-            // ->with('success', $request->input('group_alias') . ' Erfolgreich hinzugefügt!');
+
+        return redirect()->route('groups.index')
+            ->with('warning', $request->input('group_alias') . ' wurde' . $msg . '!');
     }
 }

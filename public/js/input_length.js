@@ -1,4 +1,4 @@
-$(".show_length").each(function(index, element) {
+$("[data-show-input-length]").each(function(index, element) {
     var label = document.getElementById(element.id + "_label");
     label.innerHTML = element.value.length + "/" + element.maxLength;
 
