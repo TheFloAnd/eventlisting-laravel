@@ -10,24 +10,12 @@
 
     <section class="col">
         <div class="card">
-            <div class="card-body">
-                <div class="row mt-3 g-3 justify-content-center">
-                    <div class="col-md-10">
-                        <form method="PATCH" action="{{ route('groups.edit', $result->alias) }}">
-                            @csrf
-                            <div class="row mt-3 g-3 justify-content-center">
-                                <fieldset class="" hidden>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" name="id" id="group_id"
-                                            value="{{ $result->id }}">
-                                    </div>
-                                </fieldset>
-                                <fieldset class="" hidden>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" name="alias" id="alias"
-                                            value="{{ $result->alias }}">
-                                    </div>
-                                </fieldset>
+            <form method="patch" action="{{ route('groups.update', $result->alias) }}">
+                @csrf
+                <div class="card-body" style="background: rgba(200, 200, 200, 0.2);">
+                    <div class="row mt-3 g-3 justify-content-center">
+                        <div class="col-md-10">
+                            <div class="row mt-3 g-3 justify-content-center" disabled>
                                 <div class="col-12">
                                     <fieldset id="input_name">
                                         <div class="form-floating has-validation">
@@ -36,8 +24,7 @@
                                                 placeholder="{{ $result->name ?? __('Gruppen Name') }}"
                                                 value="{{ $result->name }}" maxlength="100" required
                                                 data-bs-toggle="tooltip" data-bs-placement="top"
-                                                title="{{ __('Die volle Bezeichnung für die Gruppe') }}"
-                                                data-set-disable>
+                                                title="{{ __('Die volle Bezeichnung für die Gruppe') }}" disabled>
                                             <label for="group_name">
                                                 {{ __('Gruppen Name') }}
                                                 <span style="color: red;">
@@ -78,51 +65,55 @@
                                                 name="group_color" id="group_color" placeholder="{{ $result->color }}"
                                                 value="{{ $result->color }}" required data-bs-toggle="tooltip"
                                                 data-bs-placement="top"
-                                                title="{{ __('Darstellungs Farbe für die Gruppe!') }}" data-set-disable>
+                                                title="{{ __('Darstellungs Farbe für die Gruppe!') }}" disabled>
                                         </div>
                                     </fieldset>
                                 </div>
-
-                                <div class="col-12">
-                                    <div class="row g-2 justify-content-evenly">
-                                        <div class="col-8">
-                                            <div class="form-group">
-                                                <button type="submit" class="btn btn-outline-success w-100"
-                                                    name="submit_edit_group" value="submit">
-                                                    {{ __('Aktualisieren') }}
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="form-group">
-                                                <a type="button" class="btn btn-outline-secondary w-100"
-                                                    href="{{ route('groups.index') }}">
-                                                    {{ __('Zurück') }}
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
-                        </form>
-                    </div>
-                    <div class="col-10">
-                        <div class="form-group">
-                            <button type="button" class="btn btn-outline-danger w-100" name="submit_edit_group"
-                                data-bs-toggle="modal" data-bs-target="#modal_deactive_group" data-bs-modal-groupAlias="{{ $result->alias }}">
-                                {{ __('Deaktivieren') }}
-                            </button>
                         </div>
                     </div>
                 </div>
-            </div>
+                <div class="card-footer">
+                    <div class="col-12">
+                        <div class="row g-2 justify-content-evenly">
+                            <div class="col-8">
+                                <div class="form-group">
+                                    <a type="button" class="btn btn-outline-success w-100" name="submit_edit_group"
+                                        href="{{ route('groups.edit', $result->alias) }}">
+                                        {{ __('Bearbeiten') }}
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <a type="button" class="btn btn-outline-secondary w-100"
+                                        href="{{ route('groups.index') }}">
+                                        {{ __('Zurück') }}
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-10">
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-outline-danger w-100" name="submit_edit_group"
+                                        data-bs-toggle="modal" data-bs-target="#modal_deactive_group"
+                                        data-bs-modal-groupAlias="{{ $result->alias }}">
+                                        {{ __('Deaktivieren') }}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
     </section>
 </article>
 
-<div class="modal fade" id="modal_deactive_group" tabindex="-1" aria-labelledby="modal_deactive_group_Label" aria-hidden="true">
+<div class="modal fade" id="modal_deactive_group" tabindex="-1" aria-labelledby="modal_deactive_group_Label"
+    aria-hidden="true">
     <div class="modal-dialog modal-sm modal-dialog-centered">
         <div class="modal-content">
-            <form method="PATCH" action="{{ route('groups.update', $result->alias) }}">
+            <form method="POST" action="{{ route('groups.index') }}">
                 @csrf
                 <div class="modal-body">
                     <div class="row g-3">

@@ -53,24 +53,31 @@ class GroupsController extends Controller
             // ->with('success', $request->input('group_alias') . ' Erfolgreich hinzugefügt!');
     }
 
+    public function show($alias)
+    {
+        $result = Groups::alias($alias)->first();
+        return view('groups.edit', compact('result'), ['title' => 'Gruppe Anzeigen']);
+    }
+
     public function edit($alias)
     {
         $result = Groups::alias($alias)->first();
-        return view('groups.edit', compact('result'), ['title' => 'Gruppe Hinzufügen']);
+        return view('groups.edit', compact('result'), ['title' => 'Gruppe Bearbeiten']);
     }
 
 
     public function update(Request $request, $alias)
     {
-        // $validated = $request->validated();
-        if(Groups::alias($request->input('group_alias'))->exists()){
-            return redirect()->route('groups.create')
-                ->with('error', $request->input('group_alias') . ' Existiert bereits!');
-        }
+        // $request->validated();
 
-
-
-        return redirect()->route('groups.index');
+        $id = Groups::alias($alias)->first();
+        $update = Groups::find($id)->alias($alias)->update([
+            'name' => $request->input('group_name'),
+            'color' => $request->input('group_color'),
+            'updated_at' =>  strftime('%c')
+        ]);
+        var_dump($update);
+        // return redirect()->route('groups.index', $alias);
             // ->with('success', $request->input('group_alias') . ' Erfolgreich hinzugefügt!');
     }
 }

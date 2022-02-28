@@ -76,9 +76,9 @@
                                     </label>
                                     <input type="color" class="form-control form-control-color" name="group_color"
                                         id="group_color" value="{{ old('group_color') ?? $color }}" required
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="
+                                        data-bs-toggle="tooltip" data-bs-placement="top" title="
                                     {{ __('Darstellungs Farbe für die Gruppe!') }}">
-@error('group_color')
+                                    @error('group_color')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -93,6 +93,14 @@
                                     value="submit">
                                     {{ __('Hinzufügen') }}
                                 </button>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <a type="button" class="btn btn-outline-secondary w-100"
+                                    href="{{ route('groups.index') }}">
+                                    {{ __('Zurück') }}
+                                </a>
                             </div>
                         </div>
                     </div>

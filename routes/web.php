@@ -27,9 +27,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/Termine', [App\Http\Controllers\EventsController::class, 'index'])->name('events.index');
     Route::get('/Termine/Hinzufügen', [App\Http\Controllers\EventsController::class, 'create'])->name('events.create');
     Route::get('/Termine/Bearbeiten/{id}', [App\Http\Controllers\EventsController::class, 'edit'])->name('events.edit');
+    // Route::get('/Termine/Anzeigen/{id}', [App\Http\Controllers\EventsController::class, 'show'])->name('events.show');
 
     Route::resource('groups', App\Http\Controllers\GroupsController::class);
     Route::get('/Gruppen', [App\Http\Controllers\GroupsController::class, 'index'])->name('groups.index');
     Route::get('/Gruppen/Hinzufügen', [App\Http\Controllers\GroupsController::class, 'create'])->name('groups.create');
     Route::get('/Gruppen/Bearbeiten/{alias}', [App\Http\Controllers\GroupsController::class, 'edit'])->name('groups.edit');
+    Route::get('/Gruppen/Anzeigen/{alias}', [App\Http\Controllers\GroupsController::class, 'show'])->name('groups.show');
 });
