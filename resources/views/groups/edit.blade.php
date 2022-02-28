@@ -122,7 +122,7 @@
 <div class="modal fade" id="modal_deactive_group" tabindex="-1" aria-labelledby="modal_deactive_group_Label" aria-hidden="true">
     <div class="modal-dialog modal-sm modal-dialog-centered">
         <div class="modal-content">
-            <form method="PATCH" action="{{ route('groups.update', $result->alias) }}">
+            <form method="PATCH" action="{{ route('groups.destroy', $result->alias) }}">
                 @csrf
                 <div class="modal-body">
                     <div class="row g-3">

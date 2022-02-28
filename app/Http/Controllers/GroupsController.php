@@ -80,4 +80,32 @@ class GroupsController extends Controller
         // return redirect()->route('groups.index', $alias);
             // ->with('success', $request->input('group_alias') . ' Erfolgreich hinzugefügt!');
     }
+
+
+    public function destroy(Request $request, $alias)
+    {
+        // $request->validated();
+
+        $id = Groups::alias($alias)->first();
+        if($id->deleted_at == NULL){
+            Groups::find($id->id)
+                ->alias($alias)
+                ->update([
+                    'updated_at' =>  strftime('%c'),
+                    'deleted_at' =>  strftime('%c')
+                ]);
+        }
+
+        if($id->deleted_at != NULL){
+            Groups::find($id->id)
+                ->alias($alias)
+                ->update([
+                    'updated_at' =>  strftime('%c'),
+                    'deleted_at' =>  NULL
+                ]);
+        }
+        // var_dump($update);
+        // return redirect()->route('groups.index', $alias);
+            // ->with('success', $request->input('group_alias') . ' Erfolgreich hinzugefügt!');
+    }
 }
