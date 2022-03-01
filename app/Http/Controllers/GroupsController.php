@@ -74,7 +74,7 @@ class GroupsController extends Controller
             'name' => $request->input('group_name'),
             'color' => $request->input('group_color')
         ]);
-        return redirect()->route('groups.index');
+        return redirect()->route('groups');
             // ->with('success', $request->input('group_alias') . ' Erfolgreich hinzugefügt!');
     }
 
@@ -85,9 +85,6 @@ class GroupsController extends Controller
         $item = Groups::alias($alias)->first();
         if($item->deleted_at == null){
             Groups::alias($alias)->delete();
-            // Groups::find($id)->update([
-            //         'deleted_at' =>  strftime('%c')
-            //     ]);
             $msg = 'deaktiviert';
         }
 
@@ -98,7 +95,7 @@ class GroupsController extends Controller
             $msg = 'aktiviert';
         }
 
-        return redirect()->route('groups.index')
+        return redirect()->route('groups')
             ->with('warning', $request->input('group_alias') . ' wurde' . $msg . '!');
     }
 }

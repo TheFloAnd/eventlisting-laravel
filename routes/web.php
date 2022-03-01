@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\EventsController;
+use App\Http\Controllers\GroupsController;
+use App\Http\Controllers\SettingsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,24 +18,36 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes();
-Route::resource('home', App\Http\Controllers\HomeController::class);
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::controller(HomeController::class)->group(function () {
+    // Route::resource('home');
+    Route::get('/', 'index')->name('home');
+    Route::get('/home', 'index')->name('home');
+});
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::resource('settings', App\Http\Controllers\SettingsController::class);
-    Route::get('/einstellungen', [App\Http\Controllers\SettingsController::class, 'index'])->name('settings');
 
+    Route::controller(EventsController::class)->group(function () {
+        // Route::resource('events');
+        Route::get('/Termine', 'index')->name('events');
+        Route::get('/Termine/Hinzufügen', 'create')->name('events.create');
+        Route::get('/Termine/Bearbeiten/{id}', 'edit')->name('events.edit');
+        // Route::get('/Termine/Anzeigen/{id}', 'show')->name('events.show');
+    });
 
-    Route::resource('events', App\Http\Controllers\EventsController::class);
-    Route::get('/Termine', [App\Http\Controllers\EventsController::class, 'index'])->name('events.index');
-    Route::get('/Termine/Hinzufügen', [App\Http\Controllers\EventsController::class, 'create'])->name('events.create');
-    Route::get('/Termine/Bearbeiten/{id}', [App\Http\Controllers\EventsController::class, 'edit'])->name('events.edit');
-    // Route::get('/Termine/Anzeigen/{id}', [App\Http\Controllers\EventsController::class, 'show'])->name('events.show');
+    Route::controller(GroupsController::class)->group(function () {
+        // Route::resource('groups');
+        Route::get('/Gruppen', 'index')->name('groups');
+        Route::get('/Gruppen/Hinzufügen', 'create')->name('groups.create');
+        Route::get('/Gruppen/Bearbeiten/{alias}', 'edit')->name('groups.edit');
+        Route::get('/Gruppen/Anzeigen/{alias}', 'show')->name('groups.show');
 
-    Route::resource('groups', App\Http\Controllers\GroupsController::class);
-    Route::get('/Gruppen', [App\Http\Controllers\GroupsController::class, 'index'])->name('groups.index');
-    Route::get('/Gruppen/Hinzufügen', [App\Http\Controllers\GroupsController::class, 'create'])->name('groups.create');
-    Route::get('/Gruppen/Bearbeiten/{alias}', [App\Http\Controllers\GroupsController::class, 'edit'])->name('groups.edit');
-    Route::get('/Gruppen/Anzeigen/{alias}', [App\Http\Controllers\GroupsController::class, 'show'])->name('groups.show');
+        Route::post('/Gruppen/Hinzufügen', 'store')->name('groups.store');
+        Route::patch('/Gruppen/Bearbeiten/{alias}', 'update')->name('groups.update');
+        Route::delete('/Gruppen/Bearbeiten/{alias}', 'destroy')->name('groups.destroy');
+    });
+
+    Route::controller(SettingsController::class)->group(function () {
+        // Route::resource('settings');
+        Route::get('/einstellungen', 'index')->name('settings');
+    });
 });

@@ -19,21 +19,18 @@ class SettingsSeeder extends Seeder
             'setting' => 'refresh',
             'value' => '15',
             'value_unit' => 'seconds',
-            'created_at' => strftime('%Y-%m-%d %H:%M:%S')
-        ],
+            'created_at' => date("Y-m-d h:i:s")        ],
         [
             'view_name' => 'Termin Preview Zeitraum',
             'setting' => 'future_day',
             'value' => '2',
             'value_unit' => 'week',
-            'created_at' => strftime('%Y-%m-%d %H:%M:%S')
-        ],
+            'created_at' => date("Y-m-d h:i:s")        ],
         [
             'view_name' => 'Überschrift',
             'setting' => 'name',
             'value' => 'Unset',
-            'created_at' => strftime('%Y-%m-%d %H:%M:%S')
-        ]);
+            'created_at' => date("Y-m-d h:i:s")        ]);
 
         foreach ($settings as $setting){
             DB::table('settings')->insert($setting);

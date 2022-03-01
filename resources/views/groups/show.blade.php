@@ -87,7 +87,7 @@
                             <div class="col-4">
                                 <div class="form-group">
                                     <a type="button" class="btn btn-outline-secondary w-100"
-                                        href="{{ route('groups.index') }}">
+                                        href="{{ route('groups') }}">
                                         {{ __('Zurück') }}
                                     </a>
                                 </div>

@@ -35,7 +35,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container-fluid">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ route('home') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -48,19 +48,19 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a href="{{ url('/events') }}" class="nav-link">
+                            <a href="{{ route('events') }}" class="nav-link">
                                 <span class="btn-label pe-1"><i class="bi bi-calendar"></i></span>
                                 {{ __('Termine') }}
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ url('/groups') }}" class="nav-link">
+                            <a href="{{ route('groups') }}" class="nav-link">
                                 <span class="btn-label pe-1"><i class="bi bi-people"></i></span>
                                 {{ __('Gruppen') }}
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ url('/settings') }}" class="nav-link">
+                            <a href="{{ route('settings') }}" class="nav-link">
                                 <span class="btn-label pe-1"><i class="bi bi-gear"></i></span>
                                 {{ __('Einstellungen') }}
                             </a>
@@ -78,12 +78,12 @@
                         @endif
                         @else
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" id="nav_account" role="button" href="#"
+                                data-bs-toggle="dropdown">
                                 {{ Auth::user()->name }}
                             </a>
 
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <ul class="dropdown-menu" aria-labelledby="nav_account" style="left: auto !important;right: 0 !important;">
                                 <li>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -129,9 +129,9 @@
     <script src="{{ asset('js/input_length.js') }}"></script>
 
 
-    <script src="{{ asset('js/init/dataTables/default.init.js') }}" defer></script>
-    <script src="{{ asset('js/init/dataTables/groups_active.init.js') }}" defer></script>
-    <script src="{{ asset('js/init/dataTables/groups_inactive.init.js') }}" defer></script>
+    <script src="{{ asset('js/init/dataTables/default.init.js') }}"></script>
+    <script src="{{ asset('js/init/dataTables/groups_active.init.js') }}"></script>
+    <script src="{{ asset('js/init/dataTables/groups_inactive.init.js') }}"></script>
 </body>
 
 </html>

@@ -50,14 +50,14 @@ class home extends Model
     public function scopeToday($query)
     {
         // return $query->where(function ($query) {
-        //                 $query->whereDate('start', '<=', strftime('%Y-%m-%d'))
+        //                 $query->whereDate('start', '<=', date("Y-m-d"))
         //                     ->whereDate('end', '>=', date('Y-m-d'));
         //     });
-        return $query->whereRaw('date(start) <= ? AND  date(end) >= ?', [strftime('%Y-%m-%d'), strftime('%Y-%m-%d')]);
+        return $query->whereRaw('date(start) <= ? AND  date(end) >= ?', [date("Y-m-d"), date("Y-m-d")]);
     }
     public function scopeFuture($query)
     {
-        return $query->whereDate('start', '>', strftime('%Y-%m-%d'))
+        return $query->whereDate('start', '>', date("Y-m-d"))
             ->whereNull('deleted_at')
             ->orderBy('start');
     }

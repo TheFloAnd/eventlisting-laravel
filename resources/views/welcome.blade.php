@@ -299,7 +299,7 @@
 
                                         <td>
                                             {{ abs(strtotime(strftime('%Y-%m-%d', strtotime($row->start))) -
-                                            strtotime(strftime('%Y-%m-%d'))) / 60 / 60 / 24 }}
+                                            strtotime(date("Y-m-d"))) / 60 / 60 / 24 }}
                                             {{ __('Tagen') }}
                                         </td>
                                     </tr>

@@ -22,12 +22,12 @@
         </div>
         <div class="btn-group-vertical w-100" role="group">
             <div class="btn-group-vertical w-100" role="group">
-                <a href="{{ url('/events') }}" type="button" class="btn btn-outline-secondary home-offcanvas-body-link">
+                <a href="{{ route('events') }}" type="button" class="btn btn-outline-secondary home-offcanvas-body-link">
                     <span class="btn-label"><i class="bi bi-calendar"></i></span>
                     {{ __('Termine') }}
                 </a>
                 <li class="home-offcanvas-body-second-link">
-                    <a href="{{ url('/events') }}" type="button"
+                    <a href="{{ route('events.create') }}" type="button"
                         class="btn btn-outline-secondary home-offcanvas-body-link home-offcanvas-body-second-link">
                         <span class="btn-label"><i class="bi bi-plus-lg"></i></span>
                         {{ __('Hinzufügen') }}
@@ -35,7 +35,7 @@
                 </li>
             </div>
             <div class="btn-group-vertical w-100" role="group">
-                <a href="{{ url('/groups') }}" type="button" class="btn btn-outline-secondary home-offcanvas-body-link"><span
+                <a href="{{ route('groups') }}" type="button" class="btn btn-outline-secondary home-offcanvas-body-link"><span
                         class="btn-label"><i class="bi bi-people"></i></span>
                     {{ __('Gruppen') }}
                 </a>
