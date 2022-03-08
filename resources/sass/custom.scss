@@ -210,3 +210,15 @@ select {
         border-color: #19875440;
     }
 }
+
+hr.separator {
+    border: .075em solid #000;
+    border-radius: .75em;
+}
+
+nav.navbar {
+    border-bottom: 2px solid #000;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-bottom-left-radius: .5em;
+    border-bottom-right-radius: .5em;
+}

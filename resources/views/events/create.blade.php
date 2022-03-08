@@ -2,23 +2,27 @@
 
 @section('content')
 <article class="row g-3">
-    <section class="col-12">
-        <div class="d-flex justify-content-end mx-2">
-            <a href="#" type="button" class="btn btn-outline-success w-100">
+<div class="col-12">
+    <div class="row d-flex align-content-center">
+        <div class="col-md-8">
+            <h1>
+                {{ $title }}
+            </h1>
+        </div>
+        <div class="col-md-4">
+            <a href="#" type="button" class="btn btn-outline-secondary w-100">
                 {{ __('Zurück') }}
             </a>
         </div>
-    </section>
-
+    </div>
+</div>
     <!-- Auflistung -->
     <section class="col-12 events-section">
         <div class="card events-card">
-            <div class="card-body">
-
-
-                <form method="POST" action="{{ route('events.store') }}">
-                    @csrf
-                    <div class="row mt-3 g-3 justify-content-center">
+            <form method="POST" action="{{ route('events.store') }}">
+                @csrf
+                <div class="card-body">
+                    <div class="row g-3 justify-content-center">
                         <div class="col-md-10">
                             <fieldset>
                                 <div class="form-floating">
@@ -84,7 +88,8 @@
                                             <input type="text" class="form-control" name="room" id="room"
                                                 placeholder="{{ __('Raum') }}" list="room_list" maxlength="25"
                                                 data-bs-toggle="tooltip" data-bs-placement="top"
-                                                title="{{ __('Raum wo der Termin stattfindet') }}" data-show-input-length>
+                                                title="{{ __('Raum wo der Termin stattfindet') }}"
+                                                data-show-input-length>
                                             <label for="room">
                                                 {{ __('Raum') }}
 
@@ -97,9 +102,9 @@
                                             @enderror
 
                                             <datalist id="room_list">
-                            @foreach ($proposal_room as $row)
-                            <option value="{{ $row->room }}">
-                            @endforeach
+                                                @foreach ($proposal_room as $row)
+                                                <option value="{{ $row->room }}">
+                                                    @endforeach
                                             </datalist>
                                         </div>
                                     </fieldset>
@@ -136,8 +141,11 @@
                                 </div>
                             </fieldset>
                         </div>
-
-
+                        <hr class="separator">
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row g-3 justify-content-center">
                         <div class="col-8">
                             <div class="form-group">
                                 <button type="submit" class="btn btn-outline-success w-100" name="submit_event"
@@ -147,11 +155,8 @@
                             </div>
                         </div>
                     </div>
-                </form>
-
-
-
-            </div>
+                </div>
+            </form>
         </div>
     </section>
 
