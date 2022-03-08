@@ -32,6 +32,10 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/Termine/Hinzufügen', 'create')->name('events.create');
         Route::get('/Termine/Bearbeiten/{id}', 'edit')->name('events.edit');
         // Route::get('/Termine/Anzeigen/{id}', 'show')->name('events.show');
+
+        Route::post('/Termine/Hinzufügen', 'store')->name('events.store');
+        Route::patch('/Termine/Bearbeiten/{id}', 'update')->name('events.update');
+        Route::delete('/Termine/Bearbeiten/{id}', 'destroy')->name('events.destroy');
     });
 
     Route::controller(GroupsController::class)->group(function () {

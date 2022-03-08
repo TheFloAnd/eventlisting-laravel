@@ -62,6 +62,14 @@ class home extends Model
             ->orderBy('start');
     }
 
+    public function scopeOrder($query)
+    {
+        return $query
+            ->whereNull('deleted_at')
+            ->orderBy('start', 'ASC')
+            ->orderBy('id', 'ASC');
+    }
+
     // public function scopeFormat($query)
     // {
     //     return $query->select('*', DB::raw('

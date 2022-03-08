@@ -11,9 +11,9 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $today = Home::today()->get();
+        $today = Home::today()->order()->get();
 
-        $future = Home::future()->get();
+        $future = Home::future()->order()->get();
 
         $title = Settings::setting('name');
         $preview = Settings::setting('future_day');

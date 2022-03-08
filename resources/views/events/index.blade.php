@@ -4,7 +4,7 @@
 <article class="row g-3">
     <section class="col-12">
         <div class="d-flex justify-content-end mx-2">
-            <a href="#" type="button" class="btn btn-outline-success w-100">
+            <a href="{{ route('events.create') }}" type="button" class="btn btn-outline-success w-100">
                 {{ __('Hinzufügen') }}
             </a>
         </div>
