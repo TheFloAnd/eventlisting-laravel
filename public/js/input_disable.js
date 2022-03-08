@@ -23,12 +23,15 @@
         }
     };
 });*/
-$(".set_disable").each(function(index, element) {
+$("[data-toggle-disable]").each(function(index, element) {
     var disable = document.getElementsByClassName("disable");
+    var get_disabled = document.querySelector("[data-disable-area]")
+    get_disabled = get_disabled.querySelectorAll("[data-set-disabled]");
+    console.log(get_disabled)
     element.onchange = function() {
-        for (var i = 0; i < disable.length; i++) {
-            disable[i].toggleAttribute("disabled");
-            disable[i].toggleAttribute("readonly");
+        for (var i = 0; i < get_disabled.length; i++) {
+            get_disabled[i].toggleAttribute("disabled");
+            // get_disabled[i].toggleAttribute("readonly");
         }
     };
 });

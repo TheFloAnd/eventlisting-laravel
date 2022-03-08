@@ -2,20 +2,20 @@
 
 @section('content')
 <article class="row g-3">
-<div class="col-12">
-    <div class="row d-flex align-content-center">
-        <div class="col-md-8">
-            <h1>
-                {{ $title }}
-            </h1>
-        </div>
-        <div class="col-md-4">
-            <a href="#" type="button" class="btn btn-outline-secondary w-100">
-                {{ __('Zurück') }}
-            </a>
+    <div class="col-12">
+        <div class="row d-flex align-content-center">
+            <div class="col-md-8">
+                <h1>
+                    {{ $title }}
+                </h1>
+            </div>
+            <div class="col-md-4">
+                <a href="#" type="button" class="btn btn-outline-secondary w-100">
+                    {{ __('Zurück') }}
+                </a>
+            </div>
         </div>
     </div>
-</div>
     <!-- Auflistung -->
     <section class="col-12 events-section">
         <div class="card events-card">
@@ -141,21 +141,100 @@
                                 </div>
                             </fieldset>
                         </div>
-                        <hr class="separator">
                     </div>
-                </div>
-                <div class="card-footer">
+                    <hr class="separator">
+
+
                     <div class="row g-3 justify-content-center">
-                        <div class="col-8">
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-outline-success w-100" name="submit_event"
-                                    value="submit">
-                                    {{ __('Hinzufügen') }}
-                                </button>
+                        <div class="col-md-10">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch"
+                                    id="repeat" name="repeat" data-toggle-disable>
+                                <label class="form-check-label" for="repeat">{{ __('Wiederholen') }}</label>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-10">
+                            <div class="row g-3" data-disable-area>
+
+                                {{-- <div class="col-12">
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <div class="form-check form-check-inline" data-bs-toggle="tooltip"
+                                                data-bs-placement="top"
+                                                title="">
+                                                <input class="form-check-input set_repeat_time disable" type="radio"
+                                                    name="set_repeat_time" id="set_repeat_time_date" value="date"
+                                                    checked disabled data-set-disabled>
+                                                <label class="form-check-label" for="set_repeat_time_date">
+                                                    {{ __('Bis') }}
+                                                </label>
+                                            </div>
+                                            <div class="form-check form-check-inline" data-bs-toggle="tooltip"
+                                                data-bs-placement="top"
+                                                title="">
+                                                <input class="form-check-input set_repeat_time disable" type="radio"
+                                                    name="set_repeat_time" id="set_repeat_time_repeats" value="repeats"
+                                                    disabled data-set-disabled>
+                                                <label class="form-check-label" for="set_repeat_time_repeats">
+                                                    {{ __('Wiederholungen') }}
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div> --}}
+
+                                <div class="col-md-6">
+                                    <div class="form-group" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        title="">
+                                        <fieldset>
+                                            <label class="form-label" for="repeats">
+                                                {{ __('Bis') }}:
+                                            </label>
+                                            <input class="form-control disable" type="date"
+                                                placeholder="{{ date('Y-m-d', strtotime(date('Y-m-d') . ' +1 month')) }}"
+                                                name="repeats" id="repeats"
+                                                value="{{ date('Y-m-d', strtotime(date('Y-m-d') . ' +1 month')) }}"
+                                                disabled data-set-disabled>
+                                        </fieldset>
+                                    </div>
+                                </div>
+
+                                {{-- <div class="col-md-6">
+                                    <div class="form-group" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        title="">
+                                        <fieldset>
+                                            <label class="form-label" for="repeats">
+                                                {{ __('Wiederholungen') }}:
+                                            </label>
+                                            <input class="form-control disable" type="number"
+                                                placeholder="repeats" min="1"
+                                                name="repeats" id="repeats" value="1" disabled data-set-disabled>
+                                        </fieldset>
+                                    </div>
+                                </div> --}}
+
+                            </div>
+
+
+
+                        </div>
+
+
+                    </div>
+                    <div class="card-footer">
+                        <div class="row g-3 justify-content-center">
+                            <div class="col-8">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-outline-success w-100" name="submit_event"
+                                        value="submit">
+                                        {{ __('Hinzufügen') }}
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
             </form>
         </div>
     </section>
