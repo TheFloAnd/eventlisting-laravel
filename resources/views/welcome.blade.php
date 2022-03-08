@@ -357,7 +357,7 @@
                                 </div>
                                 <div class="col-md-10">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="remember" id="remember" {{
+                                        <input class="form-check-input form-check-input-green" type="checkbox" name="remember" id="remember" {{
                                             old('remember') ? 'checked' : '' }}>
 
                                         <label class="form-check-label" for="remember">
