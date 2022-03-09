@@ -40,7 +40,7 @@ class EventsController extends Controller
      */
     public function store(Request $request)
     {
-        // $validated = $request->validated();
+        $validated = $request->validated();
 
         if (is_array($request->input('group'))) {
             $group = '';

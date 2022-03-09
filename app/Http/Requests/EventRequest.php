@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class Groups extends FormRequest
+class EventRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,12 @@ class Groups extends FormRequest
     public function rules()
     {
         return [
-            //
+
+            'event' => 'required|max:50',
+            'team' => 'required',
+            'start' => 'required|date',
+            'end' => 'required|date',
+            'room' => 'nullable|max:25',
         ];
     }
 }

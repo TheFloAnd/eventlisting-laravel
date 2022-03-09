@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Groups;
+use App\Http\Requests\GroupRequest;
 
 class GroupsController extends Controller
 {
@@ -35,10 +36,12 @@ class GroupsController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(GroupRequest $request)
     {
-        // $validated = $request->validated();
-        if(Groups::alias($request->input('group_alias'))->exists()){
+        $validated = $request->validated();
+
+
+        if (Groups::alias($request->input('group_alias'))->exists()) {
             return redirect()->route('groups.create')
                 ->with('error', $request->input('group_alias') . ' Existiert bereits!');
         }
@@ -50,7 +53,7 @@ class GroupsController extends Controller
 
 
         return redirect()->route('groups.index');
-            // ->with('success', $request->input('group_alias') . ' Erfolgreich hinzugefügt!');
+        // ->with('success', $request->input('group_alias') . ' Erfolgreich hinzugefügt!');
     }
 
     public function show($alias)
@@ -75,7 +78,7 @@ class GroupsController extends Controller
             'color' => $request->input('group_color')
         ]);
         return redirect()->route('groups');
-            // ->with('success', $request->input('group_alias') . ' Erfolgreich hinzugefügt!');
+        // ->with('success', $request->input('group_alias') . ' Erfolgreich hinzugefügt!');
     }
 
 
@@ -83,15 +86,15 @@ class GroupsController extends Controller
     {
         // $request->validated();
         $item = Groups::alias($alias)->first();
-        if($item->deleted_at == null){
+        if ($item->deleted_at == null) {
             Groups::alias($alias)->delete();
             $msg = 'deaktiviert';
         }
 
-        if($item->deleted_at != null){
+        if ($item->deleted_at != null) {
             Groups::alias($alias)->update([
-                    'deleted_at' =>  null
-                ]);
+                'deleted_at' =>  null
+            ]);
             $msg = 'aktiviert';
         }
 
