@@ -78,7 +78,7 @@ tr.strikeout td:after {
 }
 
 .badge {
-    font-size: .80em;
+    font-size: 0.8em;
 }
 
 .header-primary {
@@ -118,15 +118,15 @@ tr.strikeout td:after {
     border-bottom-right-radius: 1rem !important;
 }
 
-div.table-responsive>div.dataTables_wrapper>div.row:nth-child(3)>div[class^=col-] {
+div.table-responsive>div.dataTables_wrapper>div.row:nth-child(3)>div[class^="col-"] {
     padding: 10px 5px 5px 0px !important;
 }
 
-div.table-responsive>div.dataTables_wrapper>div.row>div[class^=col-]:first-child {
+div.table-responsive>div.dataTables_wrapper>div.row>div[class^="col-"]:first-child {
     padding-left: 5px !important;
 }
 
-div.table-responsive>div.dataTables_wrapper>div.row>div[class^=col-]:last-child {
+div.table-responsive>div.dataTables_wrapper>div.row>div[class^="col-"]:last-child {
     padding-right: 5px !important;
 }
 
@@ -212,13 +212,13 @@ select {
 }
 
 hr.separator {
-    border: .075em solid #000;
-    border-radius: .75em;
+    border: 0.075em solid #000;
+    border-radius: 0.75em;
 }
 
-nav.navbar {
+nav.navbar.backend_nav {
     border-bottom: 2px solid #000;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    border-bottom-left-radius: .5em;
-    border-bottom-right-radius: .5em;
+    border-bottom-left-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
 }
