@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EventsController;
 use App\Http\Controllers\GroupsController;
@@ -24,10 +25,11 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/home', 'index')->name('home');
 });
 
+
 Route::group(['middleware' => ['auth']], function () {
 
     Route::controller(EventsController::class)->group(function () {
-        // Route::resource('events');
+
         Route::get('/Termine', 'index')->name('events');
         Route::get('/Termine/Hinzufügen', 'create')->name('events.create');
         Route::get('/Termine/Bearbeiten/{id}', 'edit')->name('events.edit');

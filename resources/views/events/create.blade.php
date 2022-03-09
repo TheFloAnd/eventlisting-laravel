@@ -19,7 +19,7 @@
     <!-- Auflistung -->
     <section class="col-12 events-section">
         <div class="card events-card">
-            <form method="POST" action="{{ route('events.store') }}">
+            <form method="post" action="{{ route('events.store') }}">
                 @csrf
                 <div class="card-body">
                     <div class="row g-3 justify-content-center">
@@ -66,8 +66,7 @@
                                                 class="form-select multiple-select @error('group') is-invalid @enderror"
                                                 name="group[]" id="group" multiple="multiple" required
                                                 data-bs-toggle="tooltip" data-bs-placement="top"
-                                                title="{{ __('An dem Termin Teilnehmende Gruppen') }}"
-                                                value="{{ old('group') ?? __('') }}">
+                                                title="{{ __('An dem Termin Teilnehmende Gruppen') }}">
                                                 @foreach ($groups as $row)
                                                 <option value="{{ $row->alias }}">{{ $row->name }} ({{ $row->alias }})
                                                 </option>
@@ -257,25 +256,21 @@
                                 </div> --}}
 
                             </div>
-
-
-
                         </div>
-
-
                     </div>
-                    <div class="card-footer">
-                        <div class="row g-3 justify-content-center">
-                            <div class="col-8">
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-outline-success w-100" name="submit_event"
-                                        value="submit">
-                                        {{ __('Hinzufügen') }}
-                                    </button>
-                                </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row g-3 justify-content-center">
+                        <div class="col-8">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-outline-success w-100" name="submit_event"
+                                    value="{{ __('Hinzufügen') }}">
+                                    {{ __('Hinzufügen') }}
+                                </button>
                             </div>
                         </div>
                     </div>
+                </div>
             </form>
         </div>
     </section>
