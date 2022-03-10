@@ -45,6 +45,9 @@
                                 <th scope="col" class="home-card-preview-table-head-item">
                                     {{ __('In') }}
                                 </th>
+                                <th scope="col" class="home-card-preview-table-head-item">
+
+                                </th>
                             </tr>
                         </thead>
                         <tbody class="events-card-table-body">
@@ -60,7 +63,8 @@
                                 </td>
                                 <td>
                                     @foreach(explode(';', $row->team) as $group)
-                                    <span class="badge text-dark" style="background-color:{{ App\Models\Groups::alias($group)->pluck('color')->first() }};">
+                                    <span class="badge text-dark"
+                                        style="background-color:{{ App\Models\Groups::alias($group)->pluck('color')->first() }};">
                                         {{-- <span class="badge"> --}}
                                             {{ $group }}
                                         </span>
@@ -123,6 +127,12 @@
                                     {{ abs(strtotime(date('Y-m-d', strtotime($row->start))) -
                                     strtotime(date("Y-m-d"))) / 60 / 60 / 24 }}
                                     {{ __('Tagen') }}
+                                </td>
+                                <td data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('Bearbeiten') }}">
+                                    <a href="{{ route('events.edit', $row->id) }}" type="button"
+                                        class="btn btn-sm btn-secondary position-relative">
+                                        <i class="bi bi-gear-wide"></i>
+                                    </a>
                                 </td>
                             </tr>
                             @endforeach

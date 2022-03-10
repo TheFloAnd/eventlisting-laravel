@@ -60,6 +60,15 @@ class Events extends Model
             ->orderBy('id', 'ASC');
     }
 
+    public function scopeFollowing($query, $parent_id)
+    {
+        return $query
+            ->where('repeat_parent', $parent_id)
+            ->whereNull('deleted_at')
+            ->orderBy('start', 'ASC')
+            ->orderBy('id', 'ASC');
+    }
+
     public function scopeProposals($query)
     {
         return $query->select('event', DB::raw('COUNT(`event`) as count'))

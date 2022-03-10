@@ -85,7 +85,7 @@ class EventsController extends Controller
             foreach ($period_start as $row) {
 
                 $start = $row->format("Y-m-d H:i");
-                $end_date = $row->modify($interval->format($interval->d .' days '. $interval->h .' hours '. $interval->i .' minutes'));
+                $end_date = $row->modify($interval->format($interval->d . ' days ' . $interval->h . ' hours ' . $interval->i . ' minutes'));
                 $end = $end_date->format("Y-m-d H:i");
 
                 Events::create([
@@ -104,5 +104,22 @@ class EventsController extends Controller
 
         return redirect()->route('events');
         // ->with('success', $request->input('group_alias') . ' Erfolgreich hinzugefügt!');
+    }
+
+    public function edit($id)
+    {
+
+        $result = Events::find($id);
+        if ($result->repeat_parent != NULL) {
+            $result_future = Events::following($result->repeat_parent)->events()->order()->get();
+        }else{
+            $result_future = NULL;
+        }
+
+        $proposal = Events::proposals()->get();
+        $proposal_room = Events::proposal_room()->get();
+        $groups = Groups::get();
+
+        return view('events.edit', compact('result', 'result_future', 'proposal', 'proposal_room', 'groups'), ['title' => 'Termin Bearbeiten']);
     }
 }
