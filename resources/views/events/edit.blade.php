@@ -244,14 +244,14 @@
             </div>
         </section>
 
-
+        @if($result_future != NULL)
         <section class="col-12 home-section-today">
             <div class="card home-card-today">
                 <div class="card-header home-card-header home-card-today-header">
                     <nav class="navbar home-card-today-header-nav">
                         <div class="row home-card-today-header-row">
                             <div class="col-auto home-card-today-header-col">
-                                <div id="refresh-title" data-refresh>
+                                <div>
                                     <h1 class="header-primary">
                                         {{ __('Folgende Termine') }}
                                     </h1>
@@ -260,7 +260,7 @@
                         </div>
                     </nav>
                 </div>
-                <div class="card-body home-card-body home-card-today-body" id="refresh-home-card" data-refresh>
+                <div class="card-body home-card-body home-card-today-body">
                     <div class="table-responsive">
                         <table class="table table-striped home-card-today-body-table">
                             <thead class="home-card-today-table-head">
@@ -305,52 +305,52 @@
                                     <td>
                                         {{ $row->room }}
                                     </td>
-                                    @if(strftime('%d.%m.%Y', strtotime($row->start)) != strftime('%d.%m.%Y',
+                                    @if(date('d.m.Y', strtotime($row->start)) != date('d.m.Y',
                                     strtotime($row->end)))
 
-                                    @if(strftime('%H:%M', strtotime($row->start)) == '00:00')
-                                    <td> {{ strftime('%a - %d.%m.%Y', strtotime($row->start)) }} </td>
+                                    @if(date('H:i', strtotime($row->start)) == '00:00')
+                                    <td> {{ date('D - d.m.Y', strtotime($row->start)) }} </td>
                                     @else
-                                    <td> {{ strftime('%a - %d.%m.%Y - %H:%M', strtotime($row->start)) }} </td>
+                                    <td> {{ date('D - d.m.Y - H:i', strtotime($row->start)) }} </td>
                                     @endif
 
-                                    @if(strftime('%H:%M', strtotime($row->end)) == '00:00')
-                                    <td> {{ strftime('%a - %d.%m.%Y ', strtotime($row->end)) }} </td>
+                                    @if(date('H:i', strtotime($row->end)) == '00:00')
+                                    <td> {{ date('D - d.m.Y ', strtotime($row->end)) }} </td>
                                     @else
-                                    <td> {{ strftime('%a - %d.%m.%Y - %H:%M', strtotime($row->end))}} </td>
+                                    <td> {{ date('D - d.m.Y - H:i', strtotime($row->end))}} </td>
                                     @endif
 
                                     @endif
-                                    @if(strftime('%d.%m.%Y', strtotime($row->start)) == strftime('%d.%m.%Y',
+                                    @if(date('d.m.Y', strtotime($row->start)) == date('d.m.Y',
                                     strtotime($row->end)))
 
-                                    @if(strftime('%H:%M', strtotime($row->start)) == strftime('%H:%M',
+                                    @if(date('H:i', strtotime($row->start)) == date('H:i',
                                     strtotime($row->end)))
 
-                                    @if(strftime('%H:%M', strtotime($row->start)) == '00:00')
-                                    <td colspan="2"> {{ strftime('%a - %d.%m.%Y ', strtotime($row->start)) }}
+                                    @if(date('H:i', strtotime($row->start)) == '00:00')
+                                    <td colspan="2"> {{ date('D - d.m.Y ', strtotime($row->start)) }}
                                     </td>
                                     <td style="display:none;">
                                         @else
-                                    <td colspan="2"> {{ strftime('%a - %d.%m.%Y - %H:%M', strtotime($row->start))
+                                    <td colspan="2"> {{ date('D - d.m.Y - H:i', strtotime($row->start))
                                         }} </td>
                                     <td style="display:none;">
                                         @endif
 
                                         @endif
-                                        @if(strftime('%H:%M', strtotime($row->start)) != strftime('%H:%M',
+                                        @if(date('H:i', strtotime($row->start)) != date('H:i',
                                         strtotime($row->end)))
 
-                                        @if(strftime('%H:%M', strtotime($row->start)) == '00:00')
-                                    <td> {{ strftime('%a - %d.%m.%Y', strtotime($row->start)) }} </td>
+                                        @if(date('H:i', strtotime($row->start)) == '00:00')
+                                    <td> {{ date('D - d.m.Y', strtotime($row->start)) }} </td>
                                     @else
-                                    <td> {{ strftime('%a - %d.%m.%Y - %H:%M', strtotime($row->start)) }} </td>
+                                    <td> {{ date('D - d.m.Y - H:i', strtotime($row->start)) }} </td>
                                     @endif
 
-                                    @if(strftime('%H:%M', strtotime($row->end)) == '00:00')
-                                    <td> {{ strftime('%a - %d.%m.%Y', strtotime($row->end)) }} </td>
+                                    @if(date('H:i', strtotime($row->end)) == '00:00')
+                                    <td> {{ date('D - d.m.Y', strtotime($row->end)) }} </td>
                                     @else
-                                    <td> {{ strftime('%a - %H:%M', strtotime($row->end)) }} </td>
+                                    <td> {{ date('D - H:i', strtotime($row->end)) }} </td>
                                     @endif
                                     @endif
                                     @endif
@@ -364,6 +364,7 @@
                 </div>
             </div>
         </section>
+        @endif
 
     </article>
 </form>
