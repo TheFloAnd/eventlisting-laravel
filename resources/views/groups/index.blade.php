@@ -64,7 +64,7 @@
                                     <tr>
                                         <td class="table_search">{{ $row->alias }}</td>
                                         <td class="table_search">{{ $row->name }}</td>
-                                        <td style="background-color:{{ $row->color }};">{{ $row->color }}</td>
+                                        <td class="group_color" style="background-color:{{ $row->color }};">{{ $row->color }}</td>
                                         <td data-bs-toggle="tooltip" data-bs-placement="top"
                                             title="{{ __('Bearbeiten') }}">
                                             <a href="{{ route('groups.edit', $row->alias) }}" type="button"
@@ -115,7 +115,7 @@
                                     <tr>
                                         <td class="table_search">{{ $row->alias }}</td>
                                         <td class="table_search">{{ $row->name }}</td>
-                                        <td style="background-color:{{ $row->color }};">{{ $row->color }}</td>
+                                        <td class="group_color" style="background-color:{{ $row->color }};">{{ $row->color }}</td>
                                         <td data-bs-toggle="tooltip" data-bs-placement="top"
                                             title="{{ __('Bearbeiten') }}">
                                             <a href="{{ route('groups.edit', $row->alias) }}" type="button"
