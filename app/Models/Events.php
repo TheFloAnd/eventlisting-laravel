@@ -62,7 +62,9 @@ class Events extends Model
 
     public function scopeFollowing($query, $parent_id)
     {
+
         return $query
+            ->whereDate('start', '>', date("Y-m-d"))
             ->where('repeat_parent', $parent_id)
             ->whereNull('deleted_at')
             ->orderBy('start', 'ASC')

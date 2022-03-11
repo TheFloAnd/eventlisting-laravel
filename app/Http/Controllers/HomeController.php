@@ -15,8 +15,10 @@ class HomeController extends Controller
 
         $future = Home::future()->order()->get();
 
+        $groups = Groups::withTrashed()->get();
+
         $title = Settings::setting('name');
         $preview = Settings::setting('future_day');
-        return view('welcome', compact('today', 'future', 'preview'),['title' => $title]);
+        return view('welcome', compact('today', 'future', 'preview', 'groups'),['title' => $title]);
     }
 }

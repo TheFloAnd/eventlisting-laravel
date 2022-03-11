@@ -100,11 +100,16 @@
                                         </td>
                                         <td>
                                             @foreach(explode(';', $row->team) as $group)
-                                            <span class="badge text-dark" style="background-color:{{ App\Models\Groups::alias($group)->pluck('color')->first() }};">
-                                                {{-- <span class="badge"> --}}
-                                                    {{ $group }}
-                                                </span>
-                                                @endforeach
+                                            @forEach($groups as $get_color)
+                                            @if($get_color->alias == $group)
+                                            <span class="badge text-dark"
+                                                style="background-color:{{ $get_color->color }};">
+
+                                                {{ $group }}
+                                            </span>
+                                            @endif
+                                            @endforeach
+                                            @endforeach
                                         </td>
                                         <td>
                                             {{ $row->room }}
@@ -191,10 +196,10 @@
                                 <h2 class="header-secondary home-card-preview-header-title">
                                     {{ $preview->value }}
                                     @if($preview->value_unit == 'week')
-                                        {{ __('Woche(n)') }}
+                                    {{ __('Woche(n)') }}
                                     @endif
                                     @if($preview->value_unit == 'days')
-                                        {{ __('Tage') }}
+                                    {{ __('Tage') }}
                                     @endif
                                 </h2>
                             </div>
@@ -238,11 +243,16 @@
                                         </td>
                                         <td>
                                             @foreach(explode(';', $row->team) as $group)
-                                            <span class="badge text-dark" style="background-color:{{ App\Models\Groups::alias($group)->pluck('color')->first() }};">
-                                                {{-- <span class="badge"> --}}
-                                                    {{ $group }}
-                                                </span>
-                                                @endforeach
+                                            @forEach($groups as $get_color)
+                                            @if($get_color->alias == $group)
+                                            <span class="badge text-dark"
+                                                style="background-color:{{ $get_color->color }};">
+
+                                                {{ $group }}
+                                            </span>
+                                            @endif
+                                            @endforeach
+                                            @endforeach
                                         </td>
                                         <td>
                                             {{ $row->room }}
@@ -357,8 +367,8 @@
                                 </div>
                                 <div class="col-md-10">
                                     <div class="form-check">
-                                        <input class="form-check-input form-check-input-green" type="checkbox" name="remember" id="remember" {{
-                                            old('remember') ? 'checked' : '' }}>
+                                        <input class="form-check-input form-check-input-green" type="checkbox"
+                                            name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                                         <label class="form-check-label" for="remember">
                                             {{ __('Remember Me') }}

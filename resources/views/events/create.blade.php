@@ -172,7 +172,7 @@
 
 
                         <div class="col-md-10">
-                            <div class="row g-3 mb-3" data-disable-area>
+                            <div class="row g-3 mb-3" data-area="disable">
 
                                 {{-- <div class="col-12">
                                     <fieldset>

@@ -222,3 +222,37 @@ nav.navbar.backend_nav {
     border-bottom-left-radius: 0.5em;
     border-bottom-right-radius: 0.5em;
 }
+
+// .table-select-col {
+//     display: flex;
+//     justify-content: center;
+//     align-content: center;
+//     max-width: min-content !important;
+// }
+.del_following_events {
+    overflow-y: auto;
+    height: 25rem;
+}
+
+.del_following_events thead th {
+    position: sticky;
+    top: 0;
+}
+
+.del_following_events table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.del_following_events th,
+.del_following_events td {
+    padding: 8px 16px;
+}
+
+.del_following_events th {
+    background: #eee;
+}
+
+.del_following_events tr {
+    border-bottom: #000 solid 1px;
+}
