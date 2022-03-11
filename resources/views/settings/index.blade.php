@@ -16,7 +16,7 @@
             </div>
         </div>
     </section>
-    <section class="col-12">
+    {{-- <section class="col-12">
         <div class="card">
             <div class="card-header">
                 {{ __('Datenbank') }}
@@ -49,7 +49,7 @@
             </div>
         </div>
 
-    </section>
+    </section> --}}
 </article>
 <div class="modal fade" id="modal_table" tabindex="-1" aria-labelledby="modal_tableLabel" aria-hidden="true">
     <div class="modal-dialog">

@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EventsController;
 use App\Http\Controllers\GroupsController;
 use App\Http\Controllers\SettingsController;
+use Carbon\Carbon;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,12 @@ use App\Http\Controllers\SettingsController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Create a date object
+$date = Carbon::now();
+
+// Get the current app locale
+$locale = app()->getLocale();
+Carbon::setLocale($locale);
 
 Auth::routes();
 Route::controller(HomeController::class)->group(function () {
