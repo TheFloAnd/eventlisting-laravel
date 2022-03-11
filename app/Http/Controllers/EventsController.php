@@ -21,8 +21,9 @@ class EventsController extends Controller
     public function index()
     {
         $data = Events::events()->order()->get();
+        $groups = Groups::withTrashed()->get();
 
-        return view('events.index', compact('data'), ['title' => 'Termine']);
+        return view('events.index', compact('data', 'groups'), ['title' => 'Termine']);
     }
 
 
@@ -81,11 +82,11 @@ class EventsController extends Controller
             $diff_start_date = new DateTime($request->input('start_date'));
             $diff_end_date = new DateTime($request->input('end_date'));
             $interval = date_diff($diff_start_date, $diff_end_date);
-            // dd($interval);
+
             foreach ($period_start as $row) {
 
                 $start = $row->format("Y-m-d H:i");
-                $end_date = $row->modify($interval->format($interval->d .' days '. $interval->h .' hours '. $interval->i .' minutes'));
+                $end_date = $row->modify($interval->format($interval->d . ' days ' . $interval->h . ' hours ' . $interval->i . ' minutes'));
                 $end = $end_date->format("Y-m-d H:i");
 
                 Events::create([
@@ -104,5 +105,138 @@ class EventsController extends Controller
 
         return redirect()->route('events');
         // ->with('success', $request->input('group_alias') . ' Erfolgreich hinzugefügt!');
+    }
+
+    public function edit($id)
+    {
+
+        $result = Events::find($id);
+        if ($result->repeat_parent != NULL) {
+            $result_future = Events::following($result->repeat_parent)->order()->get();
+        } else {
+            $result_future = NULL;
+        }
+
+        $proposal = Events::proposals()->get();
+        $proposal_room = Events::proposal_room()->get();
+        $groups = Groups::get();
+
+        return view('events.edit', compact('result', 'result_future', 'proposal', 'proposal_room', 'groups'), ['title' => 'Termin Bearbeiten']);
+    }
+
+
+    public function update(Request $request, $id)
+    {
+        // $request->validated();
+
+        if ($request->has('not_applicable')) {
+            Events::find($id)->update([
+                'not_applicable' => 1
+            ]);
+            if ($request->has('edit_repeat')) {
+                if (is_array($request->input('followng_event'))) {
+                    foreach ($request->input('followng_event') as $follow_update) {
+                        Events::find($follow_update)->update([
+                            'not_applicable' => 1
+                        ]);
+                    }
+                } else {
+                    Events::find($request->input('followng_event'))->update([
+                        'not_applicable' => 1
+                    ]);
+                }
+            }
+        }
+
+        if (!$request->has('not_applicable')) {
+
+            if (is_array($request->input('group'))) {
+                $group = '';
+                $i = 0;
+                $j = 1;
+                $count_groups = count($request->input('group'));
+                foreach ($request->input('group') as $row) {
+                    $count_groups == $j ? $group .= $row : $group .= $row . ';';
+                    $i++;
+                    $j++;
+                }
+            } else {
+                $group = $request->input('group');
+            }
+
+            $event = Events::find($id);
+
+            $add_start_1 = new DateTime($request->input('start_date'));
+            $add_start_2 = new DateTime($event->start);
+            $interval = date_diff($add_start_2, $add_start_1);
+            $start_diff = $interval->format($interval->d . ' days ' . $interval->h . ' hours ' . $interval->i . ' minutes');
+
+
+            $add_end_1 = new DateTime($request->input('end_date'));
+            $add_end_2 = new DateTime($event->end);
+            $interval = date_diff($add_end_2, $add_end_1);
+            $end_diff = $interval->format($interval->d . ' days ' . $interval->h . ' hours ' . $interval->i . ' minutes');
+
+            Events::find($id)->update([
+                'not_applicable' => NULL,
+                'event' => $request->input('event'),
+                'team' => $group,
+                'start' => $request->input('start_date'),
+                'end' => $request->input('end_date'),
+                'room' => $request->input('room'),
+            ]);
+            if ($request->has('edit_repeat')) {
+                if (is_array($request->input('followng_event'))) {
+                    foreach ($request->input('followng_event') as $follow_update) {
+
+                        $event = Events::find($follow_update);
+
+                        Events::find($follow_update)->update([
+                            'not_applicable' => NULL,
+                            'event' => $request->input('event'),
+                            'team' => $group,
+                            'start' => date('Y-m-d H:i', strtotime($event->start . ' ' . $start_diff . '')),
+                            'end' => date('Y-m-d H:i', strtotime($event->end . ' ' . $end_diff . '')),
+                            'room' => $request->input('room'),
+                        ]);
+                    }
+                } else {
+
+                    $event = Events::find($follow_update);
+
+                    Events::find($follow_update)->update([
+                        'not_applicable' => NULL,
+                        'event' => $request->input('event'),
+                        'team' => $group,
+                        'start' => date('Y-m-d H:i', strtotime($event->start . ' ' . $start_diff . '')),
+                        'end' => date('Y-m-d H:i', strtotime($event->end . ' ' . $end_diff . '')),
+                        'room' => $request->input('room'),
+                    ]);
+                }
+            }
+        }
+
+        return redirect()->route('events');
+        // ->with('success', $request->input('group_alias') . ' Erfolgreich hinzugefügt!');
+    }
+
+
+    public function destroy(Request $request, $id)
+    {
+
+        Events::find($id)->delete();
+
+        if ($request->has('delete_repeat')) {
+            if (is_array($request->input('followng_event'))) {
+                foreach ($request->input('followng_event') as $follow_update) {
+                    Events::find($follow_update)->delete();
+                }
+            } else {
+                Events::find($request->input('followng_event'))->delete();
+            }
+        }
+
+        return redirect()->route('events');
+        // ->with('warning', $request->input('group_alias') . ' wurde' . $msg . '!');
     }
 }

@@ -12,6 +12,9 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+<script src="{{ asset('js/input_disable.js') }}" defer></script>
+    <script src="{{ asset('js/input_length.js') }}" defer></script>
+    <script src="{{ asset('js/select.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -125,13 +128,26 @@
             });
     </script>
 
-    <script src="{{ asset('js/input_disable.js') }}"></script>
-    <script src="{{ asset('js/input_length.js') }}"></script>
-
-
     <script src="{{ asset('js/init/dataTables/default.init.js') }}"></script>
     <script src="{{ asset('js/init/dataTables/groups_active.init.js') }}"></script>
     <script src="{{ asset('js/init/dataTables/groups_inactive.init.js') }}"></script>
+
+<script>
+    // Change the selector if needed
+    var $table = $('table'),
+    $bodyCells = $table.find('tbody tr:first').children(),
+    colWidth;
+
+    // Get the tbody columns width array
+    colWidth = $bodyCells.map(function() {
+    return $(this).width();
+    }).get();
+
+    // Set the width of thead columns
+    $table.find('thead tr').children().each(function(i, v) {
+    $(v).width(colWidth[i]);
+    });
+</script>
 </body>
 
 </html>

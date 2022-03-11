@@ -100,61 +100,66 @@
                                         </td>
                                         <td>
                                             @foreach(explode(';', $row->team) as $group)
-                                            <span class="badge text-dark" style="background-color:{{ App\Models\Groups::alias($group)->pluck('color')->first() }};">
-                                                {{-- <span class="badge"> --}}
-                                                    {{ $group }}
-                                                </span>
-                                                @endforeach
+                                            @forEach($groups as $get_color)
+                                            @if($get_color->alias == $group)
+                                            <span class="badge text-dark"
+                                                style="background-color:{{ $get_color->color }};">
+
+                                                {{ $group }}
+                                            </span>
+                                            @endif
+                                            @endforeach
+                                            @endforeach
                                         </td>
                                         <td>
                                             {{ $row->room }}
                                         </td>
-                                        @if(strftime('%d.%m.%Y', strtotime($row->start)) != strftime('%d.%m.%Y',
+                                        @if(date('d.m.Y', strtotime($row->start)) != date('d.m.Y',
                                         strtotime($row->end)))
 
-                                        @if(strftime('%H:%M', strtotime($row->start)) == '00:00')
-                                        <td> {{ strftime('%a - %d.%m.%Y', strtotime($row->start)) }} </td>
+                                        @if(date('H:i', strtotime($row->start)) == '00:00')
+                                        <td> {{ date('D - d.m.Y', strtotime($row->start)) }} </td>
                                         @else
-                                        <td> {{ strftime('%a - %d.%m.%Y - %H:%M', strtotime($row->start)) }} </td>
+                                        <td> {{ date('D - d.m.Y - H:i', strtotime($row->start)) }} </td>
                                         @endif
 
-                                        @if(strftime('%H:%M', strtotime($row->end)) == '00:00')
-                                        <td> {{ strftime('%a - %d.%m.%Y ', strtotime($row->end)) }} </td>
+                                        @if(date('H:i', strtotime($row->end)) == '00:00')
+                                        <td> {{ date('D - d.m.Y ', strtotime($row->end)) }} </td>
                                         @else
-                                        <td> {{ strftime('%a - %d.%m.%Y - %H:%M', strtotime($row->end))}} </td>
+                                        <td> {{ date('D - d.m.Y - H:i', strtotime($row->end))}} </td>
                                         @endif
 
                                         @endif
-                                        @if(strftime('%d.%m.%Y', strtotime($row->start)) == strftime('%d.%m.%Y',
+                                        @if(date('d.m.Y', strtotime($row->start)) == date('d.m.Y',
                                         strtotime($row->end)))
 
-                                        @if(strftime('%H:%M', strtotime($row->start)) == strftime('%H:%M',
+                                        @if(date('H:i', strtotime($row->start)) == date('H:i',
                                         strtotime($row->end)))
 
-                                        @if(strftime('%H:%M', strtotime($row->start)) == '00:00')
-                                        <td colspan="2"> {{ strftime('%a - %d.%m.%Y ', strtotime($row->start)) }}
+                                        @if(date('H:i', strtotime($row->start)) == '00:00')
+                                        <td colspan="2"> {{ date('D - d.m.Y ', strtotime($row->start)) }}
                                         </td>
                                         <td style="display:none;">
                                             @else
-                                        <td colspan="2"> {{ strftime('%a - %d.%m.%Y - %H:%M', strtotime($row->start))
+                                        <td colspan="2"> {{ date('D - d.m.Y - H:i', strtotime($row->start))
                                             }} </td>
                                         <td style="display:none;">
                                             @endif
 
                                             @endif
-                                            @if(strftime('%H:%M', strtotime($row->start)) != strftime('%H:%M',
+                                            @if(date('H:i', strtotime($row->start)) != date('H:i',
                                             strtotime($row->end)))
 
-                                            @if(strftime('%H:%M', strtotime($row->start)) == '00:00')
-                                        <td> {{ strftime('%a - %d.%m.%Y', strtotime($row->start)) }} </td>
+                                            @if(date('H:i', strtotime($row->start)) == '00:00')
+                                        <td> {{ date('D - d.m.Y', strtotime($row->start)) }} </td>
                                         @else
-                                        <td> {{ strftime('%a - %d.%m.%Y - %H:%M', strtotime($row->start)) }} </td>
+                                        <td> {{ date('D - d.m.Y - H:i', strtotime($row->start)) }} </td>
                                         @endif
 
-                                        @if(strftime('%H:%M', strtotime($row->end)) == '00:00')
-                                        <td> {{ strftime('%a - %d.%m.%Y', strtotime($row->end)) }} </td>
+                                        @if(date('H:i', strtotime($row->end)) == '00:00')
+                                        <td> {{ date('D - d.m.Y', strtotime($row->end)) }} </td>
                                         @else
-                                        <td> {{ strftime('%a - %H:%M', strtotime($row->end)) }} </td>
+                                        <td> {{ date('D - H:i', strtotime($row->end)) }} </td>
                                         @endif
                                         @endif
                                         @endif
@@ -191,10 +196,10 @@
                                 <h2 class="header-secondary home-card-preview-header-title">
                                     {{ $preview->value }}
                                     @if($preview->value_unit == 'week')
-                                        {{ __('Woche(n)') }}
+                                    {{ __('Woche(n)') }}
                                     @endif
                                     @if($preview->value_unit == 'days')
-                                        {{ __('Tage') }}
+                                    {{ __('Tage') }}
                                     @endif
                                 </h2>
                             </div>
@@ -238,61 +243,66 @@
                                         </td>
                                         <td>
                                             @foreach(explode(';', $row->team) as $group)
-                                            <span class="badge text-dark" style="background-color:{{ App\Models\Groups::alias($group)->pluck('color')->first() }};">
-                                                {{-- <span class="badge"> --}}
-                                                    {{ $group }}
-                                                </span>
-                                                @endforeach
+                                            @forEach($groups as $get_color)
+                                            @if($get_color->alias == $group)
+                                            <span class="badge text-dark"
+                                                style="background-color:{{ $get_color->color }};">
+
+                                                {{ $group }}
+                                            </span>
+                                            @endif
+                                            @endforeach
+                                            @endforeach
                                         </td>
                                         <td>
                                             {{ $row->room }}
                                         </td>
-                                        @if(strftime('%d.%m.%Y', strtotime($row->start)) != strftime('%d.%m.%Y',
+                                        @if(date('d.m.Y', strtotime($row->start)) != date('d.m.Y',
                                         strtotime($row->end)))
 
-                                        @if(strftime('%H:%M', strtotime($row->start)) == '00:00')
-                                        <td> {{ strftime('%a - %d.%m.%Y', strtotime($row->start)) }} </td>
+                                        @if(date('H:i', strtotime($row->start)) == '00:00')
+                                        <td> {{ date('D - d.m.Y', strtotime($row->start)) }} </td>
                                         @else
-                                        <td> {{ strftime('%a - %d.%m.%Y - %H:%M', strtotime($row->start)) }} </td>
+                                        <td> {{ date('D - d.m.Y - H:i', strtotime($row->start)) }} </td>
                                         @endif
 
-                                        @if(strftime('%H:%M', strtotime($row->end)) == '00:00')
-                                        <td> {{ strftime('%a - %d.%m.%Y ', strtotime($row->end)) }} </td>
+                                        @if(date('H:i', strtotime($row->end)) == '00:00')
+                                        <td> {{ date('D - d.m.Y ', strtotime($row->end)) }} </td>
                                         @else
-                                        <td> {{ strftime('%a - %d.%m.%Y - %H:%M', strtotime($row->end))}} </td>
+                                        <td> {{ date('D - d.m.Y - H:i', strtotime($row->end))}} </td>
                                         @endif
 
                                         @endif
-                                        @if(strftime('%d.%m.%Y', strtotime($row->start)) == strftime('%d.%m.%Y',
+                                        @if(date('d.m.Y', strtotime($row->start)) == date('d.m.Y',
                                         strtotime($row->end)))
 
-                                        @if(strftime('%H:%M', strtotime($row->start)) == strftime('%H:%M',
+                                        @if(date('H:i', strtotime($row->start)) == date('H:i',
                                         strtotime($row->end)))
 
-                                        @if(strftime('%H:%M', strtotime($row->start)) == '00:00')
-                                        <td colspan="2"> {{ strftime('%a - %d.%m.%Y ', strtotime($row->start)) }}
+                                        @if(date('H:i', strtotime($row->start)) == '00:00')
+                                        <td colspan="2"> {{ date('D - d.m.Y ', strtotime($row->start)) }}
                                         </td>
                                         <td style="display:none;">
                                             @else
-                                        <td colspan="2"> {{ strftime('%a - %d.%m.%Y - %H:%M', strtotime($row->start))
+                                        <td colspan="2"> {{ date('D - d.m.Y - H:i', strtotime($row->start))
                                             }} </td>
                                         <td style="display:none;">
                                             @endif
 
                                             @endif
-                                            @if(strftime('%H:%M', strtotime($row->start)) != strftime('%H:%M',
+                                            @if(date('H:i', strtotime($row->start)) != date('H:i',
                                             strtotime($row->end)))
 
-                                            @if(strftime('%H:%M', strtotime($row->start)) == '00:00')
-                                        <td> {{ strftime('%a - %d.%m.%Y', strtotime($row->start)) }} </td>
+                                            @if(date('H:i', strtotime($row->start)) == '00:00')
+                                        <td> {{ date('D - d.m.Y', strtotime($row->start)) }} </td>
                                         @else
-                                        <td> {{ strftime('%a - %d.%m.%Y - %H:%M', strtotime($row->start)) }} </td>
+                                        <td> {{ date('D - d.m.Y - H:i', strtotime($row->start)) }} </td>
                                         @endif
 
-                                        @if(strftime('%H:%M', strtotime($row->end)) == '00:00')
-                                        <td> {{ strftime('%a - %d.%m.%Y', strtotime($row->end)) }} </td>
+                                        @if(date('H:i', strtotime($row->end)) == '00:00')
+                                        <td> {{ date('D - d.m.Y', strtotime($row->end)) }} </td>
                                         @else
-                                        <td> {{ strftime('%a - %H:%M', strtotime($row->end)) }} </td>
+                                        <td> {{ date('D - H:i', strtotime($row->end)) }} </td>
                                         @endif
                                         @endif
                                         @endif
@@ -357,8 +367,8 @@
                                 </div>
                                 <div class="col-md-10">
                                     <div class="form-check">
-                                        <input class="form-check-input form-check-input-green" type="checkbox" name="remember" id="remember" {{
-                                            old('remember') ? 'checked' : '' }}>
+                                        <input class="form-check-input form-check-input-green" type="checkbox"
+                                            name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                                         <label class="form-check-label" for="remember">
                                             {{ __('Remember Me') }}
