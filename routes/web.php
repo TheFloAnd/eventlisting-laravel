@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EventsController;
 use App\Http\Controllers\GroupsController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\DatabaseController;
 use Carbon\Carbon;
 
 /*
@@ -67,5 +68,15 @@ Route::group(['middleware' => ['auth', 'isAdmin']], function () {
     Route::controller(SettingsController::class)->group(function () {
         Route::get('/einstellungen', 'index')->name('settings');
         Route::patch('/einstellungen', 'update')->name('settings.update');
+    });
+});
+
+Route::group(['middleware' => ['auth', 'isAdmin']], function () {
+    Route::resource('database', DatabaseController::class);
+
+    Route::controller(DatabaseController::class)->group(function () {
+        Route::get('/Datenbank', 'index')->name('database');
+        Route::patch('/Datenbank', 'update')->name('database.update');
+        Route::delete('/Datenbank', 'database')->name('database.destroy');
     });
 });
