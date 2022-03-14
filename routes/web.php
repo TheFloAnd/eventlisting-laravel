@@ -34,7 +34,7 @@ Route::controller(HomeController::class)->group(function () {
 });
 
 
-Route::group(['middleware' => ['auth', 'isMod']], function () {
+Route::group(['middleware' => ['auth']], function () {
 
     Route::controller(EventsController::class)->group(function () {
 

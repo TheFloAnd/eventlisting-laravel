@@ -6,11 +6,29 @@
         <form action="{{ route('settings.update') }}" method="post">
             @method('PATCH')
             @csrf
-            <div class="card">
+            <div class="card" data-area="disable">
                 <div class="card-header">
-                    <h1>
-                        {{ $title }}
-                    </h1>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h1>
+                                {{ $title }}
+                            </h1>
+                        </div>
+                        <div class="col-md-6 d-flex justify-content-end">
+                            <div class="form-group">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" name="edit_settings" id="edit_settings"
+                                        data-toggle="toggle" autocomplete="off" data-bs-toggle="tooltip"
+                                        data-bs-placement="top"
+                                        title="{{ __('Bearbeiten Aktivieren') }}"
+                                        data-toggle-disable>
+                                    <label class="form-check-label" for="edit_settings">
+                                        {{ __('Bearbeiten') }}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="row g-3">
@@ -34,7 +52,7 @@
                                                         value="{{ old('event') ?? $name->value }}" maxlength="50"
                                                         required data-bs-toggle="tooltip" data-bs-placement="top"
                                                         title="{{ __('Name/Überschrift der Anwendung') }}"
-                                                        data-show-input-length required>
+                                                        data-show-input-length data-set-disabled disabled required>
                                                     <label for="name">
                                                         {{ __('Name/Überschrift') }}
                                                         <span style="color: red;">
@@ -76,7 +94,7 @@
                                                         min="1" required data-bs-toggle="tooltip"
                                                         data-bs-placement="top"
                                                         title="{{ __('Zeitraum der Künftigen Termine die Angezeigt werden') }}"
-                                                        required>
+                                                        data-set-disabled disabled required>
                                                     <label for="preview_value">
                                                         {{ __('Preview Zeitraum') }}
                                                         <span style="color: red;">
@@ -95,7 +113,7 @@
                                             <fieldset>
                                                 <div class="form-floating">
                                                     <select class="form-select" id="preview_unit" name="preview_unit"
-                                                        aria-label="{{ __('Einheit') }}">
+                                                        aria-label="{{ __('Einheit') }}" data-set-disabled disabled>
                                                         @if ($preview_time->unit == 'day')
                                                         <option value="day">{{ __('Tage') }}</option>
                                                         <option value="week">{{ __('Wochen') }}</option>
@@ -145,7 +163,7 @@
                                                         value="{{ old('event') ?? $refresh_delay->value }}" min="15"
                                                         required data-bs-toggle="tooltip" data-bs-placement="top"
                                                         title="{{ __('Abstände in den die Termine aktualisiert werden sollen.') }}"
-                                                        required>
+                                                        data-set-disabled disabled required>
                                                     <label for="refresh_delay">
                                                         {{ __('Neulade Abstände') }}
                                                         <span style="color: red;">
@@ -171,7 +189,7 @@
                     <div class="row g-3 justify-content-center">
                         <div class="col-8">
                             <div class="form-group">
-                                <button type="submit" class="btn btn-outline-success w-100" name="submit_settings">
+                                <button type="submit" class="btn btn-outline-success w-100" name="submit_settings" data-set-disabled disabled>
                                     {{ __('Speicher') }}
                                 </button>
                             </div>
