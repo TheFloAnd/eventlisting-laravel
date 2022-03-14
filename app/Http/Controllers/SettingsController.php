@@ -8,6 +8,12 @@ use App\Models\Settings;
 class SettingsController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware(['auth', 'isAdmin']);
+        // Auth::user()->name == 'Admin'
+    }
+
     public function index()
     {
         $settings = Settings::get();
@@ -21,7 +27,7 @@ class SettingsController extends Controller
 
 
 
-    public function update(Request $request, $none)
+    public function update(Request $request)
     {
         // $request->validated();
 

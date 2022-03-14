@@ -3,7 +3,7 @@
 @section('content')
 <article class="row g-3">
     <section class="col-12">
-        <form action="{{ route('settings.update', $title) }}" method="post">
+        <form action="{{ route('settings.update') }}" method="post">
             @method('PATCH')
             @csrf
             <div class="card">

@@ -69,6 +69,7 @@
                     </a>
                 </li>
             </div>
+            @if(Auth::user()->name == 'Admin')
             <a href="{{ route('settings') }}" type="button" class="btn btn-outline-secondary home-offcanvas-body-link">
                 <span class="btn-label">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -81,6 +82,7 @@
                 </span>
                 {{ __('Einstellungen') }}
             </a>
+            @endif
         </div>
         <div class="mt-3">
             <a type="button" class="btn btn-outline-danger w-100" href="{{ route('logout') }}"

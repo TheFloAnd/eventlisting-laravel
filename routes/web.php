@@ -33,7 +33,7 @@ Route::controller(HomeController::class)->group(function () {
 });
 
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['auth', 'isMod']], function () {
 
     Route::controller(EventsController::class)->group(function () {
 
@@ -58,10 +58,14 @@ Route::group(['middleware' => ['auth']], function () {
         Route::patch('/Gruppen/Bearbeiten/{alias}', 'update')->name('groups.update');
         Route::delete('/Gruppen/Bearbeiten/{alias}', 'destroy')->name('groups.destroy');
     });
+});
+
+
+Route::group(['middleware' => ['auth', 'isAdmin']], function () {
+    Route::resource('settings', SettingsController::class);
 
     Route::controller(SettingsController::class)->group(function () {
-        // Route::resource('settings');
         Route::get('/einstellungen', 'index')->name('settings');
-        Route::patch('/einstellungen/{title}', 'update')->name('settings.update');
+        Route::patch('/einstellungen', 'update')->name('settings.update');
     });
 });

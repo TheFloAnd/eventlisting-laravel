@@ -19,6 +19,8 @@ class HomeController extends Controller
 
         $title = Settings::setting('name');
         $preview = Settings::setting('future_day');
-        return view('welcome', compact('today', 'future', 'preview', 'groups'),['title' => $title]);
+        $refresh = Settings::setting('refresh');
+
+        return view('welcome', compact('today', 'future', 'preview', 'groups', 'refresh'),['title' => $title]);
     }
 }

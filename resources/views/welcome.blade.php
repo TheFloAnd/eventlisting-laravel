@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>{{ $title->value ?? 'Termine' }}</title>
 
     <!-- Fonts -->
     {{--
@@ -37,7 +37,6 @@
 
         <x-home_nav />
 
-
         <article class="row g-3 home article-home">
             <section class="col-12 home-section-today">
                 <div class="card home-card-today">
@@ -47,7 +46,7 @@
                                 <div class="col-auto home-card-today-header-col">
                                     <div id="refresh-title" data-refresh>
                                         <h1 class="header-primary">
-                                            {{ $title->value ?? 'NONE' }}
+                                            {{ $title->value ?? 'Termine' }}
                                         </h1>
                                     </div>
                                 </div>
@@ -195,10 +194,10 @@
                             <div id="refresh-title-preview" data-refresh>
                                 <h2 class="header-secondary home-card-preview-header-title">
                                     {{ $preview->value }}
-                                    @if($preview->value_unit == 'week')
+                                    @if($preview->unit == 'week')
                                     {{ __('Woche(n)') }}
                                     @endif
-                                    @if($preview->value_unit == 'days')
+                                    @if($preview->unit == 'days')
                                     {{ __('Tage') }}
                                     @endif
                                 </h2>
@@ -408,17 +407,16 @@
               $(element).load(window.location.href + " #" + this.id + " > *");
             });
             setTimeout(function() {
-              $('.[data-refresh-icon]').each(function(index, element) {
+              $('[data-refresh-icon]').each(function(index, element) {
                 $(element).removeClass("visible");
                 $(element).addClass("invisible");
               });
-            }, 1 * 1000);
+            }, 1 * {{ $refresh->value * 1000 }});
             console.log(Date.now() + ' Content  Refreshed!');
           }
         </script>
-        <?php
-        echo '<script>
-        show_clock();
+        <script>
+            show_clock();
         function show_clock(){
         const days = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
         display_time = document.getElementById("display_time");
@@ -446,8 +444,7 @@
           if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
           return i;
         }
-        </script>';
-        ?>
+        </script>
 
 </body>
 
