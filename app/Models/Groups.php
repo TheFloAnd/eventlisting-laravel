@@ -16,7 +16,7 @@ class Groups extends Model
      *
      * @var string
      */
-    protected $table = 'teams';
+    protected $table = 'groups';
 
     /**
      * The primary key associated with the table.
