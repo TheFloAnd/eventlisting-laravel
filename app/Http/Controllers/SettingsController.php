@@ -11,7 +11,34 @@ class SettingsController extends Controller
     public function index()
     {
         $settings = Settings::get();
+        $name = Settings::setting('name');
+        $preview_time = Settings::setting('future_day');
+        $refresh_delay = Settings::setting('refresh');
 
-        return view('settings.index', compact('settings'), ['title' => 'Einstellungen']);
+        return view('settings.index', compact('settings', 'name', 'preview_time', 'refresh_delay'), ['title' => 'Einstellungen']);
+    }
+
+
+
+
+    public function update(Request $request, $none)
+    {
+        // $request->validated();
+
+            Settings::setting('name')->update([
+                'value' => $request->input('name'),
+            ]);
+
+
+            Settings::setting('future_day')->update([
+                'value' => $request->input('preview_value'),
+                'unit' => $request->input('preview_unit'),
+            ]);
+            Settings::setting('refresh')->update([
+                'value' => $request->input('refresh_delay'),
+            ]);
+
+        return redirect()->route('settings');
+        // ->with('success', $request->input('group_alias') . ' Erfolgreich hinzugefügt!');
     }
 }

@@ -62,5 +62,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::controller(SettingsController::class)->group(function () {
         // Route::resource('settings');
         Route::get('/einstellungen', 'index')->name('settings');
+        Route::patch('/einstellungen/{title}', 'update')->name('settings.update');
     });
 });

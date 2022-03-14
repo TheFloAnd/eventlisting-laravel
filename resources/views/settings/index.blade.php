@@ -2,19 +2,184 @@
 
 @section('content')
 <article class="row g-3">
-    <section class="col">
-        <div class="card">
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-striped table-hover" id="table-to-refresh">
-                        <thead>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
+    <section class="col-12">
+        <form action="{{ route('settings.update', $title) }}" method="post">
+            @method('PATCH')
+            @csrf
+            <div class="card">
+                <div class="card-header">
+                    <h1>
+                        {{ $title }}
+                    </h1>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <h2>
+                                                {{ __('Überschrift:') }}
+                                            </h2>
+                                        </div>
+                                        <div class="col-lg-8">
+
+                                            <fieldset>
+                                                <div class="form-floating">
+                                                    <input type="text"
+                                                        class="form-control @error('name') is-invalid @enderror"
+                                                        name="name" id="name"
+                                                        placeholder="{{ old('name') ?? __('Name') }}"
+                                                        value="{{ old('event') ?? $name->value }}" maxlength="50"
+                                                        required data-bs-toggle="tooltip" data-bs-placement="top"
+                                                        title="{{ __('Name/Überschrift der Anwendung') }}"
+                                                        data-show-input-length required>
+                                                    <label for="name">
+                                                        {{ __('Name/Überschrift') }}
+                                                        <span style="color: red;">
+                                                            *
+                                                        </span>
+                                                        <span id="name_label" class="label"></span>
+                                                    </label>
+                                                    @error('name')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <h2>
+                                                {{ __('Preview Zeitraum:') }}
+                                            </h2>
+                                        </div>
+                                        <div class="col-6 col-lg-4">
+                                            <fieldset>
+                                                <div class="form-floating">
+                                                    <input type="number"
+                                                        class="form-control @error('preview_value') is-invalid @enderror"
+                                                        name="preview_value" id="preview_value"
+                                                        placeholder="{{ old('preview_value') ?? $preview_time->value }}"
+                                                        value="{{ old('preview_value') ?? $preview_time->value }}"
+                                                        min="1" required data-bs-toggle="tooltip"
+                                                        data-bs-placement="top"
+                                                        title="{{ __('Zeitraum der Künftigen Termine die Angezeigt werden') }}"
+                                                        required>
+                                                    <label for="preview_value">
+                                                        {{ __('Preview Zeitraum') }}
+                                                        <span style="color: red;">
+                                                            *
+                                                        </span>
+                                                    </label>
+                                                    @error('preview_value')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                        <div class="col-6 col-lg-4">
+                                            <fieldset>
+                                                <div class="form-floating">
+                                                    <select class="form-select" id="preview_unit" name="preview_unit"
+                                                        aria-label="{{ __('Einheit') }}">
+                                                        @if ($preview_time->unit == 'day')
+                                                        <option value="day">{{ __('Tage') }}</option>
+                                                        <option value="week">{{ __('Wochen') }}</option>
+                                                        @endif
+                                                        @if ($preview_time->unit == 'week') {
+                                                        <option value="week">{{ __('Wochen') }}</option>
+                                                        <option value="day">{{ __('Tage') }}</option>
+                                                        @endif
+                                                    </select>
+                                                    <label for="preview_unit">
+                                                        {{ __('Preview Einheit') }}
+                                                        <span style="color: red;">
+                                                            *
+                                                        </span>
+                                                    </label>
+                                                    @error('preview_unit')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <h2>
+                                                {{ __('Neuladen:') }}
+                                            </h2>
+                                        </div>
+                                        <div class="col-lg-8">
+
+                                            <fieldset>
+                                                <div class="form-floating">
+                                                    <input type="number"
+                                                        class="form-control @error('refresh_delay') is-invalid @enderror"
+                                                        name="refresh_delay" id="refresh_delay"
+                                                        placeholder="{{ old('refresh_delay') ?? __('Neulade Abstände') }}"
+                                                        value="{{ old('event') ?? $refresh_delay->value }}" min="15"
+                                                        required data-bs-toggle="tooltip" data-bs-placement="top"
+                                                        title="{{ __('Abstände in den die Termine aktualisiert werden sollen.') }}"
+                                                        required>
+                                                    <label for="refresh_delay">
+                                                        {{ __('Neulade Abstände') }}
+                                                        <span style="color: red;">
+                                                            *
+                                                        </span>
+                                                    </label>
+                                                    @error('refresh_delay')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row g-3 justify-content-center">
+                        <div class="col-8">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-outline-success w-100" name="submit_settings">
+                                    {{ __('Speicher') }}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
     </section>
     {{-- <section class="col-12">
         <div class="card">
