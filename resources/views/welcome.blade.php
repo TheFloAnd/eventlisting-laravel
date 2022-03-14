@@ -102,7 +102,7 @@
                                             @foreach(explode(';', $row->team) as $group)
                                             @forEach($groups as $get_color)
                                             @if($get_color->alias == $group)
-                                            <span class="badge text-dark"
+                                            <span class="badge rounded-pill text-dark"
                                                 style="background-color:{{ $get_color->color }};">
 
                                                 {{ $group }}
@@ -245,7 +245,7 @@
                                             @foreach(explode(';', $row->team) as $group)
                                             @forEach($groups as $get_color)
                                             @if($get_color->alias == $group)
-                                            <span class="badge text-dark"
+                                            <span class="badge rounded-pill text-dark"
                                                 style="background-color:{{ $get_color->color }};">
 
                                                 {{ $group }}

@@ -18,7 +18,7 @@ class CreateSettingsTable extends Migration
             $table->string('view_name');
             $table->string('setting');
             $table->string('value');
-            $table->string('value_unit')->nullable();
+            $table->string('unit')->nullable();
             $table->timestamps();
         });
     }

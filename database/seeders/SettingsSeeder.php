@@ -18,13 +18,12 @@ class SettingsSeeder extends Seeder
             'view_name' => 'Automatisches Neuladen',
             'setting' => 'refresh',
             'value' => '15',
-            'value_unit' => 'seconds',
             'created_at' => date("Y-m-d h:i:s")        ],
         [
             'view_name' => 'Termin Preview Zeitraum',
             'setting' => 'future_day',
             'value' => '2',
-            'value_unit' => 'week',
+            'unit' => 'week',
             'created_at' => date("Y-m-d h:i:s")        ],
         [
             'view_name' => 'Überschrift',
