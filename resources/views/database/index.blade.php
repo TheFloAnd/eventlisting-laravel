@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+{{ $locale = app()->getLocale(); }}
 <article class="row g-3">
     <section class="col-12">
         <div class="card">

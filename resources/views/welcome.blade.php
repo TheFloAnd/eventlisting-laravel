@@ -418,7 +418,7 @@
         <script>
             show_clock();
         function show_clock(){
-        const days = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+        const days = ["Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"];
         display_time = document.getElementById("display_time");
           const today = new Date();
           let y = today.getFullYear();

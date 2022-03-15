@@ -19,12 +19,16 @@ use Carbon\Carbon;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Create a date object
-$date = Carbon::now();
+
 
 // Get the current app locale
 $locale = app()->getLocale();
 Carbon::setLocale($locale);
+
+// Create a date object
+$date = Carbon::now();
+setlocale(LC_TIME, app()->getLocale());
+Carbon::setLocale('de');
 
 Auth::routes();
 Route::controller(HomeController::class)->group(function () {
@@ -47,9 +51,14 @@ Route::group(['middleware' => ['auth']], function () {
         Route::patch('/Termine/Bearbeiten/{id}', 'update')->name('events.update');
         Route::delete('/Termine/Bearbeiten/{id}', 'destroy')->name('events.destroy');
     });
+});
 
+Route::group(['middleware' => ['auth']], function () {
     Route::controller(GroupsController::class)->group(function () {
         // Route::resource('groups');
+
+        Route::resource('groups', GroupsController::class);
+
         Route::get('/Gruppen', 'index')->name('groups');
         Route::get('/Gruppen/Hinzufügen', 'create')->name('groups.create');
         Route::get('/Gruppen/Bearbeiten/{alias}', 'edit')->name('groups.edit');
@@ -62,7 +71,7 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 
-Route::group(['middleware' => ['auth', 'isAdmin']], function () {
+Route::group(['middleware' => ['auth']], function () {
     Route::resource('settings', SettingsController::class);
 
     Route::controller(SettingsController::class)->group(function () {
@@ -71,7 +80,7 @@ Route::group(['middleware' => ['auth', 'isAdmin']], function () {
     });
 });
 
-Route::group(['middleware' => ['auth', 'isAdmin']], function () {
+Route::group(['middleware' => ['auth']], function () {
     Route::resource('database', DatabaseController::class);
 
     Route::controller(DatabaseController::class)->group(function () {
