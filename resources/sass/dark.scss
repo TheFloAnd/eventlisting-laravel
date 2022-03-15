@@ -86,6 +86,10 @@ tr.strikeout td:after {
     color: $palette-text-primary;
 }
 
+.del_following_events th {
+    background-color: $palette-background-paper;
+}
+
 .home-offcanvas {
     background: $color;
     & .home-offcanvas-close {
