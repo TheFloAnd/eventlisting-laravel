@@ -318,34 +318,54 @@
 
     date_start.addEventListener('change', () => {
         if(date_start.value > date_end.value){
-            date_end.value = date_start.value
+            date_end.value = add_Date(date_start.value, duration.value)
         }
     })
     date_end.addEventListener('change', () => {
         if(date_start.value > date_end.value){
-            date_start.value = date_end.value
+            date_start.value = subtract_Date(date_end.value, duration.value)
         }
     })
 
     function add_Date(begin, time_duration){
-console.log('Duration: ' + time_duration)
-console.log('Begin: ' + begin)
-
-        time_duration = time_duration.split(":")
-        let duration_h = time_duration[0]
-        let duration_m = time_duration[1]
-
 
         let date = new Date(new Date(begin) - now.getTimezoneOffset() * 60000)
-// let date = new Date(begin)
 
-console.log('Date: ' + date.toISOString().slice(0, 16))
-        date.setHours(date.getHours() + duration_h)
-        date.setMinutes(date.getMinutes() + duration_m)
+        time_duration = new Date(new Date("1970-01-01 " + time_duration) - now.getTimezoneOffset())
+        date.setHours(date.getHours() + time_duration.getHours())
+
+        date.setMinutes(date.getMinutes() + time_duration.getMinutes())
+
         date = date.toISOString().slice(0, 16)
 
-console.log('Return: ' + date)
         return date
+    }
+    function subtract_Date(end, time_duration){
+
+    let date = new Date(new Date(end) - now.getTimezoneOffset() * 60000)
+
+    time_duration = new Date("1970-01-01 " + time_duration)
+    date.setHours(date.getHours() - time_duration.getHours())
+
+    date.setMinutes(date.getMinutes() - time_duration.getMinutes())
+
+    date = date.toISOString().slice(0, 16)
+
+    return date
+    }
+
+function duration(begin, end){
+
+    let date = new Date(new Date(end) - now.getTimezoneOffset() * 60000)
+
+    time_duration = new Date("1970-01-01 " + time_duration)
+    date.setHours(date.getHours() - time_duration.getHours())
+
+    date.setMinutes(date.getMinutes() - time_duration.getMinutes())
+
+    date = date.toISOString().slice(0, 16)
+
+    return date
     }
 </script>
 @endsection
