@@ -11,12 +11,12 @@
 <article class="row g-3">
     <div class="col-12">
         <div class="row d-flex align-content-center">
-            <div class="col-md-8">
+            <div class="col-lg-8">
                 <h1>
                     {{ $title }}
                 </h1>
             </div>
-            <div class="col-md-4">
+            <div class="col-lg-4">
                 <a href="#" type="button" class="btn btn-outline-secondary w-100">
                     {{ __('Zurück') }}
                 </a>
@@ -30,7 +30,7 @@
                 @csrf
                 <div class="card-body">
                     <div class="row g-3 justify-content-center">
-                        <div class="col-md-10">
+                        <div class="col-lg-10">
                             <fieldset>
                                 <div class="form-floating">
                                     <input type="text" class="form-control @error('event') is-invalid @enderror"
@@ -58,7 +58,7 @@
                                 </div>
                             </fieldset>
                         </div>
-                        <div class="col-md-10">
+                        <div class="col-lg-10">
                             <div class="row g-3" id="groups">
                                 <div class="col-12">
                                     <fieldset>
@@ -89,9 +89,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-10">
+                        <div class="col-lg-10">
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-lg-4">
                                     <fieldset>
                                         <div class="form-floating">
                                             <input type="text" class="form-control @error('room') is-invalid @enderror"
@@ -121,7 +121,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-lg-4">
                             <fieldset>
                                 <div class="form-floating">
                                     <input type="datetime-local"
@@ -143,7 +143,29 @@
                                 </div>
                             </fieldset>
                         </div>
-                        <div class="col-md-5">
+
+
+                        <div class="col-4 col-lg-2">
+                            <fieldset>
+                                <div class="form-floating">
+                                    <input type="time" class="form-control @error('duration') is-invalid @enderror"
+                                        name="duration" id="duration" value="{{ old('duration') ?? date('00:00') }}"
+                                        required data-bs-toggle="tooltip" data-bs-placement="top"
+                                        title="{{ __('Datum/Zeit wann der Termin Endet.') }}">
+                                    <label for="duration">
+                                        {{ __('Dauer') }}
+                                    </label>@error('duration')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </fieldset>
+                        </div>
+
+
+
+                        <div class="col-8 col-lg-4">
                             <fieldset>
                                 <div class="form-floating">
                                     <input type="datetime-local"
@@ -169,7 +191,7 @@
 
 
                     <div class="row g-3 justify-content-center">
-                        <div class="col-md-10">
+                        <div class="col-lg-10">
                             <div class="form-check form-switch">
                                 <input class="form-check-input" type="checkbox" role="switch" id="repeat" name="repeat"
                                     data-toggle-disable>
@@ -178,7 +200,7 @@
                         </div>
 
 
-                        <div class="col-md-10">
+                        <div class="col-lg-10">
                             <div class="row g-3 mb-3" data-area="disable">
 
                                 {{-- <div class="col-12">
@@ -206,7 +228,7 @@
                                     </fieldset>
                                 </div> --}}
 
-                                <div class="col-md-6">
+                                <div class="col-lg-6">
                                     <div class="form-group" data-bs-toggle="tooltip" data-bs-placement="top"
                                         title="{{ __('In welchen Intervallen sich der Termin wiederholen soll.') }}">
                                         <fieldset>
@@ -227,7 +249,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="col-lg-6">
                                     <div class="form-group" data-bs-toggle="tooltip" data-bs-placement="top"
                                         title="{{ __('Bis wann sich der Termin Wiederholen soll.') }}">
                                         <fieldset>
@@ -249,7 +271,7 @@
                                     </div>
                                 </div>
 
-                                {{-- <div class="col-md-6">
+                                {{-- <div class="col-lg-6">
                                     <div class="form-group" data-bs-toggle="tooltip" data-bs-placement="top" title="">
                                         <fieldset>
                                             <label class="form-label" for="repeats">
@@ -283,4 +305,47 @@
     </section>
 
 </article>
+
+<script>
+    const date_start = document.getElementById('start_date')
+    const date_end = document.getElementById('end_date')
+    const duration = document.getElementById('duration')
+    const now = new Date()
+
+    duration.addEventListener('change', () => {
+        date_end.value = add_Date(date_start.value, duration.value)
+    })
+
+    date_start.addEventListener('change', () => {
+        if(date_start.value > date_end.value){
+            date_end.value = date_start.value
+        }
+    })
+    date_end.addEventListener('change', () => {
+        if(date_start.value > date_end.value){
+            date_start.value = date_end.value
+        }
+    })
+
+    function add_Date(begin, time_duration){
+console.log('Duration: ' + time_duration)
+console.log('Begin: ' + begin)
+
+        time_duration = time_duration.split(":")
+        let duration_h = time_duration[0]
+        let duration_m = time_duration[1]
+
+
+        let date = new Date(new Date(begin) - now.getTimezoneOffset() * 60000)
+// let date = new Date(begin)
+
+console.log('Date: ' + date.toISOString().slice(0, 16))
+        date.setHours(date.getHours() + duration_h)
+        date.setMinutes(date.getMinutes() + duration_m)
+        date = date.toISOString().slice(0, 16)
+
+console.log('Return: ' + date)
+        return date
+    }
+</script>
 @endsection

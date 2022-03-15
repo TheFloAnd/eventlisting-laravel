@@ -126,6 +126,14 @@ tr.strikeout td:after {
     }
 }
 
+.select2-container--default .select2-selection--multiple {
+    background: $palette-background-paper !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: $palette-background-paper !important;
+}
+
 .select2-container--default.select2-container--disabled .select2-selection--multiple {
     background: $palette-action-disabled !important;
 }
