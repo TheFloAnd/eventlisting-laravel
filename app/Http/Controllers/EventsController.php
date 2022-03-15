@@ -33,6 +33,9 @@ class EventsController extends Controller
         $proposal = Events::proposals()->get();
         $proposal_room = Events::proposal_room()->get();
         $groups = Groups::get();
+        if($groups->isEmpty()){
+            return redirect()->route('groups');
+        }
 
         return view('events.create', compact('proposal', 'proposal_room', 'groups'), ['title' => 'Termin Hinzufügen']);
     }
@@ -71,7 +74,6 @@ class EventsController extends Controller
             ]);
         }
         if ($request->has('repeat')) {
-            $uuid = uniqid();
 
             $begin_start = new DateTime($request->input('start_date'));
             $end = new DateTime($request->input('repeat_till'));
@@ -83,6 +85,7 @@ class EventsController extends Controller
             $diff_end_date = new DateTime($request->input('end_date'));
             $interval = date_diff($diff_start_date, $diff_end_date);
 
+            $uuid = uniqid();
             foreach ($period_start as $row) {
 
                 $start = $row->format("Y-m-d H:i");

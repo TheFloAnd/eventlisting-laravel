@@ -39,6 +39,7 @@ class Events extends Model
         'end',
         'repeat',
         'repeat_parent',
+        'repeat_dif',
         'room',
         'created_at',
         'updated_at',

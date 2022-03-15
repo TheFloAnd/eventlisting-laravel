@@ -21,7 +21,8 @@ class CreateEventsTable extends Migration
             $table->datetime('start');
             $table->datetime('end');
             $table->integer('repeat')->nullable();
-            $table->integer('repeat_parent')->nullable();
+            $table->string('repeat_parent', 13)->nullable();
+            $table->integer('repeat_dif')->nullable();
             $table->string('room')->nullable();
             $table->timestamps();
             $table->softDeletes();
