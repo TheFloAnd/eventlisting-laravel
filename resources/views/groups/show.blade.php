@@ -20,17 +20,17 @@
                                     <fieldset id="input_name">
                                         <div class="form-floating has-validation">
                                             <input type="text" class="form-control disable show_length"
-                                                name="group_name" id="group_name"
+                                                name={{__('GruppenName')}} id={{__('GruppenName')}}
                                                 placeholder="{{ $result->name ?? __('Gruppen Name') }}"
                                                 value="{{ $result->name }}" maxlength="100" required
                                                 data-bs-toggle="tooltip" data-bs-placement="top"
                                                 title="{{ __('Die volle Bezeichnung für die Gruppe') }}" disabled>
-                                            <label for="group_name">
+                                            <label for={{__('GruppenName')}}>
                                                 {{ __('Gruppen Name') }}
                                                 <span style="color: red;">
                                                     *
                                                 </span>
-                                                <span id="group_name_label" class="label"></span>
+                                                <span id="__('GruppenName')_label" class="label"></span>
                                             </label>
                                         </div>
                                     </fieldset>
@@ -38,12 +38,12 @@
                                 <div class="col-10">
                                     <fieldset>
                                         <div class="form-floating">
-                                            <input type="text" class="form-control" name="group_alias" id="group_alias"
-                                                placeholder="{{ $result->alias ?? __('Gruppen Alias') }}"
+                                            <input type="text" class="form-control" name={{ __('GruppenAlias') }} id={{ __('GruppenAlias') }}
+                                                placeholder="{{ $result->alias ?? __('GruppenAlias') }}"
                                                 value="{{ $result->alias }}" required disabled data-bs-toggle="tooltip"
                                                 data-bs-placement="top" title="{{ __('Ein Kürzel für die Gruppe') }}">
-                                            <label for="group_alias">
-                                                {{ __('Gruppen Alias') }}
+                                            <label for={{ __('GruppenAlias') }}>
+                                                {{ __('GruppenAlias') }}
                                                 <span style="color: red;">
                                                     *
                                                 </span>
@@ -55,14 +55,14 @@
                                 <div class="col-2">
                                     <fieldset id="input_color">
                                         <div class="form-group">
-                                            <label for="group_color">
+                                            <label for={{__('GruppenFarbe')}}>
                                                 {{ __('Gruppen Farbe') }}
                                                 <span style="color: red;">
                                                     *
                                                 </span>
                                             </label>
                                             <input type="color" class="form-control form-control-color disable"
-                                                name="group_color" id="group_color" placeholder="{{ $result->color }}"
+                                                name={{__('GruppenFarbe')}} id={{__('GruppenFarbe')}} placeholder="{{ $result->color }}"
                                                 value="{{ $result->color }}" required data-bs-toggle="tooltip"
                                                 data-bs-placement="top"
                                                 title="{{ __('Darstellungs Farbe für die Gruppe!') }}" disabled>
@@ -119,7 +119,7 @@
                     <div class="row g-3">
                         <div class="col-12">
                             <p>
-                                Die Gruppe <b><i><span id="modal_deaktivate_group_alias"></span></i></b>
+                                Die Gruppe <b><i><span id="modal_deaktivate___('GruppenAlias')"></span></i></b>
                             </p>
                         </div>
                         <div class="col-6">
@@ -149,7 +149,7 @@
     // and then do the updating in a callback.
     //
     // Update the modal's content.
-    var modalBodyInput = deaktivationModal.querySelector('#modal_deaktivate_group_alias')
+    var modalBodyInput = deaktivationModal.querySelector('#modal_deaktivate___('GruppenAlias')')
     modalBodyInput.innerHTML = recipient
     })
 </script>

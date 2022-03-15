@@ -45,6 +45,6 @@ class SettingsController extends Controller
             ]);
 
         return redirect()->route('settings');
-        // ->with('success', $request->input('group_alias') . ' Erfolgreich hinzugefügt!');
+        // ->with('success', $request->input(__('GruppenAlias')) . ' Erfolgreich hinzugefügt!');
     }
 }

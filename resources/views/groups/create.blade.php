@@ -23,19 +23,19 @@
                         <div class="col-md-10">
                             <fieldset>
                                 <div class="form-floating has-validation">
-                                    <input type="text" class="form-control @error('group_name') is-invalid @enderror"
-                                        name="group_name" id="group_name"
-                                        placeholder="{{ old('group_name') ?? __('Gruppen Name') }}" maxlength="100"
+                                    <input type="text" class="form-control @error(__('GruppenName')) is-invalid @enderror"
+                                        name="{{__('GruppenName')}}" id="{{__('GruppenName')}}"
+                                        placeholder="{{ old(__('GruppenName')) ?? __('Gruppen Name') }}" maxlength="100"
                                         data-bs-toggle="tooltip" data-bs-placement="top"
                                         title="{{ __('Die volle Bezeichnung für die Gruppe') }}" data-show-input-length>
-                                    <label for="group_name">
+                                    <label for="{{__('GruppenName')}}">
                                         {{ __('Gruppen Name') }}
                                         <span style="color: red;">
                                             *
                                         </span>
-                                        <span id="group_name_label" class="label"></span>
+                                        <span id="{{__('GruppenName')}}_label" class="label"></span>
                                     </label>
-                                    @error('group_name')
+                                    @error(__('GruppenName'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -46,19 +46,19 @@
                         <div class="col-md-8">
                             <fieldset>
                                 <div class="form-floating">
-                                    <input type="text" class="form-control @error('group_alias') is-invalid @enderror"
-                                        name="group_alias" id="group_alias"
-                                        placeholder="{{ old('group_alias') ?? __('Gruppen Alias') }}" maxlength="10"
+                                    <input type="text" class="form-control @error(__('GruppenAlias')) is-invalid @enderror"
+                                        name={{ __('GruppenAlias') }} id={{ __('GruppenAlias') }}
+                                        placeholder="{{ old(__('GruppenAlias')) ?? __('GruppenAlias') }}" maxlength="10"
                                         required data-bs-toggle="tooltip" data-bs-placement="top"
                                         title="{{ __('Ein Kürzel für die Gruppe') }}" data-show-input-length>
-                                    <label for="group_alias">
+                                    <label for={{ __('GruppenAlias') }}>
                                         {{ __('Gruppen Alias') }}
                                         <span style="color: red;">
                                             *
                                         </span>
-                                        <span id="group_alias_label" class="label"></span>
+                                        <span id="{{__('GruppenAlias')}}_label" class="label"></span>
                                     </label>
-                                    @error('group_alias')
+                                    @error(__('GruppenAlias'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -76,11 +76,11 @@
                                             *
                                         </span>
                                     </label>
-                                    <input type="color" class="form-control form-control-color" name="group_color"
-                                        id="group_color" value="{{ old('group_color') ?? $color }}" required
+                                    <input type="color" class="form-control form-control-color" name={{__('GruppenFarbe')}}
+                                        id={{__('GruppenFarbe')}} value="{{ old(__('GruppenFarbe')) ?? $color }}" required
                                         data-bs-toggle="tooltip" data-bs-placement="top" title="
                                     {{ __('Darstellungs Farbe für die Gruppe!') }}">
-                                    @error('group_color')
+                                    @error(__('GruppenFarbe'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

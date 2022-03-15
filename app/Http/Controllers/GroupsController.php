@@ -42,19 +42,19 @@ class GroupsController extends Controller
         $validated = $request->validated();
 
 
-        if (Groups::alias($request->input('group_alias'))->exists()) {
+        if (Groups::alias($request->input(__('GruppenAlias')))->exists()) {
             return redirect()->route('groups.create')
-                ->with('error', $request->input('group_alias') . ' Existiert bereits!');
+                ->with('error', $request->input(__('GruppenAlias')) . ' Existiert bereits!');
         }
         Groups::create([
-            'name' => $request->input('group_name'),
-            'alias' => $request->input('group_alias'),
-            'color' => $request->input('group_color'),
+            'name' => $request->input(__('GruppenName')),
+            'alias' => $request->input(__('GruppenAlias')),
+            'color' => $request->input(__('GruppenFarbe')),
         ]);
 
 
         return redirect()->route('groups')
-            ->with('success', $request->input('group_alias') . ' Erfolgreich hinzugefügt!');
+            ->with('success', $request->input(__('GruppenAlias')) . ' Erfolgreich hinzugefügt!');
     }
 
     public function show($alias)
@@ -75,11 +75,11 @@ class GroupsController extends Controller
         // $request->validated();
 
         Groups::alias($alias)->update([
-            'name' => $request->input('group_name'),
-            'color' => $request->input('group_color')
+            'name' => $request->input(__('GruppenName')),
+            'color' => $request->input(__('GruppenFarbe')),
         ]);
         return redirect()->route('groups')
-        ->with('success', $request->input('group_alias') . ' Erfolgreich geändert!');
+        ->with('success', $alias . ' Erfolgreich geändert!');
     }
 
 

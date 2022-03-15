@@ -23,6 +23,6 @@ class DatabaseController extends Controller
 
 
         return redirect()->route('database');
-        // ->with('success', $request->input('group_alias') . ' Erfolgreich hinzugefügt!');
+        // ->with('success', $request->input(__('GruppenAlias')) . ' Erfolgreich hinzugefügt!');
     }
 }
