@@ -13,7 +13,7 @@ class GroupRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,9 +24,9 @@ class GroupRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:100',
-            'alias' => 'required|App\Models\Groups,alias|max:100',
-            'color' => 'required|max:7',
+            // 'name' => 'required|max:100',
+            // 'alias' => 'required|App\Models\Groups,alias|max:100',
+            // 'color' => 'required|max:7',
         ];
     }
 }

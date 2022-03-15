@@ -21,7 +21,7 @@ class AdminMiddleware
         if (Auth::user()->name == 'Admin') {
             return $next($request);
         }
-        abort(403);
+        // abort(403);
         return redirect('/home');
 
     }

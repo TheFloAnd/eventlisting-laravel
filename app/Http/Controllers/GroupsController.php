@@ -11,7 +11,7 @@ class GroupsController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth']);
     }
     public function index()
     {
@@ -38,7 +38,8 @@ class GroupsController extends Controller
      */
     public function store(GroupRequest $request)
     {
-        $validated = $request->validated();
+
+        // $validated = $request->validated();
 
 
         if (Groups::alias($request->input('group_alias'))->exists()) {
@@ -52,7 +53,7 @@ class GroupsController extends Controller
         ]);
 
 
-        return redirect()->route('groups.index');
+        return redirect()->route('groups');
         // ->with('success', $request->input('group_alias') . ' Erfolgreich hinzugefügt!');
     }
 
