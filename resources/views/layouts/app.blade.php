@@ -23,8 +23,8 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"> --}}
     <link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
-    {{--
-    <link rel="stylesheet" href="{{ asset('css/dark.css') }}"> --}}
+
+    <link rel="stylesheet" href="{{ asset('css/dark.css') }}">
 
     <link rel="stylesheet" href="{{ asset('css/select2/select2.min.css') }}">
     {{--
@@ -36,7 +36,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar backend_nav navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar backend_nav navbar-expand-md navbar-dark bg-dark shadow-sm">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{{ route('home') }}">
                     {{ __('Home') }}
