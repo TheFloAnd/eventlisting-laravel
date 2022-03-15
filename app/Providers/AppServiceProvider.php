@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Carbon\Carbon;
+use \DateTimeZone;
+use DateTime;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -25,8 +27,5 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
-
-        // setlocale(LC_TIME, 'de_DE');
-        // Carbon::setLocale($this->app->getLocale());
     }
 }

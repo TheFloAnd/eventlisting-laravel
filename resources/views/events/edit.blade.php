@@ -409,15 +409,15 @@ $checked = '';
                                             strtotime($row->end)))
 
                                             @if(date('H:i', strtotime($row->start)) == '00:00')
-                                            <td> {{ date('D - d.m.Y', strtotime($row->start)) }} </td>
+                                            <td> {{ date('d.m.Y', strtotime($row->start)) }} </td>
                                             @else
-                                            <td> {{ date('D - d.m.Y - H:i', strtotime($row->start)) }} </td>
+                                            <td> {{ date('d.m.Y - H:i', strtotime($row->start)) }} </td>
                                             @endif
 
                                             @if(date('H:i', strtotime($row->end)) == '00:00')
-                                            <td> {{ date('D - d.m.Y ', strtotime($row->end)) }} </td>
+                                            <td> {{ date('d.m.Y ', strtotime($row->end)) }} </td>
                                             @else
-                                            <td> {{ date('D - d.m.Y - H:i', strtotime($row->end))}} </td>
+                                            <td> {{ date('d.m.Y - H:i', strtotime($row->end))}} </td>
                                             @endif
 
                                             @endif
@@ -428,11 +428,11 @@ $checked = '';
                                             strtotime($row->end)))
 
                                             @if(date('H:i', strtotime($row->start)) == '00:00')
-                                            <td colspan="2"> {{ date('D - d.m.Y ', strtotime($row->start)) }}
+                                            <td colspan="2"> {{ date('d.m.Y ', strtotime($row->start)) }}
                                             </td>
                                             <td style="display:none;">
                                                 @else
-                                            <td colspan="2"> {{ date('D - d.m.Y - H:i', strtotime($row->start))
+                                            <td colspan="2"> {{ date('d.m.Y - H:i', strtotime($row->start))
                                                 }} </td>
                                             <td style="display:none;">
                                                 @endif
@@ -442,15 +442,15 @@ $checked = '';
                                                 strtotime($row->end)))
 
                                                 @if(date('H:i', strtotime($row->start)) == '00:00')
-                                            <td> {{ date('D - d.m.Y', strtotime($row->start)) }} </td>
+                                            <td> {{ date('d.m.Y', strtotime($row->start)) }} </td>
                                             @else
-                                            <td> {{ date('D - d.m.Y - H:i', strtotime($row->start)) }} </td>
+                                            <td> {{ date('d.m.Y - H:i', strtotime($row->start)) }} </td>
                                             @endif
 
                                             @if(date('H:i', strtotime($row->end)) == '00:00')
-                                            <td> {{ date('D - d.m.Y', strtotime($row->end)) }} </td>
+                                            <td> {{ date('d.m.Y', strtotime($row->end)) }} </td>
                                             @else
-                                            <td> {{ date('D - H:i', strtotime($row->end)) }} </td>
+                                            <td> {{ date('H:i', strtotime($row->end)) }} </td>
                                             @endif
                                             @endif
                                             @endif
@@ -577,15 +577,15 @@ $checked = '';
                                             strtotime($row->end)))
 
                                             @if(date('H:i', strtotime($row->start)) == '00:00')
-                                            <td> {{ date('D - d.m.Y', strtotime($row->start)) }} </td>
+                                            <td> {{ date('d.m.Y', strtotime($row->start)) }} </td>
                                             @else
-                                            <td> {{ date('D - d.m.Y - H:i', strtotime($row->start)) }} </td>
+                                            <td> {{ date('d.m.Y - H:i', strtotime($row->start)) }} </td>
                                             @endif
 
                                             @if(date('H:i', strtotime($row->end)) == '00:00')
-                                            <td> {{ date('D - d.m.Y ', strtotime($row->end)) }} </td>
+                                            <td> {{ date('d.m.Y ', strtotime($row->end)) }} </td>
                                             @else
-                                            <td> {{ date('D - d.m.Y - H:i', strtotime($row->end))}} </td>
+                                            <td> {{ date('d.m.Y - H:i', strtotime($row->end))}} </td>
                                             @endif
 
                                             @endif
@@ -596,11 +596,11 @@ $checked = '';
                                             strtotime($row->end)))
 
                                             @if(date('H:i', strtotime($row->start)) == '00:00')
-                                            <td colspan="2"> {{ date('D - d.m.Y ', strtotime($row->start)) }}
+                                            <td colspan="2"> {{ date('d.m.Y ', strtotime($row->start)) }}
                                             </td>
                                             <td style="display:none;">
                                                 @else
-                                            <td colspan="2"> {{ date('D - d.m.Y - H:i', strtotime($row->start))
+                                            <td colspan="2"> {{ date('d.m.Y - H:i', strtotime($row->start))
                                                 }} </td>
                                             <td style="display:none;">
                                                 @endif
@@ -610,15 +610,15 @@ $checked = '';
                                                 strtotime($row->end)))
 
                                                 @if(date('H:i', strtotime($row->start)) == '00:00')
-                                            <td> {{ date('D - d.m.Y', strtotime($row->start)) }} </td>
+                                            <td> {{ date('d.m.Y', strtotime($row->start)) }} </td>
                                             @else
-                                            <td> {{ date('D - d.m.Y - H:i', strtotime($row->start)) }} </td>
+                                            <td> {{ date('d.m.Y - H:i', strtotime($row->start)) }} </td>
                                             @endif
 
                                             @if(date('H:i', strtotime($row->end)) == '00:00')
-                                            <td> {{ date('D - d.m.Y', strtotime($row->end)) }} </td>
+                                            <td> {{ date('d.m.Y', strtotime($row->end)) }} </td>
                                             @else
-                                            <td> {{ date('D - H:i', strtotime($row->end)) }} </td>
+                                            <td> {{ date('H:i', strtotime($row->end)) }} </td>
                                             @endif
                                             @endif
                                             @endif

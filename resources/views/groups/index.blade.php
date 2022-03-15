@@ -1,6 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
+
+@if($message = Session::get('success'))
+<x-alert.success :message="$message" />
+@endif
+@if($message = Session::get('warning'))
+<x-alert.warning :message="$message" />
+@endif
+
 <article class="row g-3">
     <section class="col-12">
         <div class="d-flex justify-content-end mx-2">

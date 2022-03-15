@@ -13,10 +13,11 @@ return [
     |
     */
 
-    'reset' => 'Dein Passwort wurde zurück gesetzt!',
-    'sent' => 'Wie haben ihnen ein Link zum Passwort zurücksetzen per E-Mail gesendet!',
     'throttled' => 'Bitte warte vor dem nächsten Versuch.',
-    'token' => 'Dieser Passwort Zurücksetz Token ist ungültig.',
-    'user' => "Wir können keinen Benutzer mit dieser E-Mail Addresse finden.",
+    'password' => 'Passw&ouml;rter m&uuml;ssen mindestens sechs Zeichen lang sein und mit der Passwort-Bestätigung übereinstimmen.',
+    'reset' => 'Dein Passwort wurde zur&uuml;gesetzt.',
+    'sent' => 'Wir haben Dir einen Link zum Zur&uuml;cksetzen Deines Passwortes geschickt.',
+    'token' => 'Dieser Link zum Zur&uuml;cksetzen eines Passwortes ist ung&uuml;ltig.',
+    'user' => 'Wir konnten keinen Benutzer mit dieser E-Mail-Adresse finden',
 
 ];

@@ -39,7 +39,7 @@ class GroupsController extends Controller
     public function store(GroupRequest $request)
     {
 
-        // $validated = $request->validated();
+        $validated = $request->validated();
 
 
         if (Groups::alias($request->input('group_alias'))->exists()) {
@@ -53,8 +53,8 @@ class GroupsController extends Controller
         ]);
 
 
-        return redirect()->route('groups');
-        // ->with('success', $request->input('group_alias') . ' Erfolgreich hinzugefügt!');
+        return redirect()->route('groups')
+            ->with('success', $request->input('group_alias') . ' Erfolgreich hinzugefügt!');
     }
 
     public function show($alias)
@@ -78,8 +78,8 @@ class GroupsController extends Controller
             'name' => $request->input('group_name'),
             'color' => $request->input('group_color')
         ]);
-        return redirect()->route('groups');
-        // ->with('success', $request->input('group_alias') . ' Erfolgreich hinzugefügt!');
+        return redirect()->route('groups')
+        ->with('success', $request->input('group_alias') . ' Erfolgreich geändert!');
     }
 
 
@@ -100,6 +100,6 @@ class GroupsController extends Controller
         }
 
         return redirect()->route('groups')
-            ->with('warning', $request->input('group_alias') . ' wurde' . $msg . '!');
+            ->with('warning', $alias . ' wurde ' . $msg . '!');
     }
 }

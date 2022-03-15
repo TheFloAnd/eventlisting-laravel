@@ -24,9 +24,9 @@ class GroupRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|max:100',
-            // 'alias' => 'required|App\Models\Groups,alias|max:100',
-            // 'color' => 'required|max:7',
+            'group_name' => 'required|max:100',
+            'group_alias' => 'required|unique:App\Models\Groups,alias|max:100',
+            'group_color' => 'required|max:7',
         ];
     }
 }

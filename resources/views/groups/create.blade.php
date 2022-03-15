@@ -2,8 +2,10 @@
 
 @section('content')
 
-@if (count($errors) > 0)
-<x-alert.error :errors="$errors" />
+@if($errors->any())
+@foreach ($errors->all() as $error)
+<x-alert.error :message="$error" />
+@endforeach
 @endif
 
 <article class="row g-3">
@@ -24,7 +26,7 @@
                                     <input type="text" class="form-control @error('group_name') is-invalid @enderror"
                                         name="group_name" id="group_name"
                                         placeholder="{{ old('group_name') ?? __('Gruppen Name') }}" maxlength="100"
-                                        required data-bs-toggle="tooltip" data-bs-placement="top"
+                                        data-bs-toggle="tooltip" data-bs-placement="top"
                                         title="{{ __('Die volle Bezeichnung für die Gruppe') }}" data-show-input-length>
                                     <label for="group_name">
                                         {{ __('Gruppen Name') }}

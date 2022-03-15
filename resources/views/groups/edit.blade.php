@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+
+@if($errors->any())
+@foreach ($errors->all() as $error)
+<x-alert.error :message="$error" />
+@endforeach
+@endif
+
 <article class="row g-3">
     <section>
         <h1>
