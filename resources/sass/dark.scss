@@ -33,7 +33,7 @@ body {
     background: $palette-background-header;
 }
 
- :root * {
+ :root>* {
     // filter: brightness(.7) contrast(1.2);
     color: $palette-text-primary;
 }
@@ -46,6 +46,7 @@ body {
     background-color: $palette-background-paper !important;
 }
 
+a,
 a:hover,
 a:hover * {
     color: $palette-text-secondary;
@@ -150,6 +151,10 @@ tr.strikeout td:after {
     box-shadow: $box-shadow-default $border-color-35;
 }
 
+.nav-link {
+    color: $palette-text-secondary;
+}
+
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
     background: rgba(187, 187, 187, 0.5);
@@ -202,6 +207,10 @@ tr.strikeout td:after {
 
 .btn-close {
     filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+.btn-close.dark {
+    filter: invert(0);
 }
 
 .del_following_events thead {
