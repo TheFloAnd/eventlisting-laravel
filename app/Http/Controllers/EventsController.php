@@ -117,7 +117,7 @@ class EventsController extends Controller
         if ($result->repeat_parent != NULL) {
             $result_future = Events::following($result->repeat_parent)->order()->get();
         } else {
-            $result_future = NULL;
+            $result_future = [];
         }
 
         $proposal = Events::proposals()->get();

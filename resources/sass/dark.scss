@@ -99,7 +99,7 @@ tr.strikeout td:after {
 
 .form-control,
 .form-select {
-    background: $palette-background-paper;
+    background: $palette-background-paper !important;
     color: $palette-text-primary;
     &:focus {
         background: $palette-background-paper !important;
@@ -186,12 +186,8 @@ tr.strikeout td:after {
     background: #ced4da25;
 }
 
-.modal * {
-    background: $palette-background-default;
-}
-
-.modal-dialog {
-    border-radius: 0.75rem;
+.modal-content {
+    background-color: $palette-background-default;
 }
 
 [readonly],
@@ -202,6 +198,14 @@ tr.strikeout td:after {
 .select2-search__field {
     background: none !important;
     display: hidden !important;
+}
+
+.btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+.del_following_events thead {
+    background-color: $palette-background-default;
 }
 
 // input,

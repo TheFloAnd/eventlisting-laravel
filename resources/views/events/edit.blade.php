@@ -477,7 +477,7 @@ $checked = '';
 </form>
 
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg ">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="deleteModalLabel">
@@ -490,8 +490,9 @@ $checked = '';
                 @csrf
                 <div class="modal-body">
                     <p>{{ __('Wollen die den Termin wirklich Löschen?') }}</p>
+@if($result_future != NULL)
                     <hr class="separator">
-                    <div class="row g-3">
+                    <div class="row g-3 justify-content-center">
                         <div class="col-12">
                             <fieldset>
                                 <div class="form-group">
@@ -514,7 +515,7 @@ $checked = '';
                             <fieldset>
                                 <div class="form-group">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" id="select_all"
+                                        <input class="form-check-input" type="checkbox" id="select_all_modal"
                                             data-toggle="toggle" autocomplete="off" data-bs-toggle="tooltip"
                                             data-bs-placement="top" title="{{ __('Alle Auswählen.') }}"
                                             data-set-disabled disabled data-toggle-select>
@@ -636,6 +637,7 @@ $checked = '';
                             </div>
                         </div>
                     </div>
+                    @endif
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">

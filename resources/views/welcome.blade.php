@@ -18,7 +18,7 @@
 
 </head>
 
-<body class="container-fluid">
+<body class="container-fluid main">
 
         <x-home_nav />
 
