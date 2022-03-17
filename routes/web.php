@@ -80,11 +80,23 @@ Route::group(['middleware' => ['auth']], function () {
     });
 });
 
+
+
 Route::group(['middleware' => ['auth']], function () {
+
+    // Route::controller(DatabaseController::class, [
+    //     'make_backup' => 'database.backup',
+    // ]);
+
     Route::resource('database', DatabaseController::class);
 
-    Route::controller(DatabaseController::class)->group(function () {
+    Route::controller(DatabaseController::class, [
+        'make_backup' => 'database.backup',
+    ])
+    ->group(function () {
         Route::get('/Datenbank', 'index')->name('database');
+        // Route::patch('/Datenbank', 'backup')->name('database.backup');
+        Route::post('/Datenbank', 'store')->name('database.store');
         Route::patch('/Datenbank', 'update')->name('database.update');
         Route::delete('/Datenbank', 'database')->name('database.destroy');
     });

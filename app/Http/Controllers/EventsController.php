@@ -20,7 +20,12 @@ class EventsController extends Controller
 
     public function index()
     {
-        $data = Events::events()->order()->get();
+        if (Events::events()->order()->count() > 25) {
+            $data = Events::events()->order()->lazyById(25, $column = 'id');
+        } else {
+            $data = Events::events()->order()->get();
+        }
+
         $groups = Groups::withTrashed()->get();
 
         return view('events.index', compact('data', 'groups'), ['title' => 'Termine']);
@@ -115,7 +120,12 @@ class EventsController extends Controller
 
         $result = Events::find($id);
         if ($result->repeat_parent != NULL) {
-            $result_future = Events::following($result->repeat_parent)->order()->get();
+
+        if(Events::following($result->repeat_parent)->order()->count() > 25) {
+                $result_future = Events::following($result->repeat_parent)->order()->lazyById(25, $column = 'id');
+            } else {
+                $result_future = Events::following($result->repeat_parent)->order()->get();
+            }
         } else {
             $result_future = [];
         }

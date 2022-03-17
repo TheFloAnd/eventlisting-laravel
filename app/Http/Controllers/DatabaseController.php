@@ -17,6 +17,26 @@ class DatabaseController extends Controller
         return view('database.index', ['title' => 'Datenbank']);
     }
 
+
+    public function make_backup()
+    {
+        // $request->validated();
+
+
+        return redirect()->route('database');
+        // ->with('success', $request->input('group_alias') . ' Erfolgreich hinzugefügt!');
+    }
+
+    public function store()
+    {
+        exec("ls -la", $output);
+        // $request->validated();
+
+
+        return redirect()->route('database')
+            ->with('success', ' Erfolgreich!');
+    }
+
     public function destory(Request $request)
     {
         // $request->validated();

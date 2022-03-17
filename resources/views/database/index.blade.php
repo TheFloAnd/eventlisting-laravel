@@ -1,7 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-{{ $locale = app()->getLocale(); }}
+
+@if($message = Session::get('success'))
+<x-alert.success :message="$message" />
+@endif
+
+@if($message = Session::get('warning'))
+<x-alert.warning :message="$message" />
+@endif
+
 <article class="row g-3">
     <section class="col-12">
         <div class="card">
@@ -11,7 +19,9 @@
             <div class="card-body">
                 <div class="row g-5">
                     <div class="col-12">
-                        <form action="" method="POST">
+                        <form action="{{ route('database.store') }}" method="post">
+                            @method('post')
+                            @csrf
                             <button type="submit" class="btn btn-outline-success w-100" name="table_backup"
                                 id="table_backup">Backup</button>
                         </form>
@@ -104,7 +114,8 @@
                         <div class="col-12" id="table_info" hidden>
                             <div>
                                 <i>
-                                    {{ __('Beim Leeren oder Löschen von der Termin Tabelle wird automatisch auch die Gruppen Tabelle mit geleert/gelöscht!') }}
+                                    {{ __('Beim Leeren oder Löschen von der Termin Tabelle wird automatisch auch die
+                                    Gruppen Tabelle mit geleert/gelöscht!') }}
                                 </i>
                             </div>
                         </div>
