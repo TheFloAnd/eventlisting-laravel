@@ -4,6 +4,9 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Database\Seeders\SettingsSeeder;
+use Database\Seeders\PermissionTableSeeder;
+use Database\Seeders\RolesSeeder;
+use Database\Seeders\UserSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,8 +18,20 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-        $this->call(UsersTableSeeder::class);
         $settings = new SettingsSeeder();
+        $settings->run();
+
+
+        // Creates Permissions
+        $settings = new PermissionTableSeeder();
+        $settings->run();
+
+        // Creates Roles
+        $settings = new RolesSeeder();
+        $settings->run();
+
+        // Creates User and assigns Roles to it
+        $settings = new UserSeeder();
         $settings->run();
     }
 }

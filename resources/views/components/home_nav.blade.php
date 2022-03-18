@@ -69,7 +69,7 @@
                     </a>
                 </li>
             </div>
-            @if(Auth::user()->name == 'Admin')
+            @can('settings')
             <a href="{{ route('settings') }}" type="button" class="btn btn-outline-secondary home-offcanvas-body-link">
                 <span class="btn-label">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -82,6 +82,8 @@
                 </span>
                 {{ __('Einstellungen') }}
             </a>
+            @endcan
+@can('database')
 <a href="{{ route('database') }}" type="button" class="btn btn-outline-secondary home-offcanvas-body-link">
                 <span class="btn-label">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-archive"
@@ -92,7 +94,7 @@
                 </span>
                 {{ __('Datenbank') }}
             </a>
-            @endif
+            @endcan
         </div>
         <div class="mt-3">
             <a type="button" class="btn btn-outline-danger w-100" href="{{ route('logout') }}"

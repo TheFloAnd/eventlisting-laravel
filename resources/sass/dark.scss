@@ -91,6 +91,10 @@ tr.strikeout td:after {
     background-color: $palette-background-paper;
 }
 
+.offcanvas-body .btn-outline-secondary {
+    color: $white;
+}
+
 .home-offcanvas {
     background: $color;
     & .home-offcanvas-close {

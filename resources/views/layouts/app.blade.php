@@ -71,7 +71,7 @@
                                 {{ __('Gruppen') }}
                             </a>
                         </li>
-                        @if(Auth::user()->name == 'Admin')
+                        @can('settings')
                         <li class="nav-item">
                             <a href="{{ route('settings') }}" class="nav-link">
                                 <span class="btn-label pe-1">
@@ -86,7 +86,8 @@
                                 {{ __('Einstellungen') }}
                             </a>
                         </li>
-
+                        @endcan
+@can('database')
                         <li class="nav-item">
                             <a href="{{ route('database') }}" class="nav-link">
                                 <span class="btn-label pe-1">
@@ -99,7 +100,7 @@
                                 {{ __('Datenbank') }}
                             </a>
                         </li>
-                        @endif
+                        @endcan
                     </ul>
 
                     <!-- Right Side Of Navbar -->
