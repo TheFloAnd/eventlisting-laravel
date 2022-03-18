@@ -87,6 +87,7 @@
                             </a>
                         </li>
                         @endcan
+
 @can('database')
                         <li class="nav-item">
                             <a href="{{ route('database') }}" class="nav-link">
@@ -101,6 +102,45 @@
                             </a>
                         </li>
                         @endcan
+
+
+@canany(['user-list', 'role-list'])
+<li id="sort_nav_manage" draggable="true" role="option" aria-grabbed="false">
+    <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+        <span class="sort_nav_move d-sm-none d-xl-block">
+            <i class="fas fa-sort"></i>
+        </span>
+        <i class="fas fa-toolbox"></i>
+        <span class="nav-text">Manage</span>
+    </a>
+    <ul aria-expanded="false" class="mm-collapse">
+        @if(Route::has('users.index'))
+        @can('user-list')
+        <li>
+            <a href="{{ route('users.index') }}" class="ai-icon" aria-expanded="false">
+                <i class="fas fa-users"></i>
+                <span class="nav-text"></span>
+                {{ __('Benutzer') }}
+            </a>
+        </li>
+        @endcan
+        @endif
+        @if(Route::has('roles.index'))
+        @can('role-list')
+        <li>
+            <a href="{{ route('roles.index') }}" class="ai-icon" aria-expanded="false">
+                <i class="fas fa-user-tag"></i>
+                <span class="nav-text"></span>
+                {{ __('Rollen') }}
+            </a>
+        </li>
+        @endcan
+        @endif
+    </ul>
+</li>
+@endcanany
+
+
                     </ul>
 
                     <!-- Right Side Of Navbar -->
