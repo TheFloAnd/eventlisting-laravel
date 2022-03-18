@@ -14,7 +14,7 @@
                 <div class="pull-right">
                     @can('user-create')
                         <a class="btn btn-md btn-rounded btn-outline-success" href="{{ route('users.create') }}">
-                            Create New User
+                            {{ __('Neuer Benutzer') }}
                         </a>
                     @endcan
                 </div>

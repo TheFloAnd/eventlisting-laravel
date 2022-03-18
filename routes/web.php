@@ -7,6 +7,10 @@ use App\Http\Controllers\EventsController;
 use App\Http\Controllers\GroupsController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\DatabaseController;
+
+use App\Http\Controllers\Management\UserController;
+
+use App\Http\Controllers\Management\RoleController;
 use Carbon\Carbon;
 
 /*
@@ -105,22 +109,23 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 Route::group(['middleware' => ['auth', 'role:administrator']], function () {
-    /* Management */
-    Route::resource('roles', App\Http\Controllers\Management\RoleController::class);
-    Route::get('Rollen', [App\Http\Controllers\Management\RoleController::class, 'index'])->name('roles.index');
-    Route::get('Rolle/Hinzufügen', [App\Http\Controllers\Management\RoleController::class, 'create'])->name('roles.create');
-    Route::get('Rolle/{id}/{role}', [App\Http\Controllers\Management\RoleController::class, 'show'])->name('roles.show');
-    Route::get('Rolle/{id}/{role}/Bearbeiten', [App\Http\Controllers\Management\RoleController::class, 'edit'])->name('roles.edit');
+    Route::resource('roles', RoleController::class);
 
-    Route::resource('users', App\Http\Controllers\Management\UserController::class);
-    Route::get('Benutzer', [App\Http\Controllers\Management\UserController::class, 'index'])->name('users.index');
-    Route::get('Benutzer/Hinzufügen', [App\Http\Controllers\Management\UserController::class, 'create'])->name('users.create');
-    Route::get('Benutzer/{id}/{name}', [App\Http\Controllers\Management\UserController::class, 'show'])->name('users.show');
-    Route::get('Benutzer/{id}/{name}/Bearbeiten', [App\Http\Controllers\Management\UserController::class, 'edit'])->name('users.edit');
+    Route::controller(RoleController::class)->group(function () {
+        Route::get('Rollen', 'index')->name('roles');
+        Route::get('Rolle/Hinzufügen', 'create')->name('roles.create');
+        Route::get('Rolle/{id}/{role}', 'show')->name('roles.show');
+        Route::get('Rolle/{id}/{role}/Bearbeiten', 'edit')->name('roles.edit');
+    });
+});
 
-    Route::resource('user_request', App\Http\Controllers\Management\UserRequestsController::class);
-    Route::get('Benutzer/Anfragen', [App\Http\Controllers\Management\UserRequestsController::class, 'index'])->name('user_request.index');
-    Route::get('Benutzer/Anfrage/{id}/{name}', [App\Http\Controllers\Management\UserRequestsController::class, 'edit'])->name('user_request.edit');
+Route::group(['middleware' => ['auth', 'role:administrator']], function () {
+    Route::resource('users', UserController::class);
 
-    Route::get('/users', [App\Http\Controllers\UserController::class, 'suspend'])->middleware(['auth', 'active_user']);
+    Route::controller(UserController::class)->group(function () {
+        Route::get('Benutzer', 'index')->name('users');
+        Route::get('Benutzer/Hinzufügen', 'create')->name('users.create');
+        Route::get('Benutzer/{id}/{role}', 'show')->name('users.show');
+        Route::get('Benutzer/{id}/{role}/Bearbeiten', 'edit')->name('users.edit');
+    });
 });
