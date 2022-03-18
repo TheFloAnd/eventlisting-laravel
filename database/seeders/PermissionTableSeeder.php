@@ -26,10 +26,17 @@ class PermissionTableSeeder extends Seeder
             'role-create',
             'role-edit',
             'role-delete',
-            'event',
+            'events',
+            'events-edit',
+            'event-delete',
             'group',
+            'group-edit',
+            'group-delete',
             'settings',
+            'settings-edit',
             'database',
+            'database-backup',
+            'database-clear',
         ];
 
         foreach ($permissions as $permission) {
