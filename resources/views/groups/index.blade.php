@@ -9,6 +9,10 @@
 <x-alert.warning :message="$message" />
 @endif
 
+<x-breadcrumb :breadcrumb="[
+                                    ['Gruppen', 'groups'],
+                                ]" />
+
 <article class="row g-3">
     <section class="col-12">
         <div class="d-flex justify-content-end mx-2">

@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+
+
+<x-breadcrumb :breadcrumb="[
+                                    ['Einstellungen', 'settings'],
+                                ]" />
 <article class="row g-3">
     <section class="col-12">
         <form action="{{ route('settings.update') }}" method="post">

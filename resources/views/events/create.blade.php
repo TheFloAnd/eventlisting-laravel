@@ -7,7 +7,10 @@
 <x-alert.error :message="$error" />
 @endforeach
 @endif
-
+<x-breadcrumb :breadcrumb="[
+                                    ['Termine', 'events'],
+                                    ['Hinzufügen', 'events.create'],
+                                ]" />
 <article class="row g-3">
     <div class="col-12">
         <div class="row d-flex align-content-center">

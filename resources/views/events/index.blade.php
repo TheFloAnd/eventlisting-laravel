@@ -8,7 +8,9 @@
 @if($message = Session::get('warning'))
 <x-alert.warning :message="$message" />
 @endif
-
+<x-breadcrumb :breadcrumb="[
+                                    ['Termine', 'events'],
+                                ]" />
 <article class="row g-3">
     <section class="col-12">
         <div class="d-flex justify-content-end mx-2">

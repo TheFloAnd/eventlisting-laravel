@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+
+<x-breadcrumb :breadcrumb="[
+                                    ['Gruppe', 'groups'],
+                                    ['Anzeigen', 'groups.show', $result->alias],
+                                ]" />
+
+
 <article class="row g-3">
     <section>
         <h1>

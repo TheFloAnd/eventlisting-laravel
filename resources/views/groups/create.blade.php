@@ -8,6 +8,11 @@
 @endforeach
 @endif
 
+<x-breadcrumb :breadcrumb="[
+                                    ['Gruppen', 'groups'],
+                                    ['Hinzufügen', 'groups.create'],
+                                ]" />
+
 <article class="row g-3">
     <section>
         <h1>

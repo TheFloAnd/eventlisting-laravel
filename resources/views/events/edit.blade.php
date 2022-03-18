@@ -11,6 +11,12 @@ $checked = '';
 }
 @endphp
 
+<x-breadcrumb :breadcrumb="[
+                                    ['Termine', 'events'],
+                                    ['Bearbeiten', 'events.edit', $result->id],
+                                    [ $result->event, 'events.edit', $result->id],
+                                ]" />
+
 <form method="post" action="{{ route('events.update', $result->id) }}">
     @method('patch')
     @csrf

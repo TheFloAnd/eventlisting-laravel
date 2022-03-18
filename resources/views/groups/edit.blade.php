@@ -7,7 +7,11 @@
 <x-alert.error :message="$error" />
 @endforeach
 @endif
-
+<x-breadcrumb :breadcrumb="[
+                                    ['Gruppe', 'groups'],
+                                    ['Bearbeiten', 'groups.edit', $result->alias],
+                                    [$result->alias, 'groups.edit', $result->alias],
+                                ]" />
 <article class="row g-3">
     <section>
         <h1>
