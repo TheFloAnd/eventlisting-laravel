@@ -1,6 +1,6 @@
 <div class="modal fade" id="Modal">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
+        <form class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">{{ $title ?? 'Löschen'}}</h5>
                 <button type="button" class="close" data-dismiss="modal">
@@ -10,7 +10,9 @@
             <div class="modal-body">
                 {{$txt ?? 'Wollen sie den Eintrag wirklich Löschen?'}}
             </div>
-            {!! Form::open(['method' => 'DELETE','route' => [$route, $id]]) !!}
+            <form action="{{ route($route, $id) }}" method="post">
+                @method('delete')
+                @csrf
             <div class="modal-footer">
                 <button type="submit" class="btn btn-sm btn-rounded btn-outline-danger w-100">
                     Löschen
@@ -19,7 +21,7 @@
                     Schließen
                 </button>
             </div>
-            {!! Form::close() !!}
+        </form>
         </div>
     </div>
 </div>

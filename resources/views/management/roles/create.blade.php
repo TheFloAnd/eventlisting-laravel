@@ -3,89 +3,114 @@
 
 @section('content')
 
-    <div class="container-fluid">
 
-        <x-page_title :title="$title"
-                      :route="'drink.create'"
-                      :icon="'user-tag'"/>
-
-        <x-breadcrumb :breadcrumb="[
+<x-breadcrumb :breadcrumb="[
                                 ['Rollen', 'roles.index'],
                                 ['Rollen Hinzufügen', 'roles.create'],
-                            ]"/>
+                            ]" />
 
-        {{-- @if (count($errors) > 0)
-            <x-alert.error_input :errors="$errors" />
-        @endif --}}
+{{-- @if (count($errors) > 0)
+<x-alert.error_input :errors="$errors" />
+@endif --}}
 
-        <div class="row d-flex justify-content-center">
-            <div class="col-md-11 col-lg-10">
-                <div class="card">
-                    {!! Form::open(array('route' => 'roles.store','method'=>'POST')) !!}
-                    <div class="card-body">
-                        <div class="row justify-content-center">
-                            <div class="col-md-11 col-lg-10">
-                                <div class="form-group">
-                                    <h4>Name:</h4>
-                                    {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
+<div class="row d-flex justify-content-center">
+    <div class="col-md-11 col-lg-10">
+        <div class="card">
+            <form action="{{ route('roles.store') }}" method="post">
+                @method('post')
+                @csrf
+                <div class="card-body">
+                    <div class="row g-3 justify-content-center">
+                        <div class="col-lg-10">
+                            <fieldset>
+                                <div class="form-floating">
+                                    <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                        name="name" id="name" placeholder="{{ old('name') ?? __('Name') }}"
+                                        value="{{ old('name') ?? __('') }}" maxlength="25" required
+                                        data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('Name') }}"
+                                        data-show-input-length>
+                                    <label for="name">
+                                        {{ __('Name') }}
+                                        <span style="color: red;">
+                                            *
+                                        </span>
+                                        <span id="name_label" class="label"></span>
+                                    </label>
+                                    @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
-                            </div>
-                            <div class="col-md-11 col-lg-10">
-                                <div class="form-group">
-                                    <h4>Berechtigungen:</h4>
-                                    <div class="custom-control custom-checkbox checkbox-info check-lg mr-3">
-                                        <label class="custom-control-label" for="checkAll">
-                                            <input type="checkbox" class="custom-control-input" id="checkAll">
-                                            Alles Auswählen
-                                        </label>
-                                    </div>
-                                    <div class="row">
-                                        @foreach($permission as $value)
-                                            <div class="col-auto">
-                                                @switch(TRUE)
-                                                    @case(stristr($value->name,'delete'))
-                                                    <div class="custom-control custom-checkbox m-3 checkbox-danger">
-                                                        @break
-                                                        @case(stristr($value->name,'role'))
-                                                        <div class="custom-control custom-checkbox m-3 checkbox-secondary">
-                                                            @break
-                                                            @case(stristr($value->name,'user'))
-                                                            <div class="custom-control custom-checkbox m-3 checkbox-Warning">
-                                                                @break
-                                                                @case(stristr($value->name,'drink'))
-                                                                <div class="custom-control custom-checkbox m-3 checkbox-info">
-                                                                    @break
-                                                                    @default
-                                                                    <div class="custom-control custom-checkbox m-3 checkbox-success">
-                                                                        @endswitch
-                                                                        {{ Form::checkbox('permission[]', $value->id, false, array('class' => 'name checkbox custom-control-input', 'id' => $value->id)) }}
-                                                                        <label class="custom-control-label"
-                                                                               for="{{ $value->id }}">{{ $value->name }}</label>
-                                                                    </div>
-                                                                </div>
-                                                                @endforeach
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                            </fieldset>
+                        </div>
+                        <div class="col-md-11 col-lg-10">
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" id="select_all_modal"
+                                                    data-toggle="toggle" autocomplete="off" data-bs-toggle="tooltip"
+                                                    data-bs-placement="top" title="{{ __('Alle Auswählen.') }}"
+                                                    data-toggle-select>
+                                                <label class="form-check-label" for="select_all">
+                                                    {{ __('Alle Auswählen.') }}
+                                                </label>
                                             </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row" data-area-select>
+                                        @foreach($permission as $value)
+
+                                        <div class="col-auto">
+                                            <fieldset>
+                                                <div class="form-group">
+                                                    <div class="form-check form-switch">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            name="permission[]" id="permission" value="{{ $value->id }}"
+                                                            data-set-select>
+                                                        <label class="form-check-label" for="not_applicable">
+                                                            {{ $value->name }}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                        @endforeach
                                     </div>
-                                    <x-cards.card_footer_create :route="'roles'"/>
-                                    {!! Form::close() !!}
                                 </div>
                             </div>
                         </div>
-
-                        <script>
-                            document.getElementById('checkAll').onclick = function () {
-                                var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-                                for (var checkbox of checkboxes) {
-                                    checkbox.checked = this.checked;
-                                }
-                            }
-                        </script>
                     </div>
                 </div>
-            </div>
+                <div class="card-footer">
+                    <div class="row g-2 justify-content-center">
+                        <div class="col-sm-8">
+                            <button type="submit" class="btn btn-sm btn-rounded btn-outline-success w-100">
+                                Speichern
+                                <span class="btn-icon-right pull-right mr-auto">
+                                    <i class="fas fa-check"></i>
+                                </span>
+                            </button>
+                        </div>
+                        <div class="col-sm-4">
+                            @if(Route::has('roles'))
+                            <a class="btn btn-sm btn-rounded btn-outline-secondary w-100" href="{{ route('roles') }}">
+                                Zurück</a>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
 @endsection
