@@ -3,11 +3,11 @@
 @section('content')
 
 @if($message = Session::get('success'))
-<x-alert.success :message="$message" />
+<x-alert type="success" :message="$message" />
 @endif
 
 @if($message = Session::get('warning'))
-<x-alert.warning :message="$message" />
+<x-alert type="warning" :message="$message" />
 @endif
 
 <article class="row g-3">

@@ -29,7 +29,7 @@
 
 
     @if ($message = Session::get('success'))
-    <x-alert.success :message="$message" />
+    <x-alert type="success" :message="$message" />
     @endif
 
 

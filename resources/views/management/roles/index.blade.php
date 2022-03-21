@@ -11,7 +11,7 @@
                             ]" />
 
     @if ($message = Session::get('success'))
-    <x-alert.success :message="$message" />
+    <x-alert type="success" :message="$message" />
     @endif
     <div class="row">
         <div class="col-lg-12 accordion" id="collapse-table">

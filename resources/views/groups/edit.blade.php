@@ -4,7 +4,7 @@
 
 @if($errors->any())
 @foreach ($errors->all() as $error)
-<x-alert.error :message="$error" />
+<x-alert type="error":message="$error" />
 @endforeach
 @endif
 <x-breadcrumb :breadcrumb="[

@@ -9,10 +9,6 @@
                                 ['Rollen Hinzufügen', 'roles.create'],
                             ]" />
 
-{{-- @if (count($errors) > 0)
-<x-alert.error_input :errors="$errors" />
-@endif --}}
-
 <div class="row d-flex justify-content-center">
     <div class="col-md-11 col-lg-10">
         <div class="card">

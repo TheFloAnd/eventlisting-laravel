@@ -198,7 +198,17 @@
     <script src="{{ asset('js/init/dataTables/default.init.js') }}"></script>
     <script src="{{ asset('js/init/dataTables/groups_active.init.js') }}"></script>
     <script src="{{ asset('js/init/dataTables/groups_inactive.init.js') }}"></script>
-
+<script>
+    var alertList = document.querySelectorAll('.alert')
+    var alerts = [].slice.call(alertList).map(function (element) {
+    return new bootstrap.Alert(element)
+    })
+    window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+    $(this).remove();
+    });
+    }, 5000);
+</script>
 </body>
 
 </html>
