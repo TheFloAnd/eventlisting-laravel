@@ -132,7 +132,7 @@
             </a>
             @endcan
             @endif
-            {{-- @if(Route::has('roles'))
+            @if(Route::has('roles'))
             @can('role-list')
             <a href="{{ route('roles') }}" type="button" class="btn btn-outline-secondary home-offcanvas-body-link">
                 <span class="btn-label pe-1">
@@ -147,7 +147,7 @@
                 {{ __('Rollen') }}
             </a>
             @endcan
-            @endif --}}
+            @endif
         </div>
         <div class="mt-3">
             <a type="button" class="btn btn-outline-danger w-100" href="{{ route('logout') }}"
