@@ -172,8 +172,15 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <div class="col-10">
-                        <button type="submit" class="btn btn-outline-success">Submit</button>
+<div class="row g-3 justify-content-center">
+                        <div class="col-8">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-outline-success w-100" name="submit_event"
+                                    value="{{ __('Hinzufügen') }}">
+                                    {{ __('Hinzufügen') }}
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </form>

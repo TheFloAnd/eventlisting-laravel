@@ -92,36 +92,7 @@
                 </div>
             </div>
 
-            <div class="card-footer">
-                <div class="row justify-content-center">
-                    <div class="col-8">
-                        <a class="btn btn-md btn-rounded btn-outline-primary w-100" href="{{ route('users.index') }}">
-                            {{ __('Zurück') }}
-                        </a>
-                    </div>
-                    @can('user-ban')
-                    @if(!$user->hasRole(['administrator']))
-                    <div class="col-4">
-                        {!! Form::model($user, ['method' => 'PATCH','route' => ['users.update', $user->id]]) !!}
-                        @if(empty($user->blocked_at))
-                        <button type="button" value="deactivate" name="deactivate"
-                            class="btn btn-md btn-rounded btn-outline-danger w-100" data-toggle="modal"
-                            data-target="#Modal_deaktivate">
-                            {{ __('Deaktivieren') }}
-                        </button>
-                        @else
-                        <button type="button" value="reactivate" name="reactivate"
-                            class="btn btn-md btn-rounded btn-outline-danger w-100" data-toggle="modal"
-                            data-target="#Modal_reaktivate">
-                            {{ __('Reaktivieren') }}
-                        </button>
-                        @endif
-                        {!! Form::close() !!}
-                    </div>
-                    @endif
-                    @endcan
-                </div>
-            </div>
+
         </div>
     </section>
 </article>

@@ -199,37 +199,25 @@
                 </div>
 
                 <div class="card-footer">
-                    <div class="row g-2 justify-content-center">
-                        <div class="col-8 col-lg-5">
-                            <button type="submit" value="save" name="save"
-                                class="btn btn-md btn-rounded btn-outline-success w-100">
-                                {{ __('Speichern') }}
-                            </button>
+                    <div class="row g-3 justify-content-center">
+                        <div class="col-8">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-outline-success w-100" name="submit_event"
+                                    value="{{ __('Ändern') }}">
+                                    {{ __('Ändern') }}
+                                </button>
+                            </div>
                         </div>
-                        <div class="col-4 col-lg-2">
-                            <a class="btn btn-md btn-rounded btn-outline-secondary w-100" href="{{ route('users') }}">
-                                {{ __('Zurück') }}
-                            </a>
-                        </div>
-                        @can('user-ban')
                         @if(!$user->hasRole(['administrator']))
-                        <div class="col-8 col-lg-5">
-                            @if(empty($user->blocked_at))
-                            <button type="button" value="deactivate" name="deactivate"
-                                class="btn btn-md btn-rounded btn-outline-danger w-100" data-toggle="modal"
-                                data-target="#Modal_deaktivate">
-                                {{ __('Deaktivieren') }}
-                            </button>
-                            @else
-                            <button type="button" value="reactivate" name="reactivate"
-                                class="btn btn-md btn-rounded btn-outline-danger w-100" data-toggle="modal"
-                                data-target="#Modal_reaktivate">
-                                {{ __('Reaktivieren') }}
-                            </button>
-                            @endif
+                        <div class="col-4">
+                            <div class="form-group">
+                                <button type="button" class="btn btn-outline-danger w-100" name="submit_event"
+                                    value="{{ __('Löschen') }}" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                    {{ __('Löschen') }}
+                                </button>
+                            </div>
                         </div>
                         @endif
-                        @endcan
                     </div>
                 </div>
             </form>
