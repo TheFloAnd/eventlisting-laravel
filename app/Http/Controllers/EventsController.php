@@ -28,7 +28,7 @@ class EventsController extends Controller
 
         $groups = Groups::withTrashed()->get();
 
-        return view('events.index', compact('data', 'groups'), ['title' => 'Termine']);
+        return view('events.index', compact('data', 'groups'), ['title' => __('Termine')]);
     }
 
 
@@ -42,7 +42,7 @@ class EventsController extends Controller
             return redirect()->route('groups');
         }
 
-        return view('events.create', compact('proposal', 'proposal_room', 'groups'), ['title' => 'Termin Hinzufügen']);
+        return view('events.create', compact('proposal', 'proposal_room', 'groups'), ['title' => __('Termin Hinzufügen')]);
     }
 
     /**
@@ -112,7 +112,7 @@ class EventsController extends Controller
 
 
         return redirect()->route('events')
-            ->with('success', 'Termin(e) wurden Erfolgreich hinzugefügt!');
+            ->with('success', __('Termin(e) wurden Erfolgreich hinzugefügt!'));
     }
 
     public function edit($id)
@@ -134,7 +134,7 @@ class EventsController extends Controller
         $proposal_room = Events::proposal_room()->get();
         $groups = Groups::get();
 
-        return view('events.edit', compact('result', 'result_future', 'proposal', 'proposal_room', 'groups'), ['title' => 'Termin Bearbeiten']);
+        return view('events.edit', compact('result', 'result_future', 'proposal', 'proposal_room', 'groups'), ['title' => __('Termin Bearbeiten')]);
     }
 
 
@@ -230,12 +230,12 @@ class EventsController extends Controller
         }
         if ($request->has('not_applicable')) {
             return redirect()->route('events')
-                ->with('warning', 'Termin(e) wurden als "Entfällt" gesetzt!');
+                ->with('warning', __('Termin(e) wurden als "Entfällt" gesetzt!'));
         }
 
         if (!$request->has('not_applicable')) {
             return redirect()->route('events')
-                ->with('success', 'Termine(e) wurden Erfolgreich geändert!');
+                ->with('success', __('Termine(e) wurden Erfolgreich geändert!'));
         }
     }
 
@@ -256,6 +256,6 @@ class EventsController extends Controller
         }
 
         return redirect()->route('events')
-            ->with('warning', 'Termin(e) wurden Entfernt!');
+            ->with('warning', __('Termin(e) wurden Entfernt!'));
     }
 }

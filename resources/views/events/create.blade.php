@@ -4,12 +4,12 @@
 
 @if($errors->any())
 @foreach ($errors->all() as $error)
-<x-alert.error :message="$error" />
+<x-alert type="error" :message="$error" />
 @endforeach
 @endif
 
 <article class="row g-3">
-    <div class="col-12">
+<section class="col-12">
         <div class="row d-flex align-content-center">
             <div class="col-lg-8">
                 <h1>
@@ -17,12 +17,17 @@
                 </h1>
             </div>
             <div class="col-lg-4">
-                <a href="#" type="button" class="btn btn-outline-secondary w-100">
-                    {{ __('Zurück') }}
-                </a>
+                <a href="{{ route('events') }}" type="button" class="btn btn-outline-secondary w-100">
+                {{ __('Zurück') }}
+            </a>
             </div>
         </div>
-    </div>
+
+        <x-breadcrumb :breadcrumb="[
+                                            [__('Termine'), 'events'],
+                                            [__('Hinzufügen'), 'events.create'],
+                                        ]" />
+    </section>
     <!-- Auflistung -->
     <section class="col-12 events-section">
         <div class="card events-card">
@@ -203,31 +208,6 @@
                         <div class="col-lg-10">
                             <div class="row g-3 mb-3" data-area="disable">
 
-                                {{-- <div class="col-12">
-                                    <fieldset>
-                                        <div class="form-group">
-                                            <div class="form-check form-check-inline" data-bs-toggle="tooltip"
-                                                data-bs-placement="top" title="">
-                                                <input class="form-check-input set_repeat_time disable" type="radio"
-                                                    name="set_repeat_time" id="set_repeat_time_date" value="date"
-                                                    checked disabled data-set-disabled>
-                                                <label class="form-check-label" for="set_repeat_time_date">
-                                                    {{ __('Bis') }}
-                                                </label>
-                                            </div>
-                                            <div class="form-check form-check-inline" data-bs-toggle="tooltip"
-                                                data-bs-placement="top" title="">
-                                                <input class="form-check-input set_repeat_time disable" type="radio"
-                                                    name="set_repeat_time" id="set_repeat_time_repeats" value="repeats"
-                                                    disabled data-set-disabled>
-                                                <label class="form-check-label" for="set_repeat_time_repeats">
-                                                    {{ __('Wiederholungen') }}
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                </div> --}}
-
                                 <div class="col-lg-6">
                                     <div class="form-group" data-bs-toggle="tooltip" data-bs-placement="top"
                                         title="{{ __('In welchen Intervallen sich der Termin wiederholen soll.') }}">
@@ -271,18 +251,6 @@
                                     </div>
                                 </div>
 
-                                {{-- <div class="col-lg-6">
-                                    <div class="form-group" data-bs-toggle="tooltip" data-bs-placement="top" title="">
-                                        <fieldset>
-                                            <label class="form-label" for="repeats">
-                                                {{ __('Wiederholungen') }}:
-                                            </label>
-                                            <input class="form-control disable" type="number" placeholder="repeats"
-                                                min="1" name="repeats" id="repeats" value="1" disabled
-                                                data-set-disabled>
-                                        </fieldset>
-                                    </div>
-                                </div> --}}
 
                             </div>
                         </div>

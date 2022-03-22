@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class alert.error extends Component
+class breadcrumb extends Component
 {
     /**
      * Create a new component instance.
@@ -23,6 +23,6 @@ class alert.error extends Component
      */
     public function render()
     {
-        return view('components.alert.error');
+        return view('components.breadcrumb');
     }
 }

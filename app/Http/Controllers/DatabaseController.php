@@ -14,7 +14,7 @@ class DatabaseController extends Controller
 
     public function index()
     {
-        return view('database.index', ['title' => 'Datenbank']);
+        return view('database.index', ['title' => __('Datenbank')]);
     }
 
 

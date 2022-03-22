@@ -20,14 +20,14 @@ class GroupsController extends Controller
 
         $inactive = Groups::unused()->withTrashed()->get();
 
-        return view('groups.index', compact('active', 'inactive'), ['title' => 'Gruppen']);
+        return view('groups.index', compact('active', 'inactive'), ['title' => __('Gruppen')]);
     }
     public function create()
     {
 
         $color = '#' . substr(str_shuffle("0123456789abcdef"), 6, 6);
 
-        return view('groups.create', compact('color'), ['title' => 'Gruppe Hinzufügen']);
+        return view('groups.create', compact('color'), ['title' => __('Gruppe Hinzufügen')]);
     }
 
     /**
@@ -54,19 +54,19 @@ class GroupsController extends Controller
 
 
         return redirect()->route('groups')
-            ->with('success', $request->input('group_alias') . ' Erfolgreich hinzugefügt!');
+            ->with('success', $request->input('group_alias') . __(' Erfolgreich hinzugefügt!'));
     }
 
     public function show($alias)
     {
         $result = Groups::alias($alias)->withTrashed()->first();
-        return view('groups.show', compact('result'), ['title' => 'Gruppe Anzeigen']);
+        return view('groups.show', compact('result'), ['title' => __('Gruppe Anzeigen')]);
     }
 
     public function edit($alias)
     {
         $result = Groups::alias($alias)->withTrashed()->first();
-        return view('groups.edit', compact('result'), ['title' => 'Gruppe Bearbeiten']);
+        return view('groups.edit', compact('result'), ['title' => __('Gruppe Bearbeiten')]);
     }
 
 
@@ -79,7 +79,7 @@ class GroupsController extends Controller
             'color' => $request->input('group_color')
         ]);
         return redirect()->route('groups')
-        ->with('success', $request->input('group_alias') . ' Erfolgreich geändert!');
+        ->with('success', $request->input('group_alias') . __(' Erfolgreich geändert!'));
     }
 
 
@@ -100,6 +100,6 @@ class GroupsController extends Controller
         }
 
         return redirect()->route('groups')
-            ->with('warning', $alias . ' wurde ' . $msg . '!');
+            ->with('warning', $alias . __(' wurde ') . $msg . '!');
     }
 }

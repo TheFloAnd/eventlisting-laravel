@@ -1,7 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
+
 <article class="row g-3">
+<section class="col-12">
+        <div class="row d-flex align-content-center">
+            <div class="col-lg-8">
+                <h1>
+                    {{ $title }}
+                </h1>
+            </div>
+        </div>
+        <x-breadcrumb :breadcrumb="[
+                                            [__('Einstellungen'), 'settings'],
+                                        ]" />
+    </section>
     <section class="col-12">
         <form action="{{ route('settings.update') }}" method="post">
             @method('PATCH')

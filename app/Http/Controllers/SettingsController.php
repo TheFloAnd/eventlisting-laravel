@@ -21,7 +21,7 @@ class SettingsController extends Controller
         $preview_time = Settings::setting('future_day');
         $refresh_delay = Settings::setting('refresh');
 
-        return view('settings.index', compact('settings', 'name', 'preview_time', 'refresh_delay'), ['title' => 'Einstellungen']);
+        return view('settings.index', compact('settings', 'name', 'preview_time', 'refresh_delay'), ['title' => __('Einstellungen')]);
     }
 
 
