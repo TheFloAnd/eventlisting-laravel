@@ -72,29 +72,53 @@
                 </div>
             </div>
             <div class="card-footer">
-                <div class="row g-2 justify-content-center">
+                <div class="row g-3 justify-content-center">
+                    @if(Auth::user()->hasRole(['administrator']))
                     @if($role->name != 'administrator')
-                    <div class="col-sm-5">
-                        <button type="button" class="btn btn-sm btn-rounded btn-outline-danger w-100"
-                            data-toggle="modal" data-target="#delete_role">
-                            {{ __('Löschen') }}
-                            <span class="btn-icon-right pull-right mr-auto">
-                                <i class="fas fa-trash"></i>
-                            </span>
-                        </button>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-outline-danger w-100" name="submit_event"
+                                value="{{ __('Löschen') }}" data-bs-toggle="modal" data-bs-target="#Modal_delete">
+                                {{ __('Löschen') }}
+                            </button>
+                        </div>
                     </div>
                     @endif
-                    <div class="col-sm-6">
-                        @if(Route::has('roles'))
-                        <a class="btn btn-sm btn-rounded btn-outline-secondary w-100" href="{{ route('roles') }}">
-                            {{ __('Zurück') }}
-                        </a>
-                        @endif
-                    </div>
+                    @endif
                 </div>
             </div>
         </div>
     </section>
+</article>
+
+@if($role->name != 'administrator')
+<div class="modal fade" id="Modal_delete">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ __('Löschen') }}</h5>
+                <button type="button" class="btn-close dark" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {{ __('Wollen sie den Benutzer wirklich Löschen?') }}
+            </div>
+            <form action="{{ route('roles.destroy', $role->id) }}" method="post">
+                @method('delete')
+                @csrf
+                <div class="modal-footer">
+                    <button type="submit" value="reactivate" name="reactivate"
+                        class="btn btn-md btn-rounded btn-outline-danger w-100">
+                        {{ __('Löschen') }}
+                    </button>
+                    <button type="button" class="btn btn-sm btn-rounded btn-outline-secondary w-100"
+                        data-dismiss="modal">
+                        {{ __('Schließen') }}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
+@endif
 
 @endsection
