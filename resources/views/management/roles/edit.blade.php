@@ -123,6 +123,33 @@
                         </div>
                     </div>
                 </form>
-
-                <x-modal.delete :route="'roles.destroy'" :id="$id" />
+@if(!$role->name != 'administrator')
+<div class="modal fade" id="Modal_delete">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ __('Löschen') }}</h5>
+                <button type="button" class="btn-close dark" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {{ __('Wollen sie den Benutzer wirklich Löschen?') }}
+            </div>
+            <form action="{{ route('roles.destroy', $role->id) }}" method="post">
+                @method('delete')
+                @csrf
+                <div class="modal-footer">
+                    <button type="submit" value="reactivate" name="reactivate"
+                        class="btn btn-md btn-rounded btn-outline-danger w-100">
+                        {{ __('Löschen') }}
+                    </button>
+                    <button type="button" class="btn btn-sm btn-rounded btn-outline-secondary w-100"
+                        data-dismiss="modal">
+                        {{ __('Schließen') }}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endif
                 @endsection
