@@ -7,12 +7,9 @@
 <x-alert type="error" :message="$error" />
 @endforeach
 @endif
-<x-breadcrumb :breadcrumb="[
-                                    ['Termine', 'events'],
-                                    ['Hinzufügen', 'events.create'],
-                                ]" />
+
 <article class="row g-3">
-    <div class="col-12">
+<section class="col-12">
         <div class="row d-flex align-content-center">
             <div class="col-lg-8">
                 <h1>
@@ -20,12 +17,17 @@
                 </h1>
             </div>
             <div class="col-lg-4">
-                <a href="#" type="button" class="btn btn-outline-secondary w-100">
-                    {{ __('Zurück') }}
-                </a>
+                <a href="{{ route('events') }}" type="button" class="btn btn-outline-secondary w-100">
+                {{ __('Zurück') }}
+            </a>
             </div>
         </div>
-    </div>
+
+        <x-breadcrumb :breadcrumb="[
+                                            [__('Termine'), 'events'],
+                                            [__('Hinzufügen'), 'events.create'],
+                                        ]" />
+    </section>
     <!-- Auflistung -->
     <section class="col-12 events-section">
         <div class="card events-card">

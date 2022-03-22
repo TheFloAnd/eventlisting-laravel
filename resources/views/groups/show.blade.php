@@ -2,17 +2,24 @@
 
 @section('content')
 
-<x-breadcrumb :breadcrumb="[
-                                    ['Gruppe', 'groups'],
-                                    ['Anzeigen', 'groups.show', $result->alias],
-                                ]" />
-
-
 <article class="row g-3">
-    <section>
-        <h1>
-            {{ $title }}
-        </h1>
+    <section class="col-12">
+        <div class="row d-flex align-content-center">
+            <div class="col-lg-8">
+                <h1>
+                    {{ $title }}
+                </h1>
+            </div>
+            <div class="col-lg-4">
+                <a href="{{ route('groups') }}" type="button" class="btn btn-outline-secondary w-100">
+                    {{ __('Zurück') }}
+                </a>
+            </div>
+        </div>
+        <x-breadcrumb :breadcrumb="[
+                                            [__('Gruppe'), 'groups'],
+                                            [__('Anzeigen'), 'groups.show', $result->alias],
+                                        ]" />
     </section>
 
     <section class="col">

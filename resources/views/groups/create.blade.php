@@ -8,16 +8,24 @@
 @endforeach
 @endif
 
-<x-breadcrumb :breadcrumb="[
-                                    ['Gruppen', 'groups'],
-                                    ['Hinzufügen', 'groups.create'],
-                                ]" />
-
 <article class="row g-3">
-    <section>
-        <h1>
-            {{ $title }}
-        </h1>
+    <section class="col-12">
+        <div class="row d-flex align-content-center">
+            <div class="col-lg-8">
+                <h1>
+                    {{ $title }}
+                </h1>
+            </div>
+            <div class="col-lg-4">
+                <a href="{{ route('groups') }}" type="button" class="btn btn-outline-secondary w-100">
+                    {{ __('Zurück') }}
+                </a>
+            </div>
+        </div>
+        <x-breadcrumb :breadcrumb="[
+                                            [__('Gruppen'), 'groups'],
+                                            [__('Hinzufügen'), 'groups.create'],
+                                        ]" />
     </section>
     <section class="col-12">
         <div class="card">

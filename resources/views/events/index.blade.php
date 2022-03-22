@@ -8,16 +8,24 @@
 @if($message = Session::get('warning'))
 <x-alert type="warning" :message="$message" />
 @endif
-<x-breadcrumb :breadcrumb="[
-                                    ['Termine', 'events'],
-                                ]" />
 <article class="row g-3">
     <section class="col-12">
-        <div class="d-flex justify-content-end mx-2">
-            <a href="{{ route('events.create') }}" type="button" class="btn btn-outline-success w-100">
-                {{ __('Hinzufügen') }}
-            </a>
+        <div class="row d-flex align-content-center">
+            <div class="col-lg-8">
+                <h1>
+                    {{ $title }}
+                </h1>
+            </div>
+            <div class="col-lg-4">
+                <a href="{{ route('events.create') }}" type="button" class="btn btn-outline-success w-100">
+                    {{ __('Hinzufügen') }}
+                </a>
+            </div>
         </div>
+
+<x-breadcrumb :breadcrumb="[
+                                    [__('Termine'), 'events'],
+                                ]" />
     </section>
 
     <!-- Auflistung -->

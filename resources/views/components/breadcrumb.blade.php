@@ -1,4 +1,5 @@
-<div class="col-auto mt-0 form-head">
+<div class="row">
+    <div class="col-12">
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
             <a href="{{ url('/') }}">
@@ -22,4 +23,5 @@
             @endif
         @endforeach
     </ol>
+</div>
 </div>

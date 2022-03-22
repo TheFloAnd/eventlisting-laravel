@@ -9,17 +9,23 @@
 <x-alert type="warning" :message="$message" />
 @endif
 
-<x-breadcrumb :breadcrumb="[
-                                    ['Gruppen', 'groups'],
-                                ]" />
-
 <article class="row g-3">
     <section class="col-12">
-        <div class="d-flex justify-content-end mx-2">
-            <a href="{{ route('groups.create') }}" type="button" class="btn btn-outline-success w-100">
-                {{ __('Hinzufügen') }}
-            </a>
+        <div class="row d-flex align-content-center">
+            <div class="col-lg-8">
+                <h1>
+                    {{ $title }}
+                </h1>
+            </div>
+            <div class="col-lg-4">
+                <a href="{{ route('groups.create') }}" type="button" class="btn btn-outline-success w-100">
+                    {{ __('Hinzufügen') }}
+                </a>
+            </div>
         </div>
+<x-breadcrumb :breadcrumb="[
+                                    [__('Gruppen'), 'groups'],
+                                ]" />
     </section>
 
     <!-- Auflistung -->

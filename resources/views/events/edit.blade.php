@@ -11,30 +11,31 @@ $checked = '';
 }
 @endphp
 
-<x-breadcrumb :breadcrumb="[
-                                    ['Termine', 'events'],
-                                    ['Bearbeiten', 'events.edit', $result->id],
-                                    [ $result->event, 'events.edit', $result->id],
-                                ]" />
-
 <form method="post" action="{{ route('events.update', $result->id) }}">
     @method('patch')
     @csrf
     <article class="row g-3">
-        <div class="col-12">
+        <section class="col-12">
             <div class="row d-flex align-content-center">
-                <div class="col-md-8">
+                <div class="col-lg-8">
                     <h1>
                         {{ $title }}
                     </h1>
                 </div>
-                <div class="col-md-4">
+                <div class="col-lg-4">
                     <a href="{{ route('events') }}" type="button" class="btn btn-outline-secondary w-100">
                         {{ __('Zurück') }}
                     </a>
                 </div>
             </div>
-        </div>
+
+            <x-breadcrumb :breadcrumb="[
+                                                [__('Termine'), 'events'],
+                                                [__('Bearbeiten'), 'events.edit', $result->id],
+                                                [ $result->event, 'events.edit', $result->id],
+                                            ]" />
+        </section>
+
         <!-- Auflistung -->
         <section class="col-12 events-section">
             <div class="card events-card">
@@ -496,7 +497,7 @@ $checked = '';
                 @csrf
                 <div class="modal-body">
                     <p>{{ __('Wollen die den Termin wirklich Löschen?') }}</p>
-@if($result_future != NULL)
+                    @if($result_future != NULL)
                     <hr class="separator">
                     <div class="row g-3 justify-content-center">
                         <div class="col-12">
