@@ -24,7 +24,7 @@
         </div>
 
         <x-breadcrumb :breadcrumb="[
-                                            ['Rolen', 'roles.index'],
+                                            ['Rollen', 'roles.index'],
                                         ]" />
     </section>
     <section class="col-lg-12 accordion" id="collapse-table">

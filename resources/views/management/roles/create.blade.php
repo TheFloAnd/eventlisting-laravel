@@ -19,8 +19,8 @@
         </div>
 
         <x-breadcrumb :breadcrumb="[
-                                        [__('Rolen'), 'roles.index'],
-                                        [__('Rolen Hinzufügen'), 'roles.create'],
+                                        [__('Rollen'), 'roles.index'],
+                                        [__('Rollen Hinzufügen'), 'roles.create'],
                                     ]" />
     </section>
 

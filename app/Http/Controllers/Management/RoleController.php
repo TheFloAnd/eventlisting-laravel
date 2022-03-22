@@ -35,11 +35,11 @@ class RoleController extends Controller
     {
         /*
         $roles = Role::orderBy('id','DESC')->paginate(5);
-        return view('roles.index',compact('roles'), ['title' => 'Rolen Auflisten']);
+        return view('roles.index',compact('roles'), ['title' => 'Rollen Auflisten']);
             ->with('i', ($request->input('page', 1) - 1) * 5);
 */
         $roles = Role::orderBy('id', 'DESC')->paginate(NULL);
-        return view('management.roles.index', compact('roles'), ['title' => 'Rolen Auflisten'])
+        return view('management.roles.index', compact('roles'), ['title' => 'Rollen Auflisten'])
             ->with('i');
     }
 
@@ -87,7 +87,7 @@ class RoleController extends Controller
             ->where("role_has_permissions.role_id", $id)
             ->get();
 
-        return view('management.roles.show', compact('role', 'rolePermissions', 'id'), ['title' => 'Rolen Anzeigen']);
+        return view('management.roles.show', compact('role', 'rolePermissions', 'id'), ['title' => 'Rollen Anzeigen']);
     }
 
     /**
@@ -104,7 +104,7 @@ class RoleController extends Controller
             ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
             ->all();
 
-        return view('management.roles.edit', compact('role', 'permission', 'rolePermissions', 'id'), ['title' => 'Rolen Bearbeiten']);
+        return view('management.roles.edit', compact('role', 'permission', 'rolePermissions', 'id'), ['title' => 'Rollen Bearbeiten']);
     }
 
     /**
