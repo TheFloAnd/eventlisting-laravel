@@ -92,62 +92,60 @@
                 </div>
             </div>
 
-
+<div class="card-footer">
+    <div class="row g-3 justify-content-center">
+        <div class="col-8">
+            <div class="form-group">
+                <button type="submit" class="btn btn-outline-success w-100" name="submit_event"
+                    value="{{ __('Ändern') }}">
+                    {{ __('Ändern') }}
+                </button>
+            </div>
+        </div>
+        @if(!$user->hasRole(['administrator']))
+        <div class="col-4">
+            <div class="form-group">
+                <button type="button" class="btn btn-outline-danger w-100" name="submit_event"
+                    value="{{ __('Löschen') }}" data-bs-toggle="modal" data-bs-target="#Modal_delete">
+                    {{ __('Löschen') }}
+                </button>
+            </div>
+        </div>
+        @endif
+    </div>
+</div>
         </div>
     </section>
 </article>
 @if(!$user->hasRole(['administrator']))
-<div class="modal fade" id="Modal_reaktivate">
+<div class="modal fade" id="Modal_delete">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">{{ __('Aktivieren') }}</h5>
+                <h5 class="modal-title">{{ __('Löschen') }}</h5>
                 <button type="button" class="close" data-dismiss="modal">
                     <span>×</span>
                 </button>
             </div>
             <div class="modal-body">
-                {{$txt ?? 'Wollen sie den Benutzer wirklich Reaktivieren?'}}
+                {{ __('Wollen sie den Benutzer wirklich Löschen?') }}
             </div>
-            {!! Form::model($user, ['method' => 'PATCH','route' => ['users.update', $user->id]]) !!}
+            <form action="{{ route('users.delete', $user->id) }}" method="post">
+                @method('delete')
+                @csrf
             <div class="modal-footer">
                 <button type="submit" value="reactivate" name="reactivate"
                     class="btn btn-md btn-rounded btn-outline-danger w-100">
-                    {{ __('Reaktivieren') }}
+                    {{ __('Löschen') }}
                 </button>
                 <button type="button" class="btn btn-sm btn-rounded btn-outline-secondary w-100" data-dismiss="modal">
                     Schließen
                 </button>
             </div>
-            {!! Form::close() !!}
+        </form>
         </div>
     </div>
 </div>
-<div class="modal fade" id="Modal_deaktivate">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">{{ __('Aktivieren') }}</h5>
-                <button type="button" class="close" data-dismiss="modal">
-                    <span>×</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                {{$txt ?? 'Wollen sie den Benutzer wirklich Deaktivieren?'}}
-            </div>
-            {!! Form::model($user, ['method' => 'PATCH','route' => ['users.update', $user->id]]) !!}
-            <div class="modal-footer">
-                <button type="submit" value="deactivate" name="deactivate"
-                    class="btn btn-md btn-rounded btn-outline-danger w-100">
-                    {{ __('Deaktivieren') }}
-                </button>
-                <button type="button" class="btn btn-sm btn-rounded btn-outline-secondary w-100" data-dismiss="modal">
-                    Schließen
-                </button>
-            </div>
-            {!! Form::close() !!}
-        </div>
-    </div>
-</div>
+
 @endif
 @endsection

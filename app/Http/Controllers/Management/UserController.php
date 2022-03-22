@@ -11,6 +11,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Traits\HasRoles;
 
 class UserController extends Controller
 {
@@ -38,7 +39,7 @@ class UserController extends Controller
         $data = User::orderBy('id', 'DESC')->get();
         $user = Auth::user();
 
-        return view('management.users.index', compact('data', 'user'), ['title' => 'Benutzer Liste'])->with('i');
+        return view('management.users.index', compact('data', 'user'), ['title' => __('Benutzer Liste')])->with('i');
     }
 
     /**
@@ -58,7 +59,7 @@ class UserController extends Controller
                 ->all();
         }
 
-        return view('management.users.create', compact('roles'), ['title' => 'Benutzer Erstellen']);
+        return view('management.users.create', compact('roles'), ['title' => __('Benutzer Erstellen')]);
     }
 
     /**
@@ -95,7 +96,7 @@ class UserController extends Controller
     public function show($id, $name)
     {
         $user = User::find($id);
-        return view('management.users.show', compact('user', 'id'), ['title' => 'Benutzer Anzeigen']);
+        return view('management.users.show', compact('user', 'id'), ['title' => __('Benutzer Anzeigen')]);
     }
 
     /**
@@ -121,7 +122,7 @@ class UserController extends Controller
 
         $userRole = $user->roles->pluck('name', 'name')->all();
 
-        return view('management.users.edit', compact('user', 'roles', 'userRole', 'id'), ['title' => 'Benutzer Bearbeiten']);
+        return view('management.users.edit', compact('user', 'roles', 'userRole', 'id'), ['title' => __('Benutzer Bearbeiten')]);
     }
 
     /**
