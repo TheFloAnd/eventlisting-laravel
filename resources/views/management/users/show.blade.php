@@ -92,28 +92,28 @@
                 </div>
             </div>
 
-<div class="card-footer">
-    <div class="row g-3 justify-content-center">
-        <div class="col-8">
-            <div class="form-group">
-                <button type="submit" class="btn btn-outline-success w-100" name="submit_event"
-                    value="{{ __('Ändern') }}">
-                    {{ __('Ändern') }}
-                </button>
+            <div class="card-footer">
+                <div class="row g-3 justify-content-center">
+                    <div class="col-8">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-outline-success w-100" name="submit_event"
+                                value="{{ __('Ändern') }}">
+                                {{ __('Ändern') }}
+                            </button>
+                        </div>
+                    </div>
+                    @if(!$user->hasRole(['administrator']))
+                    <div class="col-4">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-outline-danger w-100" name="submit_event"
+                                value="{{ __('Löschen') }}" data-bs-toggle="modal" data-bs-target="#Modal_delete">
+                                {{ __('Löschen') }}
+                            </button>
+                        </div>
+                    </div>
+                    @endif
+                </div>
             </div>
-        </div>
-        @if(!$user->hasRole(['administrator']))
-        <div class="col-4">
-            <div class="form-group">
-                <button type="button" class="btn btn-outline-danger w-100" name="submit_event"
-                    value="{{ __('Löschen') }}" data-bs-toggle="modal" data-bs-target="#Modal_delete">
-                    {{ __('Löschen') }}
-                </button>
-            </div>
-        </div>
-        @endif
-    </div>
-</div>
         </div>
     </section>
 </article>
@@ -130,19 +130,20 @@
             <div class="modal-body">
                 {{ __('Wollen sie den Benutzer wirklich Löschen?') }}
             </div>
-            <form action="{{ route('users.delete', $user->id) }}" method="post">
+            <form action="{{ route('users.destroy', $user->id) }}" method="post">
                 @method('delete')
                 @csrf
-            <div class="modal-footer">
-                <button type="submit" value="reactivate" name="reactivate"
-                    class="btn btn-md btn-rounded btn-outline-danger w-100">
-                    {{ __('Löschen') }}
-                </button>
-                <button type="button" class="btn btn-sm btn-rounded btn-outline-secondary w-100" data-dismiss="modal">
-                    Schließen
-                </button>
-            </div>
-        </form>
+                <div class="modal-footer">
+                    <button type="submit" value="reactivate" name="reactivate"
+                        class="btn btn-md btn-rounded btn-outline-danger w-100">
+                        {{ __('Löschen') }}
+                    </button>
+                    <button type="button" class="btn btn-sm btn-rounded btn-outline-secondary w-100"
+                        data-dismiss="modal">
+                        Schließen
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

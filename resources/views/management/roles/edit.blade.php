@@ -1,113 +1,128 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container-fluid">
-
-        <x-page_title :title="$title"
-                      :route="'roles.create'"
-                      :icon="'user-tag'"
-                      :add="'1'"
-                      :btn_txt="'Rolle Erstellen'"/>
+<article class="row g-3">
+    <section class="col-12">
+        <div class="row d-flex align-content-center">
+            <div class="col-lg-8">
+                <h1>
+                    {{ $title }}
+                </h1>
+            </div>
+            <div class="col-lg-4">
+                <a href="{{ route('users.index') }}" type="button" class="btn btn-outline-secondary w-100">
+                    {{ __('Zurück') }}
+                </a>
+            </div>
+        </div>
 
         <x-breadcrumb :breadcrumb="[
-                                ['Rollen', 'roles.index'],
-                                [__($role->name), 'roles.show', [$role->id, $role->name]],
-                                ['Bearbeiten', 'roles.edit', [$role->id, $role->name]]
-                            ]"/>
-
-        {{-- @if (count($errors) > 0)
-            <x-alert.error_input :errors="$errors" />
-        @endif --}}
-
-        <div class="row d-flex justify-content-center">
-            <div class="col-md-11 col-lg-10">
-                <div class="card">
-                    <div class="card-header justify-content-center">
-                        <a class="btn btn-sm btn-rounded btn-outline-primary w-50"
-                           href="{{ route('roles.show', [$role->id, $role->name]) }}">
-                            {{ __('Nur Anzeigen') }}
-                        </a>
-                    </div>
-                    {!! Form::model($role, ['method' => 'PATCH','route' => ['roles.update', $role->id]]) !!}
+                                        [__('Rollen'), 'roles.index'],
+                                        [__($role->name), 'roles.show', [$role->id, $role->name]],
+                                        [__('Bearbeiten'), 'roles.edit', [$role->id, $role->name]]
+                                    ]" />
+    </section>
+        <section class="col-md-11 col-lg-10">
+            <div class="card">
+                <div class="card-header justify-content-center">
+                    <a class="btn btn-sm btn-rounded btn-outline-primary w-50"
+                        href="{{ route('roles.show', [$role->id, $role->name]) }}">
+                        {{ __('Nur Anzeigen') }}
+                    </a>
+                </div>
+                <form action="{{ route('roles.update', $role->id) }}" method="post">
+                    @method('patch')
+                    @csrf
                     <div class="card-body">
-                        <div class="row justify-content-center">
-                            <div class="col-md-11 col-lg-10">
-                                <div class="form-group">
-                                    <h4>Name:</h4>
-                                    {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
-                                </div>
+                        <div class="row g-3 justify-content-center">
+                            <div class="col-lg-10">
+                                <fieldset>
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                            name="name" id="name" placeholder="{{ old('name') ?? $role->name }}"
+                                            value="{{ old('name') ?? $role->name }}" maxlength="25" required
+                                            data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('Name') }}"
+                                            data-show-input-length>
+                                        <label for="name">
+                                            {{ __('Name') }}
+                                            <span style="color: red;">
+                                                *
+                                            </span>
+                                            <span id="name_label" class="label"></span>
+                                        </label>
+                                        @error('name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                </fieldset>
                             </div>
                             <div class="col-md-11 col-lg-10">
-                                <div class="form-group">
-                                    <h4>Berechtigungen:</h4>
-                                    <div class="custom-control custom-checkbox checkbox-info check-lg mr-3">
-                                        <label class="custom-control-label" for="checkAll">
-                                            <input type="checkbox" class="checkAll custom-control-input" id="checkAll">
-                                            Alles Auswählen
-                                        </label>
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <fieldset>
+                                            <div class="form-group">
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox"
+                                                        id="select_all_modal" data-toggle="toggle" autocomplete="off"
+                                                        data-bs-toggle="tooltip" data-bs-placement="top"
+                                                        title="{{ __('Alle Auswählen.') }}" data-toggle-select>
+                                                    <label class="form-check-label" for="select_all">
+                                                        {{ __('Alle Auswählen.') }}
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </fieldset>
                                     </div>
-                                    <div class="row">
-                                        @php
-                                            $admin_roles = array('user-list','user-create','user-edit', 'user-delete', 'user-ban', 'role-list', 'role-create', 'role-edit', 'role-delete');
-                                        @endphp
-                                        @foreach($permission as $value)
+                                    <div class="col-12">
+                                        <div class="row" data-area-select>
+                                            @foreach($permission as $value)
+
                                             <div class="col-auto">
-                                                @switch(TRUE)
-                                                    @case(stristr($value->name,'delete'))
-                                                    <div class="custom-control custom-checkbox m-3 checkbox-danger">
-                                                        @break
-                                                        @case(stristr($value->name,'role'))
-                                                        <div class="custom-control custom-checkbox m-3 checkbox-secondary">
-                                                            @break
-                                                            @case(stristr($value->name,'user'))
-                                                            <div class="custom-control custom-checkbox m-3 checkbox-Warning">
-                                                                @break
-                                                                @case(stristr($value->name,'drink'))
-                                                                <div class="custom-control custom-checkbox m-3 checkbox-info">
-                                                                    @break
-                                                                    @default
-                                                                    <div class="custom-control custom-checkbox m-3 checkbox-success">
-                                                                        @endswitch
-                                                                        @if(in_array($value->name, $admin_roles))
-                                                                            @role('administrator')
-                                                                            {{ Form::checkbox('permission[]', $value->id, in_array($value->id, $rolePermissions), array('class' => $value->name . ' custom-control-input', 'id' => $value->id)) }}
-                                                                            <label class="custom-control-label"
-                                                                                   for="{{ $value->id }}">{{ $value->name }}</label>
-                                                                            @endrole
-                                                                        @endif
-                                                                        @if(!in_array($value->name, $admin_roles))
-                                                                            {{ Form::checkbox('permission[]', $value->id, in_array($value->id, $rolePermissions), array('class' => $value->name . ' custom-control-input', 'id' => $value->id)) }}
-                                                                            <label class="custom-control-label"
-                                                                                   for="{{ $value->id }}">{{ $value->name }}</label>
-                                                                        @endif
-                                                                    </div>
-                                                                </div>
-                                                                @endforeach
-                                                            </div>
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <div class="form-check form-switch">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                name="permission[]" id="permission"
+                                                                value="{{ $value->id }}" data-set-select {{ in_array($value->id, $rolePermissions)? 'checked' : '' }}>
+                                                            <label class="form-check-label" for="not_applicable">
+                                                                {{ $value->name }}
+                                                            </label>
                                                         </div>
                                                     </div>
+                                                </fieldset>
                                             </div>
+                                            @endforeach
+                                        </div>
                                     </div>
-                                    @php
-                                        $del = '1';
-
-                                        if($role->name == 'administrator'){
-                                            $del = '0';
-                                        }
-                                    @endphp
-                                    <x-cards.card_footer_edit :route="'roles'" :del="$del"/>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    {!! Form::close() !!}
+                    <div class="card-footer">
+                        <div class="row g-3 justify-content-center">
+                            <div class="col-8">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-outline-success w-100" name="submit_event"
+                                        value="{{ __('Ändern') }}">
+                                        {{ __('Ändern') }}
+                                    </button>
+                                </div>
+                            </div>
+                            @if(Auth::user()->hasRole(['administrator']))
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-outline-danger w-100" name="submit_event"
+                                        value="{{ __('Löschen') }}" data-bs-toggle="modal"
+                                        data-bs-target="#Modal_delete">
+                                        {{ __('Löschen') }}
+                                    </button>
+                                </div>
+                            </div>
+                            @endif
+                        </div>
+                    </div>
+                </form>
 
-                    <x-modal.delete :route="'roles.destroy'" :id="$id"/>
-                    <script>
-                        document.querySelector('#checkAll').onclick = function () {
-                            var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-                            for (var checkbox of checkboxes) {
-                                checkbox.checked = this.checked;
-                            }
-                        }
-                    </script>
-@endsection
+                <x-modal.delete :route="'roles.destroy'" :id="$id" />
+                @endsection

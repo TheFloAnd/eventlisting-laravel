@@ -133,7 +133,7 @@
 @endif
 
 
-{{-- @if(Route::has('roles'))
+@if(Route::has('roles'))
 @can('role-list')
 <li class="nav-item">
     <a href="{{ route('roles') }}" class="nav-link">
@@ -150,7 +150,7 @@
     </a>
 </li>
 @endcan
-@endif --}}
+@endif
 
                     </ul>
 

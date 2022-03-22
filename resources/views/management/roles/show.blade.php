@@ -3,15 +3,27 @@
 
 @section('content')
 
-<x-page_title :title="$title" :route="'roles.create'" :icon="'user-tag'" :btn_txt="'Rolle Erstellen'" :add="'1'" />
+<article class="row g-3">
+    <section class="col-12">
+        <div class="row d-flex align-content-center">
+            <div class="col-lg-8">
+                <h1>
+                    {{ $title }}
+                </h1>
+            </div>
+            <div class="col-lg-4">
+                <a href="{{ route('users.index') }}" type="button" class="btn btn-outline-secondary w-100">
+                    {{ __('Zurück') }}
+                </a>
+            </div>
+        </div>
 
-<x-breadcrumb :breadcrumb="[
-                                ['Rollen', 'roles.index'],
-                                [__($role->name), 'roles.show', [$role->id, $role->name]]
-                            ]" />
-
-<div class="row d-flex justify-content-center">
-    <div class="col-md-11 col-lg-10">
+        <x-breadcrumb :breadcrumb="[
+                                        [__('Rollen'), 'roles.index'],
+                                        [__($role->name), 'roles.show', [$role->id, $role->name]]
+                                    ]" />
+    </section>
+    <section class="col-md-11 col-lg-10">
         <div class="card">
             @can('role-edit')
             <div class="card-header justify-content-center">
@@ -61,11 +73,11 @@
             </div>
             <div class="card-footer">
                 <div class="row g-2 justify-content-center">
-                    @if($role->name == 'administrator')
+                    @if($role->name != 'administrator')
                     <div class="col-sm-5">
                         <button type="button" class="btn btn-sm btn-rounded btn-outline-danger w-100"
                             data-toggle="modal" data-target="#delete_role">
-                            Löschen
+                            {{ __('Löschen') }}
                             <span class="btn-icon-right pull-right mr-auto">
                                 <i class="fas fa-trash"></i>
                             </span>
@@ -75,14 +87,14 @@
                     <div class="col-sm-6">
                         @if(Route::has('roles'))
                         <a class="btn btn-sm btn-rounded btn-outline-secondary w-100" href="{{ route('roles') }}">
-                            Zurück
+                            {{ __('Zurück') }}
                         </a>
                         @endif
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 </div>
 
 @endsection

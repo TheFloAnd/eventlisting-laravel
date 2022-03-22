@@ -212,7 +212,7 @@
                         <div class="col-4">
                             <div class="form-group">
                                 <button type="button" class="btn btn-outline-danger w-100" name="submit_event"
-                                    value="{{ __('Löschen') }}" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                    value="{{ __('Löschen') }}" data-bs-toggle="modal" data-bs-target="#Modal_delete">
                                     {{ __('Löschen') }}
                                 </button>
                             </div>
@@ -226,64 +226,35 @@
 </article>
 
 @if(!$user->hasRole(['administrator']))
-<div class="modal fade" id="Modal_reaktivate">
+<div class="modal fade" id="Modal_delete">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form action="{{ route('users.update', $user->id) }}" method="post">
-                @method('patch')
+            <div class="modal-header">
+                <h5 class="modal-title">{{ __('Löschen') }}</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {{ __('Wollen sie den Benutzer wirklich Löschen?') }}
+            </div>
+            <form action="{{ route('users.destroy', $user->id) }}" method="post">
+                @method('delete')
                 @csrf
-                <div class="modal-header">
-                    <h5 class="modal-title">{{ __('Aktivieren') }}</h5>
-                    <button type="button" class="close" data-dismiss="modal">
-                        <span>×</span>
-                    </button>
-                </div>
-
-                <div class="modal-body">
-                    {{ $txt ?? 'Wollen sie den Benutzer wirklich Reaktivieren?'}}
-                </div>
                 <div class="modal-footer">
                     <button type="submit" value="reactivate" name="reactivate"
                         class="btn btn-md btn-rounded btn-outline-danger w-100">
-                        {{ __('Reaktivieren') }}
+                        {{ __('Löschen') }}
                     </button>
                     <button type="button" class="btn btn-sm btn-rounded btn-outline-secondary w-100"
                         data-dismiss="modal">
-                        Schließen
+                        {{ __('Schließen') }}
                     </button>
                 </div>
             </form>
         </div>
     </div>
 </div>
-<div class="modal fade" id="Modal_deaktivate">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <form action="{{ route('users.update', $user->id) }}" method="post">
-                @method('patch')
-                @csrf
-                <div class="modal-header">
-                    <h5 class="modal-title">{{ __('Deaktivieren') }}</h5>
-                    <button type="button" class="close" data-dismiss="modal">
-                        <span>×</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    {{$txt ?? 'Wollen sie den Benutzer wirklich Deaktivieren?'}}
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" value="deactivate" name="deactivate"
-                        class="btn btn-md btn-rounded btn-outline-danger w-100">
-                        {{ __('Deaktivieren') }}
-                    </button>
-                    <button type="button" class="btn btn-sm btn-rounded btn-outline-secondary w-100"
-                        data-dismiss="modal">
-                        Schließen
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+
 @endif
 @endsection
