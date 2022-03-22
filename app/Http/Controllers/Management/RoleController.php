@@ -39,7 +39,7 @@ class RoleController extends Controller
             ->with('i', ($request->input('page', 1) - 1) * 5);
 */
         $roles = Role::orderBy('id', 'DESC')->paginate(NULL);
-        return view('management.roles.index', compact('roles'), ['title' => 'Rollen Auflisten'])
+        return view('management.roles.index', compact('roles'), ['title' => __('Rollen Auflisten')])
             ->with('i');
     }
 
@@ -51,7 +51,7 @@ class RoleController extends Controller
     public function create()
     {
         $permission = Permission::get();
-        return view('management.roles.create', compact('permission'), ['title' => 'Role Erstellen']);
+        return view('management.roles.create', compact('permission'), ['title' => __('Role Erstellen')]);
     }
 
     /**
@@ -71,7 +71,7 @@ class RoleController extends Controller
         $role->syncPermissions($request->input('permission'));
 
         return redirect()->route('roles.index')
-            ->with('success', 'Role created successfully');
+            ->with('success', __('Rolle erfolgreich erstellt!'));
     }
 
     /**
@@ -87,7 +87,7 @@ class RoleController extends Controller
             ->where("role_has_permissions.role_id", $id)
             ->get();
 
-        return view('management.roles.show', compact('role', 'rolePermissions', 'id'), ['title' => 'Rollen Anzeigen']);
+        return view('management.roles.show', compact('role', 'rolePermissions', 'id'), ['title' => __('Rollen Anzeigen')]);
     }
 
     /**
@@ -104,7 +104,7 @@ class RoleController extends Controller
             ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
             ->all();
 
-        return view('management.roles.edit', compact('role', 'permission', 'rolePermissions', 'id'), ['title' => 'Rollen Bearbeiten']);
+        return view('management.roles.edit', compact('role', 'permission', 'rolePermissions', 'id'), ['title' => __('Rollen Bearbeiten')]);
     }
 
     /**
@@ -128,7 +128,7 @@ class RoleController extends Controller
         $role->syncPermissions($request->input('permission'));
 
         return redirect()->route('roles.index')
-            ->with('success', 'Role updated successfully');
+            ->with('success', __('Rolle erfolgreich geändert!'));
     }
 
     /**
@@ -141,6 +141,6 @@ class RoleController extends Controller
     {
         DB::table("roles")->where('id', $id)->delete();
         return redirect()->route('roles.index')
-            ->with('success', 'Role deleted successfully');
+            ->with('warning', __('Rolle gelöscht'));
     }
 }
