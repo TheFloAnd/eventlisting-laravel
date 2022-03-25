@@ -9,7 +9,10 @@ class DatabaseController extends Controller
     public function __construct()
     {
         $this->middleware(['auth', 'isAdmin']);
-        // Auth::user()->name == 'Admin'
+
+        $this->middleware('permission:database', ['only' => ['create', 'store']]);
+        $this->middleware('permission:database-backup', ['only' => ['backup', 'update']]);
+        $this->middleware('permission:database-clear', ['only' => ['clear', 'update']]);
     }
 
     public function index()
@@ -18,7 +21,15 @@ class DatabaseController extends Controller
     }
 
 
-    public function make_backup()
+    public function backup()
+    {
+        // $request->validated();
+
+
+        return redirect()->route('database');
+        // ->with('success', $request->input('group_alias') . ' Erfolgreich hinzugefügt!');
+    }
+    public function clear()
     {
         // $request->validated();
 

@@ -41,7 +41,9 @@
                                 <th>{{ __('Name') }}</th>
                                 <th>{{ __('E-Mail') }}</th>
                                 <th>{{ __('Rolle') }}</th>
+                                @can('user-edit')
                                 <th style="width:7.5em;">{{ __('Aktion') }}</th>
+                                @endcan
                             </tr>
                         </thead>
                         <tbody>

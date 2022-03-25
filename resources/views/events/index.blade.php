@@ -16,11 +16,15 @@
                     {{ $title }}
                 </h1>
             </div>
+            @if(Route::has('events.create'))
+@can('events-create')
             <div class="col-lg-4">
                 <a href="{{ route('events.create') }}" type="button" class="btn btn-outline-success w-100">
                     {{ __('Hinzufügen') }}
                 </a>
             </div>
+            @endcan
+            @endif
         </div>
 
 <x-breadcrumb :breadcrumb="[
@@ -66,9 +70,13 @@
                                 <th scope="col" class="home-card-preview-table-head-item">
                                     {{ __('In') }}
                                 </th>
+@if(Route::has('events.edit'))
+                                @can('events-edit')
                                 <th scope="col" class="home-card-preview-table-head-item">
 
                                 </th>
+                                @endcan
+                                @endif
                             </tr>
                         </thead>
                         <tbody class="events-card-table-body">
@@ -160,6 +168,8 @@
                                     strtotime(date("Y-m-d"))) / 60 / 60 / 24 }}
                                     {{ __('Tagen') }}
                                 </td>
+                                @if(Route::has('events.edit'))
+                                @can('events-edit')
                                 <td data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('Bearbeiten') }}">
                                     <a href="{{ route('events.edit', $row->id) }}" type="button"
                                         class="btn btn-sm btn-secondary position-relative">
@@ -171,6 +181,8 @@
                                         {{-- <i class="bi bi-gear-wide"></i> --}}
                                     </a>
                                 </td>
+                                @endcan
+                                @endif
                             </tr>
                             @endforeach
                         </tbody>

@@ -17,11 +17,15 @@
                     {{ $title }}
                 </h1>
             </div>
+@if(Route::has('groups.create'))
+                                @can('groups-create')
             <div class="col-lg-4">
                 <a href="{{ route('groups.create') }}" type="button" class="btn btn-outline-success w-100">
                     {{ __('Hinzufügen') }}
                 </a>
             </div>
+            @endcan
+            @endif
         </div>
 <x-breadcrumb :breadcrumb="[
                                     [__('Gruppen'), 'groups'],
@@ -74,7 +78,11 @@
                                         <th scope="col">
                                             {{ __('Farbe') }}
                                         </th>
+                                        @if(Route::has('groups.edit'))
+                                        @can('groups-edit')
                                         <th class="no-sort" scope="col"></th>
+                                        @endcan
+                                        @endif
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -83,6 +91,8 @@
                                         <td class="table_search">{{ $row->alias }}</td>
                                         <td class="table_search">{{ $row->name }}</td>
                                         <td class="group_color" style="background-color:{{ $row->color }};">{{ $row->color }}</td>
+                                        @if(Route::has('groups.edit'))
+                                        @can('groups-edit')
                                         <td data-bs-toggle="tooltip" data-bs-placement="top"
                                             title="{{ __('Bearbeiten') }}">
                                             <a href="{{ route('groups.edit', $row->alias) }}" type="button"
@@ -94,6 +104,8 @@
                                                 </svg>
                                             </a>
                                         </td>
+                                        @endcan
+                                        @endif
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -125,7 +137,11 @@
                                         <th scope="col">
                                             {{ __('Farbe') }}
                                         </th>
+                                        @if(Route::has('groups.edit'))
+                                        @can('groups-edit')
                                         <th class="no-sort"></th>
+                                        @endcan
+                                        @endif
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -134,6 +150,8 @@
                                         <td class="table_search">{{ $row->alias }}</td>
                                         <td class="table_search">{{ $row->name }}</td>
                                         <td class="group_color" style="background-color:{{ $row->color }};">{{ $row->color }}</td>
+                                        @if(Route::has('groups.edit'))
+                                        @can('groups-edit')
                                         <td data-bs-toggle="tooltip" data-bs-placement="top"
                                             title="{{ __('Bearbeiten') }}">
                                             <a href="{{ route('groups.edit', $row->alias) }}" type="button"
@@ -145,6 +163,8 @@
                                                 </svg>
                                             </a>
                                         </td>
+                                        @endcan
+                                        @endif
                                     </tr>
                                     @endforeach
                                 </tbody>

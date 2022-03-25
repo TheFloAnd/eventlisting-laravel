@@ -102,7 +102,7 @@
                                     <input type="password" class="form-control @error('password') is-invalid @enderror"
                                         name="password" id="password"
                                         placeholder="{{ old('password') ?? __('Passwort') }}"
-                                        value="{{ old('password') ?? __('') }}" maxlength="50" required
+                                        value="{{ old('password') ?? __('') }}" maxlength="50"
                                         data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('password') }}"
                                         data-show-input-length>
                                     <label for="password">
@@ -128,7 +128,7 @@
                                         class="form-control @error('confirm-password') is-invalid @enderror"
                                         name="confirm-password" id="confirm-password"
                                         placeholder="{{ old('confirm-password') ?? __('Passwort') }}"
-                                        value="{{ old('confirm-password') ?? __('') }}" maxlength="50" required
+                                        value="{{ old('confirm-password') ?? __('') }}" maxlength="50"
                                         data-bs-toggle="tooltip" data-bs-placement="top"
                                         title="{{ __('confirm-password') }}" data-show-input-length>
                                     <label for="password">

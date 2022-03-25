@@ -23,6 +23,8 @@
                                                 [__('Datenbank'), 'database'],
                                             ]" />
     </section>
+@if(Route::has('database.backup'))
+@can('database-backup')
     <section class="col-12">
         <div class="card">
             <div class="card-header">
@@ -44,7 +46,10 @@
         </div>
 
     </section>
-
+    @endcan
+    @endif
+@if(Route::has('database.clear'))
+@can('database-clear')
     <section class="col-12">
         <div class="card">
             <div class="card-header">
@@ -73,7 +78,11 @@
         </div>
 
     </section>
+    @endcan
+    @endif
 </article>
+@if(Route::has('database.clear'))
+@can('database-clear')
 <div class="modal fade" id="modal_table" tabindex="-1" aria-labelledby="modal_tableLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -145,6 +154,8 @@
         </div>
     </div>
 </div>
+@endcan
+@endif
 <script>
     var modal_table = document.getElementById('modal_table')
     modal_table.addEventListener('show.bs.modal', function(event) {

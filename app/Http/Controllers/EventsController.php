@@ -16,6 +16,11 @@ class EventsController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+
+        $this->middleware('permission:events', ['only' => ['index']]);
+        $this->middleware('permission:events-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:events-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:events-delete', ['only' => ['destroy']]);
     }
 
     public function index()

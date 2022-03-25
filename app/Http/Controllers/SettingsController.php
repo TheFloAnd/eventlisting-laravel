@@ -11,7 +11,9 @@ class SettingsController extends Controller
     public function __construct()
     {
         $this->middleware(['auth', 'isAdmin']);
-        // Auth::user()->name == 'Admin'
+
+        $this->middleware('permission:settings', ['only' => ['index']]);
+        $this->middleware('permission:settings-edit', ['only' => ['edit', 'update']]);
     }
 
     public function index()

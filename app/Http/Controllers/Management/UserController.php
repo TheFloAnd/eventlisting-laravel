@@ -23,10 +23,10 @@ class UserController extends Controller
     function __construct()
     {
         $this->middleware(['auth']);
-        // $this->middleware('permission:user-list|user-create|user-edit|user-delete', ['only' => ['index', 'store']]);
-        // $this->middleware('permission:user-create', ['only' => ['create', 'store']]);
-        // $this->middleware('permission:user-edit', ['only' => ['edit', 'update']]);
-        // $this->middleware('permission:user-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:user-list|user-create|user-edit|user-delete', ['only' => ['index', 'store']]);
+        $this->middleware('permission:user-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:user-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:user-delete', ['only' => ['destroy']]);
     }
 
     /**
@@ -134,40 +134,44 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $message = 'Error';
-        if (isset($request->save)) {
-            $this->validate($request, [
-                'name' => 'required',
-                'email' => 'required|email|unique:users,email,' . $id,
-                'password' => 'same:confirm-password',
-                'roles' => 'required'
-            ]);
 
-            $input = $request->all();
-            if (!empty($input['password'])) {
-                $input['password'] = Hash::make($input['password']);
-            } else {
-                $input = Arr::except($input, array('password'));
-            }
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,' . $id,
+            'password' => 'same:confirm-password',
+            'roles' => 'required'
+        ]);
+        $message = 'Error';
+        // if (isset($request->save)) {
+        //     $this->validate($request, [
+        //         'name' => 'required',
+        //         'email' => 'required|email|unique:users,email,' . $id,
+        //         'password' => 'same:confirm-password',
+        //         'roles' => 'required'
+        //     ]);
+
+            // if (!empty($input['password'])) {
+            //     $input['password'] = Hash::make($input['password']);
+            // } else {
+            //     $input = Arr::except($input, array('password'));
+            // }
 
             $user = User::find($id);
-            $user->update($input);
+            if (!empty($input['password'])) {
+                $input['password'] = Hash::make($input['password']);
+                $input = $request->all();
+                $user->update($input);
+            } else {
+                $input = $request->except('password');
+                $user->update($input);
+            }
+
             DB::table('model_has_roles')->where('model_id', $id)->delete();
 
             $user->assignRole($request->input('roles'));
 
             $message = 'User successfully updated';
-        }
-        if (isset($request->deactivate)) {
-            DB::table('users')->where('id', $id)->update(['blocked_at' => now()]);
-
-            $message = 'User successfully banned';
-        }
-        if (isset($request->reactivate)) {
-            DB::table('users')->where('id', $id)->update(['blocked_at' => NULL]);
-
-            $message = 'User successfully unbanned';
-        }
+        // }
         return redirect()->route('users.index')
             ->with('success', $message);
     }

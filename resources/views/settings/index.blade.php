@@ -27,6 +27,7 @@
                                 {{ $title }}
                             </h1>
                         </div>
+                        @can('settings-edit')
                         <div class="col-md-6 d-flex justify-content-end">
                             <div class="form-group">
                                 <div class="form-check form-switch">
@@ -41,6 +42,7 @@
                                 </div>
                             </div>
                         </div>
+                        @endcan
                     </div>
                 </div>
                 <div class="card-body">
