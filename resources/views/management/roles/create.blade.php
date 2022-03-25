@@ -3,6 +3,12 @@
 
 @section('content')
 
+@if($errors->any())
+@foreach ($errors->all() as $error)
+<x-alert type="error" :message="$error" />
+@endforeach
+@endif
+
 <article class="row g-3">
     <section class="col-12">
         <div class="row d-flex align-content-center">

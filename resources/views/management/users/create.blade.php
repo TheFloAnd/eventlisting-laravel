@@ -3,6 +3,12 @@
 
 @section('content')
 
+@if($errors->any())
+@foreach ($errors->all() as $error)
+<x-alert type="error" :message="$error" />
+@endforeach
+@endif
+
 <article class="row g-3">
     <section class="col-12">
         <div class="row d-flex align-content-center">
@@ -29,18 +35,6 @@
                 @method('post')
                 @csrf
                 <div class="card-body">
-
-
-                    @if (count($errors) > 0)
-                    <div class="alert alert-danger">
-                        <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    @endif
                     <div class="row g-3 justify-content-center">
                         <div class="col-lg-10">
                             <fieldset>
