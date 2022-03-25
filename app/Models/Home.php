@@ -57,7 +57,10 @@ class home extends Model
     }
     public function scopeFuture($query)
     {
+        $future = Settings::setting('future_day');
+
         return $query->whereDate('start', '>', date("Y-m-d"))
+            ->whereDate('start', '<', date("Y-m-d", strtotime('+'. $future->value .' '. $future->unit)))
             ->whereNull('deleted_at')
             ->orderBy('start');
     }
@@ -69,23 +72,4 @@ class home extends Model
             ->orderBy('start', 'ASC')
             ->orderBy('id', 'ASC');
     }
-
-    // public function scopeFormat($query)
-    // {
-    //     return $query->select('*', DB::raw('
-    //                                 DATE_FORMAT(created_at,"%d.%m.%Y") as date,
-    //                                 DATE_FORMAT(created_at,"%H:%i:%s") as time_created,
-    //                                 DATE_FORMAT(created_at,"%d.%m.%Y %H:%i:%s") as created
-    //                             '));
-    // }
-
-
-    // public function scopeProposals($query)
-    // {
-    //     return $query->select('eaten', DB::raw('COUNT(`eaten`) as count'))
-    //         ->whereNull('deleted_at')
-    //         ->groupBy('eaten')
-    //         ->orderBy('count', 'DESC')
-    //         ->inRandomOrder();
-    // }
 }
