@@ -1,21 +1,21 @@
-<button class="btn btn-lg btn_hidden btn_menu" type="button" href="?b=events" data-bs-toggle="offcanvas"
-    data-bs-target="#home-offcanvasTop" aria-controls="home-offcanvasTop">
+<button class="btn btn-lg btn__hidden btn_menu" type="button" href="?b=events" data-bs-toggle="offcanvas"
+    data-bs-target="#home__offcanvasTop" aria-controls="home__offcanvasTop">
     <span class="navbar-toggler-icon"></span>
 </button>
-<div class="offcanvas offcanvas-start home-offcanvas" tabindex="-1" id="home-offcanvasTop"
-    aria-labelledby="home-offcanvasTopLabel">
+<div class="offcanvas offcanvas-start home__offcanvas" tabindex="-1" id="home__offcanvasTop"
+    aria-labelledby="home__offcanvasTopLabel">
     <div class="offcanvas-header">
-        <h4 id="home-offcanvasTopLabel">
+        <h4 id="home__offcanvasTopLabel">
             {{ __('Navigation') }}
         </h4>
-        <button type="button" class="btn-close text-reset home-offcanvas-close" data-bs-dismiss="offcanvas"
+        <button type="button" class="btn-close text-reset home__offcanvas-close" data-bs-dismiss="offcanvas"
             aria-label="Close"></button>
     </div>
-    <div class="offcanvas-body home-offcanvas-body">
+    <div class="offcanvas-body home__offcanvas-body">
         @if (Route::has('login'))
         @auth
         <div class="mb-3">
-            <a href="{{ url('/home') }}" class="btn btn-outline-secondary home-offcanvas-body-link w-100">
+            <a href="{{ url('/home') }}" class="btn btn-outline-secondary home__offcanvas-body-link w-100">
                 <span class="btn-label"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                         fill="currentColor" class="bi bi-house-door" viewBox="0 0 16 16">
                         <path
@@ -29,7 +29,7 @@
             @can('events')
             <div class="btn-group-vertical w-100" role="group">
                 <a href="{{ route('events') }}" type="button"
-                    class="btn btn-outline-secondary home-offcanvas-body-link">
+                    class="btn btn-outline-secondary home__offcanvas-body-link">
                     <span class="btn-label"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                             fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
                             <path
@@ -39,9 +39,9 @@
                 </a>
                 @if(Route::has('events.create'))
                 @can('events-create')
-                <li class="home-offcanvas-body-second-link">
+                <li class="offcanvas__link">
                     <a href="{{ route('events.create') }}" type="button"
-                        class="btn btn-outline-secondary home-offcanvas-body-link home-offcanvas-body-second-link">
+                        class="btn btn-outline-secondary home__offcanvas-body-link offcanvas__link">
                         <span class="btn-label"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                 fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd"
@@ -59,7 +59,7 @@
             @can('groups')
             <div class="btn-group-vertical w-100" role="group">
                 <a href="{{ route('groups') }}" type="button"
-                    class="btn btn-outline-secondary home-offcanvas-body-link"><span class="btn-label"><svg
+                    class="btn btn-outline-secondary home__offcanvas-body-link"><span class="btn-label"><svg
                             xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-people" viewBox="0 0 16 16">
                             <path
@@ -69,9 +69,9 @@
                 </a>
                 @if(Route::has('groups.create'))
                 @can('groups-create')
-                <li class="home-offcanvas-body-second-link">
+                <li class="offcanvas__link">
                     <a href="{{ route('groups.create') }}" type="button"
-                        class="btn btn-outline-secondary home-offcanvas-body-link home-offcanvas-body-second-link">
+                        class="btn btn-outline-secondary home__offcanvas-body-link offcanvas__link">
                         <span class="btn-label"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                 fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd"
@@ -87,7 +87,7 @@
             @endif
             @if(Route::has('settings'))
             @can('settings')
-            <a href="{{ route('settings') }}" type="button" class="btn btn-outline-secondary home-offcanvas-body-link">
+            <a href="{{ route('settings') }}" type="button" class="btn btn-outline-secondary home__offcanvas-body-link">
                 <span class="btn-label">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-gear" viewBox="0 0 16 16">
@@ -104,7 +104,7 @@
             @endif
             @if(Route::has('database'))
             @can('database')
-            <a href="{{ route('database') }}" type="button" class="btn btn-outline-secondary home-offcanvas-body-link">
+            <a href="{{ route('database') }}" type="button" class="btn btn-outline-secondary home__offcanvas-body-link">
                 <span class="btn-label">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-archive" viewBox="0 0 16 16">
@@ -118,7 +118,7 @@
             @endif
             @if(Route::has('users'))
             @can('user-list')
-            <a href="{{ route('users') }}" type="button" class="btn btn-outline-secondary home-offcanvas-body-link">
+            <a href="{{ route('users') }}" type="button" class="btn btn-outline-secondary home__offcanvas-body-link">
                 <span class="btn-label pe-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people"
                         viewBox="0 0 16 16">
@@ -132,7 +132,7 @@
             @endif
             @if(Route::has('roles'))
             @can('role-list')
-            <a href="{{ route('roles') }}" type="button" class="btn btn-outline-secondary home-offcanvas-body-link">
+            <a href="{{ route('roles') }}" type="button" class="btn btn-outline-secondary home__offcanvas-body-link">
                 <span class="btn-label pe-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock"
                         viewBox="0 0 16 16">

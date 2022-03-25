@@ -22,7 +22,7 @@
                                     [__($user->name), 'users.show', [$user->id, $user->name]],
                                 ]" />
     </section>
-    <section class="col-md-10 col-md-11 col-lg-10">
+    <section class="col-12">
         <div class="card">
             @can('user-edit')
             <div class="card-header justify-content-center">
@@ -34,7 +34,7 @@
             @endcan
             <div class="card-body">
                 <div class="row g-3 justify-content-center">
-                    <div class="col-md-11 col-lg-10">
+                    <div class="col-lg-10">
                         <div class="form-floating">
                             <!-- <h4>{{ __('Name:') }}</h4> -->
                             <input type="text" class="form-control" value="{{ $user->name }}" disabled>
@@ -44,7 +44,7 @@
                             </label>
                         </div>
                     </div>
-                    <div class="col-md-11 col-lg-10">
+                    <div class="col-lg-10">
                         <div class="form-floating">
                             <!-- <h4>{{ __('Email-Adresse:') }}</h4> -->
                             <input type="text" class="form-control" value="{{ $user->email }}" disabled>
@@ -54,7 +54,7 @@
                             </label>
                         </div>
                     </div>
-                    <div class="col-md-11 col-lg-10">
+                    <div class="col-lg-10">
                         <div class="form-group">
                             <h4>{{ __('Role:') }}</h4>
                             @if(!empty($user->getRoleNames()))
@@ -80,7 +80,7 @@
                         </div>
                     </div>
                     @if(!empty($user->blocked_at))
-                    <div class="col-md-11 col-lg-10">
+                    <div class="col-lg-10">
                         <div class="form-floating">
                             <h4>{{ __('Gesperrt:') }}</h4>
                             <label class="badge badge-md badge-pill badge-outline-danger">

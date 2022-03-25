@@ -22,15 +22,15 @@
 
         <x-home_nav />
 
-        <article class="row g-3 home article-home">
-            <section class="col-12 home-section-today">
+        <article class="row g-3 home article__home">
+            <section class="col-12 home__section__today">
                 <div class="card home-card-today">
                     <div class="card-header home-card-header home-card-today-header">
                         <nav class="navbar home-card-today-header-nav">
                             <div class="row home-card-today-header-row">
                                 <div class="col-auto home-card-today-header-col">
                                     <div id="refresh-title" data-refresh>
-                                        <h1 class="header-primary">
+                                        <h1 class="header__primary">
                                             {{ $title->value ?? 'Termine' }}
                                         </h1>
                                     </div>
@@ -44,7 +44,7 @@
                                 </div>
 
                             </div>
-                            <h1 class="header-primary home-card-today-header-title">
+                            <h1 class="header__primary home-card-today-header-title">
                                 <span id="display_time"></span>
                             </h1>
                         </nav>
@@ -159,16 +159,16 @@
             </section>
             <section class="col-12 home-section-preview">
                 <div class="card home-card-preview">
-                    <div class="card-header home-card-preview-header">
-                        <nav class="navbar navbar-dark home-card-preview-header-nav">
+                    <div class="card-header home__card__header__preview">
+                        <nav class="navbar navbar-dark home__card__header__preview-nav">
 
-                            <div class="row home-card-preview-header-row">
-                                <div class="col-auto home-card-preview-header-col">
-                                    <h2 class="header-secondary home-card-preview-header-title">
+                            <div class="row home__card__header__preview-row">
+                                <div class="col-auto home__card__header__preview-col">
+                                    <h2 class="header__secondary home__card__header__preview-title">
                                         {{ __('Termin Vorschau') }}
                                     </h2>
                                 </div>
-                                <div class="col-auto home-card-preview-header-col">
+                                <div class="col-auto home__card__header__preview-col">
                                     <div class="invisible" data-refresh-icon>
                                         <div class="spinner-grow" role="status">
                                             <span class="visually-hidden">{{ __('Laden...') }}</span>
@@ -177,7 +177,7 @@
                                 </div>
                             </div>
                             <div id="refresh-title-preview" data-refresh>
-                                <h2 class="header-secondary home-card-preview-header-title">
+                                <h2 class="header__secondary home__card__header__preview-title">
                                     {{ $preview->value }}
                                     @if($preview->unit == 'week')
                                     {{ __('Woche(n)') }}

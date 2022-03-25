@@ -292,14 +292,14 @@ $checked = '';
         </section>
 
         @if($result_future != NULL)
-        <section class="col-12 home-section-today">
+        <section class="col-12 home__section__today">
             <div class="card home-card-today">
                 <div class="card-header">
                     <nav class="navbar">
                         <div class="row">
                             <div class="col-auto">
                                 <div>
-                                    <h1 class="header-primary">
+                                    <h1 class="header__primary">
                                         {{ __('Folgende Termine') }}
                                     </h1>
                                 </div>
@@ -534,7 +534,7 @@ $checked = '';
                             </fieldset>
                         </div>
                         <div class="col-12">
-                            <div class="table-responsive del_following_events">
+                            <div class="table-responsive rm__following__events">
                                 <table class="table table-striped table-hover">
                                     <thead>
                                         <tr>

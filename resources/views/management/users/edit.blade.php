@@ -34,7 +34,7 @@
                                         [__('Bearbeiten'), 'users.edit', [$user->id, $user->name]]
                                     ]" />
     </section>
-    <section class="col-md-11 col-lg-10">
+    <section class="col-12">
         <div class="card">
             <form action="{{ route('users.update', $user->id) }}" method="post">
                 @method('patch')
@@ -147,7 +147,7 @@
                             </fieldset>
                         </div>
                         @if(!empty($user->blocked_at))
-                        <div class="col-md-11 col-lg-10">
+                        <div class="col-lg-10">
                             <div class="form-group">
                                 <h4>{{ __('Gesperrt:') }}</h4>
                                 <label class="badge badge-md badge-pill badge-outline-danger">

@@ -23,7 +23,7 @@
                                         [__('Hinzufügen'), 'users.create'],
                                     ]" />
     </section>
-    <section class="col-lg-10">
+    <section class="col-12">
         <div class="card">
             <form action="{{ route('users.store') }}" method="post">
                 @method('post')

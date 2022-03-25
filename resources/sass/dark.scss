@@ -62,7 +62,7 @@ tr.strikethrough td:before {
     width: 100%;
 }
 
-tr.strikeout td:after {
+tr.strikethrough td:after {
     content: "\00B7";
     font-size: 1em;
 }
@@ -87,7 +87,7 @@ tr.strikeout td:after {
     color: $palette-text-primary;
 }
 
-.del_following_events th {
+.rm__following__events th {
     background-color: $palette-background-paper;
 }
 
@@ -95,9 +95,9 @@ tr.strikeout td:after {
     color: $white;
 }
 
-.home-offcanvas {
+.home__offcanvas {
     background: $color;
-    & .home-offcanvas-close {
+    & .home__offcanvas-close {
         filter: invert(1) grayscale(100%) brightness(200%);
     }
 }
@@ -217,16 +217,6 @@ tr.strikeout td:after {
     filter: invert(0);
 }
 
-.del_following_events thead {
+.rm__following__events thead {
     background-color: $palette-background-default;
 }
-
-// input,
-// input:-webkit-autofill,
-// input:-webkit-autofill:focus,
-// input:-webkit-autofill:hover,
-// input:-webkit-autofill:active,
-// input:-webkit-autofill-previewed,
-// input:-webkit-autofill-selected {
-//     background-color: $palette-background-paper !important;
-// }

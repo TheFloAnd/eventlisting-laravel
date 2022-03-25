@@ -21,7 +21,7 @@
                                         [__('Bearbeiten'), 'roles.edit', [$role->id, $role->name]]
                                     ]" />
     </section>
-    <section class="col-md-11 col-lg-10">
+    <section class="col-12">
         <div class="card">
             <div class="card-header justify-content-center">
                 <a class="btn btn-sm btn-rounded btn-outline-primary w-50"
@@ -57,7 +57,7 @@
                                 </div>
                             </fieldset>
                         </div>
-                        <div class="col-md-11 col-lg-10">
+                        <div class="col-lg-10">
                             <div class="row g-3">
                                 <div class="col-12">
                                     <fieldset>

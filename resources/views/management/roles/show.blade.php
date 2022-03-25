@@ -23,7 +23,7 @@
                                         [__($role->name), 'roles.show', [$role->id, $role->name]]
                                     ]" />
     </section>
-    <section class="col-md-11 col-lg-10">
+    <section class="col-12">
         <div class="card">
             @can('role-edit')
             <div class="card-header justify-content-center">

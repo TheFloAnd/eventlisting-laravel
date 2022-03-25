@@ -27,17 +27,11 @@
                                             ['Rollen', 'roles.index'],
                                         ]" />
     </section>
-    <section class="col-lg-12 accordion" id="collapse-table">
-        <div class="card accordion-item">
-            <div class="card-header accordion-header accordion__header" id="collapse-table-head" style="height: 2rem;"
-                data-toggle="collapse" data-target="#collapse-table-body" aria-controls="collapse-table-body">
-                <h4 class="card-title mr-auto pull-left">{{ __('Vergangene Einträge') }}</h4>
-                <span class="accordion__header--indicator"></span>
-            </div>
-            <div class="card-body collapse accordion-body show" id="collapse-table-body"
-                data-bs-parent="#collapse-table">
+    <section class="col-12">
+        <div class="card">
+            <div class="card-body">
                 <div class="table-responsive">
-                    <table class="dataTable_default stripe display row-border hover order-column compact"
+                    <table class="dataTable_default stripe display row-border hover"
                         class="display" style="width:100%;">
                         <thead>
                             <tr>
