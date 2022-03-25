@@ -49,7 +49,7 @@ class Events extends Model
 
     public function scopeEvents($query)
     {
-        return $query->whereRaw('date(start) <= ? OR  date(end) >= ?', [date("Y-m-d"), date("Y-m-d")])
+        return $query->whereDate('end', '>=', date("Y-m-d"))
             ->whereNull('deleted_at')
             ->orderBy('start');
     }
