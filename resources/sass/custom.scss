@@ -4,6 +4,12 @@
 // @media (prefers-color-scheme: dark) {
 //     @import "dark.scss";
 // }
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 .navbar a:hover {
     color: default;
     text-decoration-color: currentColor;
@@ -12,6 +18,23 @@
 
 .card {
     border-radius: 0.5em !important;
+}
+
+.nav__icon {
+    margin: auto;
+}
+
+.nav__icon>svg {
+    width: 20px;
+    height: 20px;
+    margin: auto;
+    fill: currentColor;
+}
+
+.backend__nav .nav-link {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
 }
 
 .btn__hidden {
